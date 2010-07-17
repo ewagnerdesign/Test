@@ -1,0 +1,6 @@
+if params[dom_id_nested(:commit)].blank?
+  render :file => 'ecrfs/index.html.erb'
+else
+  page[dom_id_nested(:data_area)].replace :file => "ecrfs/index" 
+end
+

@@ -1,0 +1,19 @@
+<div id="<%= dom_id(@user, :study_roles_list) %>">
+  <% if @study_user.nil? %>
+    <p>Add a user to Study to assign roles.</p>
+  <% elsif @roles.empty? %>
+    <p>There are no Study Level Roles defined in the system.</p>
+  <% else %>
+    <% form_remote_tag :url => admin_user_study_role_path(@user, @study_user), :html => { :method => :put } do -%>
+    <table class="changes">
+      <tr><th></th><th>Role:</th><th>Permissions:</th></tr>
+      <%= render :partial => 'common/role_as_table_row', :collection => @roles, :as => :role, :locals => { :selected_roles => @selected_roles} %>
+    </table>
+    <p>
+      <%= submit_tag "Update" %> or <%= link_to_remote "Revert", :url => admin_user_study_roles_path(@user, :study_user_id => @study_user),
+            :method => :get,
+            :update => { :success => dom_id(@user, :study_roles_tab) } %>
+    </p>
+    <% end %>
+  <% end %>
+</div>

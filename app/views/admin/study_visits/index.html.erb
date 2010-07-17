@@ -1,0 +1,57 @@
+<%= javascript_tag %Q{
+  function check_crud()
+  {
+    var form = $('.crud-form')
+    if(form.size() < 1) return true;
+    alert('Close edit/create form first!');
+    return false;
+  }
+} %>
+<div id="<%= dom_id_nested(:index, @study) %>">
+  <div id="dashboard_data_area" class="data_area">
+    <div class="data_area_sidebar" style="float:left">
+      <div id="<%= dom_id_nested(:arms_list, @study) %>">
+        <%= render :file => "admin/study_arms/index.html.erb" %>
+      </div>
+    </div>
+    <div class="data_area_content">
+      <%  if @selected_study_arm %>
+        <% remote_form_for [:admin, @study, @selected_study_arm],
+          :url => admin_study_study_arm_path(@study, @selected_study_arm),
+          :html => { :id => dom_id_nested(:visits_form, @study) }  do |f| %>
+          <%= render :partial => "study_visits_list.html.erb" %>
+          <%= f.submit "Save Study Arm #{@selected_study_arm.try(:code)}", :id => dom_id_nested(:save, @study), :style => 'margin-right: 50px', :onclick => 'check_crud();' %>
+        <% end %>
+      <% else %>
+        <div id="<%= dom_id_nested(:visits_form, @study) %>">
+          <%= render :partial => "study_visits_list.html.erb" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <br/>
+  <!-- TODO: pagination temporary commented to avoid problems with selecting multiple visits for forms management (https://redmine.trovare.ua.sphere-inc.lan/projects/ctms/wiki/Study_Admin_Happy_Path, http://www.pivotaltracker.com/story/show/2973055)
+  < %= will_paginate @visits, :param_name => dom_id_nested(:page, @study) % >
+  -->
+  <div id="<%= dom_id_nested(:emptiness_messages, @study) %>">
+    <% if @visits.empty? %>
+      <p>
+      <% if @current_query.blank? %>
+       There are no Visits at the moment.
+      <% else %>
+       There are no Visits found matching <strong><%= @current_query %></strong>.
+      <% end %>
+      </p>
+    <% end %>
+  </div>
+  <div style="clear: both"></div>
+  <div style="font-size: larger">
+    <%= link_to_remote "Add visit ...", 
+      { :url => new_admin_study_visit_path(@study, :selected_study_arm_id => @selected_study_arm), :method => :get, :condition => "close_previous_crud_form()" },
+      { :id => dom_id(@study, :add_visit), :style => 'margin-right: 50px'}%>
+    <%= link_to_function "Select",       "$(\"##{dom_id_nested(:visits_form, @study)} input[name='visits[]']\").attr('checked', true)" %> /
+    <%= link_to_function "Deselect All", "$(\"##{dom_id_nested(:visits_form, @study)} input[name='visits[]']\").attr('checked', false)" %> 
+  </div>
+
+  <%= render :file => "admin/study_forms/index" %>
+</div>

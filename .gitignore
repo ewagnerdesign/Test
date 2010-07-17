@@ -1,0 +1,9 @@
+config/database.yml
+db/test.sqlite3
+.rake_tasks~
+.rake_tasks
+nbproject
+.idea
+log/
+tmp/**/**
+.eprj

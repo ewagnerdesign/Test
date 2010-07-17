@@ -1,0 +1,87 @@
+<div id="<%= dom_id_nested(:data_area) %>">
+  <div class="data_area_sidebar">
+    <div class="visits_studies_list">
+      <%= render :partial => "common/studies_list_bar", :locals => { :path => :visits_path } %>
+    </div>
+  </div>
+  <div class="data_area_content">
+
+    <div id="<%= dom_id_nested(:index) %>">
+      <div class="title_tools">
+        <% content_for :search_params do %>
+          <div class="multiline_search">
+          <%= label_tag :study %>:
+          <%= collection_select(:search, :study_id, @studies, :id, :name, {:prompt => "All Studies", :selected => @current_query[:study_id]} , {:onchange =>
+                                  "$.getJSON( Routes.subjectsPath({format: 'json'}), { 'search[study_id]': $('#search_study_id').val() },
+                                     function(data) {
+                                       var s = $('#search_subject_id');
+                                       s.empty().append('<option selected=\"selected\" value=\"\">Select Subject</option>');
+                                       $.each(data, function(index, itemData) {
+                                         var option = new Option(itemData.code, itemData.id);
+                                         option.innerText = itemData.code;
+                                         s.append(option);
+                                       });
+                                     });"
+
+                        })  %>
+          <%= label_tag :subject %>:
+          <%= collection_select(:search, :subject_id, @subjects, :id, :number, {:prompt => "Select Subject", :selected => @current_query[:subject_id]} )  %>
+          <span id="planned_date_block"><%= label_tag :search_planned_date, "Planned Date" %>:
+          <%= text_field_tag :"search[planned_date]", @current_query[:planned_date].to_s, { :size => 10, :readonly => "readonly"} %></span>
+          <br/>
+          <%= label_tag :site %>:
+          <%= collection_select(:search, :site_id, Site.all, :id, :name, {:prompt => "Select Site", :selected => @current_query[:site_id]} )  %>
+          Show:
+          <% [%w(all_days All hide_date), %w(overdue Overdue hide_date), %w(today Today hide_date), %w(today_overdue Today\ &\ Overdue hide_date), %w(by_date By\ Date show_date)].each do |value, label, date_class| %>
+            <%= radio_button_tag "search[show]", value, @current_query[:show] == value, { :class => date_class} %>
+            <%= label_tag "search_show_#{value}", label %>
+          <% end %>
+        </div>
+        <% end %>
+        <%= filter_form(visits_path(:js)) %>
+      </div>
+
+      <div style="clear: both"></div>
+        <div id="<%= dom_id_nested(:create) %>"></div>
+        <div class="list" id="<%= dom_id_nested(:list) %>">
+        <% unless @visits.empty? %>
+          <table class="changes">
+            <th colspan="3">Status:</th><th>#:</th><th>Visit:</th><th>Status:</th><th>Planned Date:</th><th>Previous Visit:</th><th>Offset:</th><th>Sites:</th><th>CRFs:</th>
+            <%= render :partial => 'visit', :collection => @visits %>
+          </table>
+          <%= will_paginate @visits %>
+        <% end %>
+        </div>
+      <div id="<%= dom_id_nested(:emptiness_messages) %>">
+        <% if @visits.empty?
+          query = @current_query[:query] %>
+          <p>
+            <% if @current_query.blank? %>
+              There are no Visits at the moment.
+            <% else %>
+              There are no Visits found<% unless query.blank? %> matching <strong><%= query %></strong><% end -%>.
+            <% end %>
+          </p>
+        <% end %>
+      </div>
+    </div>
+
+<% javascript_tag do -%>
+<%= date_picker(:control_id => 'search_planned_date', :yearRange => '-15:+2') %>
+
+  $('.hide_date').click(function() {
+    $('#planned_date_block').children().attr("disabled", true);
+    $('#search_planned_date').val("");
+  });
+
+  $('.show_date').click(function() {
+    $('#planned_date_block').children().removeAttr("disabled");
+  });
+
+  $('input[name="search[show]"]:checked').click();
+
+<% end %>
+
+
+  </div>
+</div>

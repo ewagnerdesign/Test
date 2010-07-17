@@ -1,0 +1,41 @@
+<div class="view-container">
+  <div class="view-block">
+    <div class="view-block-header">
+       <b>Control connections</b>
+       <a class="view-block-button" id="fdConnectionAdd">add new one</a>
+    </div>
+
+    <div class="view-block-inner">
+      <div class="modal-content" >
+        <ul id="dlConnectionCollectionItems" class="unselectable">
+
+        </ul>
+        <div class="connections-empty" style="display:none">
+          <b>Holy anarchy!</b> This form doesn't have any field connection rules!
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="connectionOptions" style="display:none" class="unselectable">
+    <span class="condition-label">IF</span>
+    <div class="view-block" style="margin-left: 80px;">
+      <%= render :partial => 'conditions' %>
+    </div>
+    <span class="condition-label">THEN</span>
+    <div class="view-block" style="margin-left: 80px;">
+      <%= render :partial => 'operational' %>
+    </div>
+  </div>
+</div>
+
+<div class="view-sidebar" id="fdConnectionTreeControlPane">
+    <b>Control Tree</b>
+    <div class="filter">
+      <label>Filter</label>
+      <input type="text" />
+    </div>
+    <div class="tree" class="unselectable">
+      <ul class="controlTree">
+      </ul>
+    </div>
+</div>

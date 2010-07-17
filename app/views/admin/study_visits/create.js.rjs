@@ -1,0 +1,10 @@
+if @visit.valid? && @study.valid?
+  page.insert_html :bottom, dom_id_nested(:list, @study), :partial => "visit", :member => @visit
+  page[dom_id(@visit)].effect("highlight", {}, 3500)
+  page[dom_id_nested(:create, @study)].replace_html ""
+  page[dom_id_nested(:emptiness_messages, @study)].replace_html ""
+  #TODO: Hide form
+else
+  page[dom_id_nested(:create, @study)].replace_html :file => "admin/study_visits/new.html.erb"
+  page[dom_id_nested(:create, @study)].effect("shake", {:direction => 'up', :distance => '6'}, 100)
+end

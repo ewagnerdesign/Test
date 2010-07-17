@@ -1,0 +1,45 @@
+<div style="display:none;"><a id="query-popup-loader" rel="#query-popup" href=""></a></div>
+<div id="query-popup" class="popup-overlay"></div>
+<div id="query-tooltip" class="query-tooltip"></div>
+<% javascript_tag do -%>
+$(function() {
+  // loader
+  $("#query-popup-loader").overlay({
+
+    mask: 'slategrey',
+
+    onBeforeLoad: function() {
+
+      // grab wrapper element inside content
+      var wrap = $("#query-popup");
+
+      // load the page specified in the trigger
+      wrap.load(this.getTrigger().attr("href"));
+    },
+
+    onClose: function() {
+      $("#query-popup").empty();
+    }
+  });
+});
+
+function close_query_popup() {
+  $('#query-popup-loader').data('overlay').close();
+}
+
+function show_query_comments(form_field_value_id, query_id, reload_queries) {
+  $("#query-popup-loader").attr("href", Routes.listQueriesPath({form_field_value_id: form_field_value_id, query_id: query_id, reload_queries: reload_queries}));
+  $("#query-popup-loader").click();
+}
+
+<% if monitor?  %>
+function show_create_query(form_field_value_id, reload_queries) {
+  reload_queries = reload_queries || false;
+  $("#query-popup-loader").attr("href", Routes.newQueryPath({form_field_value_id:form_field_value_id, reload_queries: reload_queries}));
+  $("#query-popup-loader").click();
+}
+<% end %>
+
+<% end %>
+
+

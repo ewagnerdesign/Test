@@ -1,0 +1,7 @@
+if @user.valid?
+  page[dom_id(@user)].replace :partial => "user"
+  page[dom_id(@user)].effect("highlight", {}, 3500)
+else
+  page[dom_id(@user)].replace_html :file => "admin/users/edit.html.erb"
+  page[dom_id(@user)].effect("shake", {:direction => 'up', :distance => '6'}, 100)
+end

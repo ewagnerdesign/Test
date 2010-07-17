@@ -1,0 +1,27 @@
+<h1>Listing forms</h1>
+
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Cumulative</th>
+    <th>Description</th>
+  </tr>
+
+<% @forms.each_with_index do |form, index| %>
+  <tr>
+    <td><%= index+1 %></td>
+    <td><%=h form.name %></td>
+    <td><%= form.cumulative %></td>
+    <td><%=h form.description %></td>
+    <td><%= link_to 'Show', [:admin, form] %></td>
+    <td><%= link_to 'Edit', :action =>"edit", :controller => '../fd', :id => form %></td>
+    <td><%= link_to_if form.removable?, 'Delete', [:admin, form], :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New form', fd_path %>
+

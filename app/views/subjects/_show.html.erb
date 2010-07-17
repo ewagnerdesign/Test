@@ -1,0 +1,19 @@
+<td colspan="9">
+<div class="block-container">
+    <%= link_to_close(subject_path(@subject)) %>
+    <div class="title">Subject</div>
+        <tt>
+          <strong>Study:</strong> <%= @subject.study.try(:name) || "None" %><br/>
+          <strong>Site:</strong> <%= @subject.site.try(:name) %><br/>
+          <strong>Study Arm:</strong> <%= @subject.study_arm.try(:code) || "None" %><br/>
+          <strong>Number:</strong> <%= highlight_search_result(@subject.number, @current_query[:query]) %><br/>
+          <strong>Randomization number:</strong> <%= @subject.randomization_number %><br/>
+          <strong>Gender:</strong> <%= @subject.gender %><br/>
+          <strong>Date Of Birth:</strong> <%= @subject.dob %><br/>
+          <strong>Consent Datetime:</strong> <%= @subject.consent_datetime %><br/>
+          <strong>Inactive:</strong> <%= @subject.inactive ? 'yes': 'no' %><br/>
+          <strong>Updated at:</strong> <%= h(@subject.updated_at) %>
+        </tt>
+   <br/>
+</div>
+</td>

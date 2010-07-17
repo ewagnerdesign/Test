@@ -1,0 +1,23 @@
+<p>
+  <b>Code:</b>
+  <%=h @domain.code %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%=h @domain.name %>
+</p>
+
+<p>
+  <b>Class:</b>
+  <%=h @domain.domain_class %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%=h @domain.description %>
+</p>
+
+
+<%= link_to 'Edit', edit_admin_domain_path(@domain) %> |
+<%= link_to 'Back', admin_domains_path %>

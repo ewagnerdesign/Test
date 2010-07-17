@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  form_id: 
+  validators: MyText
+  field_type: MyText
+  options: MyText
+  sdtm_category_id: 1
+  cdash_question_id: 1
+
+two:
+  form_id: 
+  validators: MyText
+  field_type: MyText
+  options: MyText
+  sdtm_category_id: 1
+  cdash_question_id: 1

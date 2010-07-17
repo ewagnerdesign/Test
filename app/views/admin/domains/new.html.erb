@@ -1,0 +1,12 @@
+<div class="block-container" style="border-color:LimeGreen;">
+  <div class="title">New Domain</div>
+  <%= link_to_close(new_admin_domain_path()) %>
+  <div id="<%= dom_id(:domain) %>" class="input-form crud-form">
+  <% remote_form_for [:admin, @domain] do |f| %>
+    <%= render :partial => "form", :locals => {:f => f} %>
+    <p>
+      <%= f.submit "Update" %> or <%= link_to_cancel "cancel", new_admin_domain_path() %>
+    </p>
+  <% end %>
+  </div>
+</div>

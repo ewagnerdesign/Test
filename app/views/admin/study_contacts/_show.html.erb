@@ -1,0 +1,5 @@
+<div class="block-container">
+  <%= link_to_close(admin_study_contact_path(@study, @user)) %>
+  <h2>Contact - <%= highlight_search_result(@user.full_name, @current_query) %></h2>
+  <%= render :partial => 'admin/users/show_embedded' %>
+</div>

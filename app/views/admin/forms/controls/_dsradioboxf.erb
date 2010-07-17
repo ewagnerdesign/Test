@@ -1,0 +1,12 @@
+<div class="multiField">
+  <% control[:options].each do |option| %>
+  <label class="inlineLabel">
+    <%= radio_button_tag "", option[0],
+                         former_control_selected?(control, option[0]),
+                         {
+                                 :class => 'select'
+                         }.merge!(former_control_identifiers(control, option[0].to_i))   %>
+    <span><%= option[1] %></span>
+  </label>
+  <% end %>
+</div>

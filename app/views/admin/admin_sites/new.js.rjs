@@ -1,0 +1,5 @@
+if params[:cancel]
+  page["create_site"].replace_html ""
+else
+  page["create_site"].replace_html :file => "admin/admin_sites/new.html.erb"
+end

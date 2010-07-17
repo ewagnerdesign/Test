@@ -1,0 +1,5 @@
+<%= text_field_tag "", "", former_control_options(control) %>
+<%=  select_tag "",
+        options_for_select( swap_from_options(control[:options]) ,control.value.second ),
+        former_control_identifiers(control).update( :id=> control_id2(control) )
+%>

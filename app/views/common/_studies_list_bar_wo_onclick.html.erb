@@ -1,0 +1,12 @@
+<h3>Studies:</h3>
+<% if @studies.empty? %>
+<p>No Studies</p>
+<% else %>
+<ul class="study-menu">
+  <li <%= 'class="selected_study"' if @current_query[:study_id] == 0 %>><%= link_to "All Studies", send(path, :"search[study_id]" => 0), :id => :select_study_all %></li>
+  <% @studies.each do |s| %>
+    <li <%= 'class="selected_study"' if @current_query[:study_id] == s.id %>><%= link_to s.name, send(path, :"search[study_id]" => s.id), :id => dom_id(s, :select) %></li>
+  <% end %>
+</ul>
+<% end %>
+

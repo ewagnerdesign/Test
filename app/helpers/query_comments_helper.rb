@@ -1,0 +1,2 @@
+module QueryCommentsHelper
+end

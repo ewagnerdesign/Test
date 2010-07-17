@@ -1,0 +1,11 @@
+<div class="search-bar">
+  <strong>Filter:</strong>
+  <% remote_form_for :search, @search, :url => url, :method => :get do |f| -%>
+    <div>
+      <%= yield :search_params %>
+      <%= hidden_field_tag dom_id_nested(:commit, parent_entity), 'Go' %>
+      <%= f.submit "Go", :id => "search_go", :onclick => "$('#" + dom_id_nested(:commit, parent_entity) + "').val('Go')" %> |
+      <%= f.submit "Clear", :id => "search_clear", :onclick => "$('#" + dom_id_nested(:commit, parent_entity) + "').val('Clear')" %>
+    </div>
+  <% end %>
+</div>

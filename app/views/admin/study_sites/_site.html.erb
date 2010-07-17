@@ -1,0 +1,16 @@
+<li id="<%= dom_id(@study, dom_id(site)) %>"
+  <%= highlightable(dom_id(@study, dom_id(site, :tools)), true) %>
+  <%= clickable admin_study_site_path(@study, site) %>   >
+  <div class="tools" id="<%= dom_id(@study, dom_id(site, :tools)) %>"<%= site.id %> style="display:none;">
+    <%= link_to_remote 'Show', 
+      {:method => :get, :url => admin_study_site_path(@study, site)}, 
+      {:onclick => "event.cancelBubble=true;", :id => "#{dom_id(@study, dom_id(site,:show))}"} %> |
+    <%= link_to_remote 'Remove from Study',
+       {:method=> :delete, :url => remove_admin_study_site_path(@study, site)},
+       {:onclick => "event.cancelBubble=true;", :id => "#{dom_id(@study, dom_id(site,:remove))}"} %>&nbsp;&nbsp;
+  </div>
+  <div class="strip<%= "-create" if site.active %>"><strong>ID:</strong> <%= site.id %></div>
+  <div class="indent">
+    <%= highlight_search_result(site.name, @current_query) %>
+  </div>
+</li>

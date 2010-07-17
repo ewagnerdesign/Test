@@ -1,0 +1,12 @@
+<div class="block-container" style="border-color:LimeGreen;">
+  <div class="title">New parent level SDTM</div>
+  <%= link_to_close(new_admin_sdtm_category_path()) %>
+  <div id="<%= dom_id(:contact) %>" class="input-form crud-form">
+  <% remote_form_for [:admin, @sdtm_category] do |f| %>
+    <%= render :partial => "form", :locals => {:f => f} %>
+    <p>
+      <%= f.submit "Update" %> or <%= link_to_cancel "cancel", new_admin_sdtm_category_path() %>
+    </p>
+  <% end %>
+  </div>
+</div>

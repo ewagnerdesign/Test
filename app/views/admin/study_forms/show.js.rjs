@@ -1,0 +1,10 @@
+if params[:cancel] == "true"
+  page[dom_id_nested(:item, @study, @form)].replace :partial => "study_form", :object => @form
+else
+  page[dom_id_nested(:item, @study, @form)].replace_html :partial => "show"
+  page << "$('##{dom_id_nested(:item, @study, @form)}').get(0).onmouseover = null"
+   page << "$('##{dom_id_nested(:item, @study, @form)}').get(0).onclick = null"
+  #TODO: set white color
+  page.call "$('##{dom_id_nested(:show, @study, @form)}').tabify"
+  #page[dom_id_nested(:item, @study, @form)].onclick = ""
+end

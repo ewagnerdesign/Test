@@ -1,0 +1,23 @@
+<div id="latest_activities">
+<h2>Latest Activities</h2>
+<% if @latest_activities.empty? %>
+  <p>No recent Activities found.</p>
+<% else %>
+ <p>
+   <table class="changes">
+     <tr>
+       <th>Type:</th><th>When:</th><th>Note:</th><th>Action:</th><th>Made by:</th>
+     </tr>
+    <% @latest_activities.each do |la| %>
+      <tr class="<%= cycle("even", "odd") %>">
+         <td><%= la.auditable.try(:latest_activity_type) %></td>
+         <td><%= time_ago_in_words(la.created_at) %> ago</td>
+         <td><%= la.auditable.try(:latest_activity_name) %></td>
+         <td><%= la.action.capitalize %></td>
+         <td><%= la.user.try(:full_name) %></td>
+      </tr>
+    <% end %>
+   </table>
+  </p>
+<% end %>
+</div>

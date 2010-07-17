@@ -1,0 +1,26 @@
+<div id="index-study_<%= @study.id %>-study_forms"> <!-- TODO <%= dom_id_nested(:index, @study) %> -->
+<% if @study_arm_visit.nil? -%>
+  <div id="<%= dom_id_nested(:emptiness_messages_forms, @study) %>">
+    <p>
+      To manage Visit CRFs select a Visit assigned to a Study Arm.
+    </p>
+  </div>
+<% else -%>
+  <div class="list">
+    <strong><%= @study_arm_visit.visit.name %> CRFs:</strong>
+    <ul>
+      <%= render :partial => 'admin/study_forms/study_form', :collection => @forms %>
+    </ul>
+  </div>
+  <%= render :partial => "admin/form_versions/versions_popup" %>
+  <div id="<%= dom_id_nested(:emptiness_messages_forms, @study) %>">
+    <% if @forms.blank? %>
+      <p>
+        There are no linked CRFs at the moment.
+      </p>
+    <% end %>
+    <%= link_to_remote "Add CRFs...", { :url => new_admin_study_form_path(@study, :study_arm_visit_id => @study_arm_visit.id), :method => :get, :condition => "close_previous_crud_form()" } %>
+    <div id="create-study_<%= @study.id %>-study_forms"></div>
+  </div>
+<% end -%>
+</div>

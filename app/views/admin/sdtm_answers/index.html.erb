@@ -1,0 +1,27 @@
+<div id="<%= dom_id_nested(:index, @sdtm_category) %>">
+  <div class="title_tools">
+    <% if @sdtm_category.extensible %>
+      <%= link_to_remote "Add child", { :url => new_admin_sdtm_category_sdtm_answer_path(@sdtm_category), :condition => "close_previous_crud_form()", :method => :get } %>
+    <% end %>
+  </div>
+    
+  <div style="clear: both"></div>
+  <ul>
+    <div id="<%= dom_id_nested(:create, @sdtm_category) %>"></div>
+    <div class="list" id="<%= dom_id_nested(:list, @sdtm_category) %>">
+      <%= render :partial => 'sdtm_answer', :collection => @sdtm_answers %>
+    </div>
+  </ul>
+  <%= will_paginate @sdtm_answers, :param_name => dom_id_nested(:page, @sdtm_category) %>
+  <div id="<%= dom_id_nested(:emptiness_messages, @sdtm_category) %>">
+    <% if @sdtm_answers.empty? %>
+      <p>
+      <% if @current_query.blank? %>
+         There are no SDTMs at the moment.
+      <% else %>
+         There are no SDTMs found matching <strong><%= @current_query %></strong>.
+      <% end %>
+      </p>
+    <% end %>
+  </div>
+</div>

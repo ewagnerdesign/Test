@@ -1,0 +1,6 @@
+if @study_arm.valid?
+  page[dom_id_n(:item, @study, @study_arm)].replace :partial => "study_arm"
+  # page[dom_id_n(:item, @study, @study_arm)].effect("highlight", {}, 3500)
+end
+#page[dom_id_nested_controller("study_visits", :list, @study)].replace :file => "admin/study_visits/_study_visits_list"
+page.replace_html dom_id_n(:add_arm_msg, @study), @study_arm.errors.map{|e| e.first.humanize + " " + e.second }.join("; ")

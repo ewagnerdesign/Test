@@ -1,0 +1,10 @@
+if @domain.valid?
+  page.insert_html :top, dom_id_nested(:list), :partial => "domain", :collection => [ @domain ]
+  page[dom_id(@domain)].effect("highlight", {}, 3500)
+  page[dom_id_nested(:create)].replace_html ""
+  page[dom_id_nested(:emptiness_messages)].replace_html ""
+  #TODO: Hide form
+else
+  page[dom_id_nested(:create)].replace_html :file => "admin/domains/new.html.erb"
+  page[dom_id_nested(:create)].effect("shake", {:direction => 'up', :distance => '6'}, 100)
+end

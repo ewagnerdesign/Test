@@ -1,0 +1,58 @@
+<p>
+  <b>Data collection field:</b>
+  <%=h @cdash_question.data_collection_field %>
+</p>
+
+<p>
+  <b>Domain:</b>
+  <%=h @cdash_question.domain %>
+</p>
+
+<p>
+  <b>Number:</b>
+  <%=h @cdash_question.number %>
+</p>
+
+<p>
+  <b>Variable name:</b>
+  <%=h @cdash_question.variable_name %>
+</p>
+
+<p>
+  <b>Definition:</b>
+  <%=h @cdash_question.definition %>
+</p>
+
+<p>
+  <b>Completion instructions:</b>
+  <%=h @cdash_question.completion_instructions %>
+</p>
+
+<p>
+  <b>Sponsor info:</b>
+  <%=h @cdash_question.sponsor_info %>
+</p>
+
+<p>
+  <b>Core:</b>
+  <%=h @cdash_question.core %>
+</p>
+
+<p>
+  <b>Sdtm mapping:</b>
+  <%=h @cdash_question.sdtm_mapping %>
+</p>
+
+<p>
+  <b>Sdtm term code:</b>
+  <%=h @cdash_question.sdtm_term_code %>
+</p>
+
+<p>
+  <b>Sdtm:</b>
+  <%=h @cdash_question.sdtm %>
+</p>
+
+
+<%= link_to 'Edit', edit_cdash_question_path(@cdash_question) %> |
+<%= link_to 'Back', cdash_questions_path %>

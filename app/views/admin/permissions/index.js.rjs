@@ -1,0 +1,1 @@
+page[dom_id_n(:index_permissions)].replace :partial => "admin/permissions/index", :locals => { :selected_permissions => @selected_permissions } 

@@ -1,0 +1,7 @@
+if @cdash_question.valid?
+  page[dom_id(@cdash_question)].replace :partial => "cdash_question"
+  page[dom_id(@cdash_question)].effect("highlight", {}, 3500)
+else
+  page[dom_id(@cdash_question)].replace_html :file => "admin/cdash_questions/edit.html.erb"
+  page[dom_id(@cdash_question)].effect("shake", {:direction => 'up', :distance => '6'}, 100)
+end

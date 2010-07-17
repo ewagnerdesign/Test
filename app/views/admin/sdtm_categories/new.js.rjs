@@ -1,0 +1,5 @@
+if params[:cancel]
+  page[dom_id_nested(:create)].replace_html ""
+else
+  page[dom_id_nested(:create)].replace_html :file => "admin/sdtm_categories/new.html.erb"
+end

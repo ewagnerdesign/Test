@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+         <!---script type="text/javascript" src="js/jquery-1.3.2.min.js"></script-->
+     <!--script type="text/javascript" src="js/scripts.js"></script-->
+    
+    <title>Trovare - Demo :: <%= yield(:title) || "" %></title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+     <!--link href="css/styles.css" rel="stylesheet" type="text/css" /-->
+    
+    <%= javascript_include_tag :defaults %>
+    <%= javascript_include_tag "jquery.inherit-1.1.1.js" %>
+    <%=stylesheet_link_tag "styles.css" %>
+
+    <%=stylesheet_link_tag "uform/uni-form-generic.css" %>
+    <%=stylesheet_link_tag "uform/uni-form.css" %>
+
+    <%= javascript_include_tag "jquery-ui" %>
+    <%=stylesheet_link_tag "ui-darkness/jquery-ui-1.8.1.custom.css" %>
+
+    <%= javascript_include_tag 'livevalidation_standalone' %>
+    <%= stylesheet_link_tag 'live_validation' %>
+
+    <%= javascript_include_tag "jquery.autocomplete"   %>
+    <%= javascript_include_tag "uni-form.jquery"   %>
+    <%= stylesheet_link_tag 'jquery.autocomplete' %>
+
+    <%= javascript_include_tag 'validate/sv.utils.js', 'validate/sv.validators', 'validate/sv.field.validator' %>
+    <%= javascript_named_routes %>
+    <%= javascript_include_tag "fconnection.js" %>
+    <%= javascript_include_tag "jquery.tools.min.js" %>
+<% if !(controller.controller_name == 'sites' && controller.action_name == 'show'
+        ) && controller.controller_name != 'visits' %>
+ <% else  %>
+
+
+<% end %>
+</head>
+
+<body>
+                <!--h1><%= link_to "Trovare - Demo", root_path %> - ADMIN</h1-->
+
+  <div id="topbar" class="content clearfix">
+    <div class="content" >
+        <h1 id="logo" class="mp0"><a href="/" class="txt_rem">trovare &trade;</a></h1>
+        <div id="slogan">Admin</div>
+        <!--div id="authorize">hi, John.Smith</div-->
+	<div id="authorize">
+	<% if !current_user %>
+               <%= link_to "Register", new_account_path %> |
+               <%= link_to "Log In", new_user_session_path %>
+             <% else  %>
+                <%= link_to "My Account", account_path %> |
+                <%= link_to "Logout", user_session_path, :method => :delete, :confirm => "Are you sure you want to logout?"%>
+            <% end %>
+	 </div>   
+    </div>	
+  </div>
+  
+
+<!--div id="subbar"><div class="content"-->
+<!--%= render :partial => '/layouts/admin/admin_menu', :locals => { :gorizontal => true } %></div></div-->
+
+ <!--div class="content"-->
+ <div id="main_bg">
+            <div id="page" class="content clearfix">
+                <div class="col_a">
+                  <%= render :partial => '/layouts/admin/admin_menu', :locals => { :gorizontal => true } %>
+                    
+                  <div class="container">
+                      <div class="container_bg">
+                        <div id="flash_messages"><%= render "layouts/flash_messages" %></div>
+
+                         <%= yield %>
+                      </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+<!--/div-->	
+
+
+
+ 
+    <div id="footer" class="content">
+        <a href="#link" id="bot_logo" class="txt_rem">trovare</a>
+        <ul class="ul_clean">
+           <li><a href="#link">logout</a></li>
+           <li><a href="#link">about</a></li>
+            <li><a href="#link">contact</a></li>
+            <li><a href="#link">investor relations</a></li>
+            <li><a href="#link">trovare news</a></li>
+            <li><a href="#link">terms of use</a></li>
+            <li><a href="#link">privacy policy</a></li>
+            <li><a href="#link">report a bug</a></li>
+        </ul>
+      </div>
+
+
+</body>
+</html>

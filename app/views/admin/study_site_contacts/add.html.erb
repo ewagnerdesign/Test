@@ -1,0 +1,18 @@
+<div class="block-container" style="border-color:LimeGreen;">
+  <div class="title">Add "<%= @site.name %>" Site contacts to "<%= @study.name %>" Study</div>
+  <%= link_to_close(add_admin_study_site_contacts_path(@study, @site)) %>
+  <div class="input-form">
+  <% if @candidates.empty? %>
+    <p>There are no unassigned Contacts left</p>
+  <% else %>
+    <% remote_form_for [:admin, @study, @site], :url => enroll_admin_study_site_contacts_path(@study, @site) do |f| %>
+      <p>
+        <%= select_tag 'site_contacts[]', options_for_select(
+          @candidates.map {|m| [m.user.get_info, m.id]}, []),
+          :multiple => true, :size => 10 %>
+      </p>
+      <%= submit_tag "Add", :id => dom_id(@study, dom_id(@site, :add_contact_submit))%>
+    <% end %>
+  <% end %>
+  </div>
+</div>

@@ -1,0 +1,7 @@
+if params[:cancel] == "true"
+  page[dom_id(@sdtm_category)].replace :partial => "sdtm_category"
+else
+  page[dom_id(@sdtm_category)].replace_html :file => "admin/sdtm_categories/edit.html.erb"
+  page << "$('##{dom_id(@sdtm_category)}').get(0).onmouseover = null"
+  page << "$('##{dom_id(@sdtm_category)}').get(0).onclick = null"
+end

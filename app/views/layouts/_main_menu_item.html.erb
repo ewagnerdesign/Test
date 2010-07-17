@@ -1,0 +1,11 @@
+<% selClass = ''
+  if main_menu_item[:controller] == controller.controller_name || main_menu_item[:selected]
+    selClass = 'active'
+  end
+  linkClass = { :class => 'item_' + (main_menu_item_counter+1).to_s}
+%>
+<li class="<%=  selClass %>">
+  <% link_to main_menu_item[:path], linkClass do %>
+        <span class="txt_rem"><%= main_menu_item[:caption] %></span>
+  <% end %>
+</li>

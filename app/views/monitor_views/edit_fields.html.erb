@@ -1,0 +1,20 @@
+<div class="block-container" style="border-color:LimeGreen;">
+  <% remote_form_for [@monitor_view], :url => update_fields_monitor_view_path(@monitor_view, :method => :put ) do |f| %>
+    <table>
+      <% @monitor_view.form.all_field_ids.each do |field_id| %>
+        <tr>
+          <td>
+            <input type="checkbox" name="field_ids[]" value="<%= field_id %>" onclick="event.cancelBubble=true;"
+               <%= @monitor_view.field_ids.include?(field_id) ? "checked='checked' " : "" %> />
+          </td>
+          <td>
+            <%= h @monitor_view.form.last_form_field(field_id).label %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+    <p>
+      <%= f.submit "Save" %> or <%= link_to_cancel "cancel", edit_fields_monitor_view_path(@monitor_view) %>
+    </p>
+  <% end %>
+</div>

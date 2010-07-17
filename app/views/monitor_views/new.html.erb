@@ -1,0 +1,14 @@
+<td colspan="6">
+  <div class="block-container" style="border-color:LimeGreen;">
+    <div class="title">New Monitor View</div>
+    <%= link_to_close(new_monitor_view_path()) %>
+    <div id="monitor_view" class="input-form crud-form">
+    <% remote_form_for [@monitor_view] do |f| %>
+      <%= render :partial => "form", :locals => {:f => f, :limited_edit => false} %>
+      <p>
+        <%= f.submit "Create" %> or <%= link_to_cancel "cancel", new_monitor_view_path() %>
+      </p>
+    <% end %>
+    </div>
+  </div>
+</td>

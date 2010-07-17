@@ -1,0 +1,8 @@
+if @monitor_view.valid?
+  page[dom_id_n(:fields, @monitor_view)].replace_html :text => ""
+  page[dom_id_n(:edit_fields, @monitor_view)].show
+else
+  # TODO check this 
+  page[dom_id_n(:item, @monitor_view)].replace_html :file => "admin/sdtm_categories/edit.html.erb"
+  page[dom_id_n(:item, @monitor_view)].effect("shake", {:direction => 'up', :distance => '6'}, 100)
+end

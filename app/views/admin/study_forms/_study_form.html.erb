@@ -1,0 +1,19 @@
+<li id="<%= dom_id_nested(:item, @study, study_form) %>"
+  <%= highlightable(dom_id_nested(:tools, @study, study_form), true) %>
+  <%= clickable admin_study_form_path(@study, study_form, :study_arm_visit_id => @study_arm_visit.id) %>   >
+  <div class="tools" id="<%= dom_id_nested(:tools, @study, study_form) %>"<%= study_form.id %> style="display:none;">
+    <%= link_to_remote 'Show', {:method => :get, :url => admin_study_form_path(@study, study_form, :study_arm_visit_id => @study_arm_visit.id)}, {:onclick => "event.cancelBubble=true;"} %> |
+    <%= link_to_remote 'Remove from Visit',
+       {:method=> :delete, :url => admin_study_form_path(@study, study_form, :study_arm_visit_id => @study_arm_visit.id)},
+       {:onclick => "event.cancelBubble=true;"} %>
+  </div>
+  <div class="strip">
+    <%= study_form.cumulative? ? "Cumulative" : "eCRF" %>
+  </div>
+  <div class="indent">
+    <strong><%= highlight_search_result(study_form.name, @current_query) %></strong>
+    <%= '(' + study_form.domain.try(:name) + ')' unless study_form.domain.nil? %>
+    <%= link_to 'Versions', '#', {:onclick => "show_form_versions(#{study_form.id}, #{@study.id}); event.cancelBubble=true;",
+      :id => dom_id(study_form, :comment)} %>
+  </div>
+</li>

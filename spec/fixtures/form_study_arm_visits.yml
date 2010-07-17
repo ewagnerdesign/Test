@@ -1,0 +1,9 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  form_id: 
+  study_arm_visit_id: 
+
+two:
+  form_id: 
+  study_arm_visit_id: 

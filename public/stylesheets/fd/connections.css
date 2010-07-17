@@ -1,0 +1,212 @@
+#fdConnectionTrees {
+    max-height: 600px;
+    min-height: 200px;
+    max-width: 250px;
+    float: left;
+    display: block;
+    width: 200px;
+    height: 340px;
+}
+
+#fdConnectionConditions, #fdConnectionOperationals {
+  padding: 5px;
+}
+
+#connectionOptions .container-options {
+  border-top:1px solid #8aaed7;
+  padding: 1px 5px;
+  margin: 3px 5px;
+}
+
+
+#fdConnectionConditions .item-actions {
+    position:absolute;
+}
+
+#fdConnectionConditions .item span {
+  padding-right:3px;
+}
+
+ul.controlTree {
+    list-style:none outside none;
+    margin:0;
+    padding:0;
+}
+
+ul.controlTree li {
+    padding:3px 0 2px 16px;
+    background:url("/images/fd/treeview-default-line.gif") no-repeat scroll 0 0 transparent;
+    margin:0;
+}
+
+ul.controlTree li.collapsable,
+ul.controlTree li.expandable {
+    background-position:0 -176px;
+}
+
+ul.controlTree li.lastExpandable {
+    background-position:-32px -67px;
+}
+
+ul.controlTree li.lastCollapsable {
+    background-position:0 -111px;
+}
+
+ul.controlTree li.lastCollapsable,
+ul.controlTree li.lastExpandable {
+background-image:url('/images/fd/treeview-default.gif');
+}
+
+ul.controlTree li.expandable ul {
+    display: none;
+}
+
+ul.controlTree div.hitarea {
+    background:url("/images/fd/treeview-default.gif") no-repeat scroll -64px -25px transparent;
+    cursor:pointer;
+    float: left;
+    height:16px;
+    margin-left:-16px;
+    width:16px;
+}
+
+ul.controlTree div.expandable-hitarea {
+    background-position:-80px -3px;
+}
+
+ul.controlTree div.lastCollapsable-hitarea,
+ul.controlTree div.lastExpandable-hitarea {
+    background-position:0 50%;
+}
+
+ul.controlTree li.last {
+    background-position:0 -1766px;
+}
+
+ul.controlTree span {
+    padding:0px 0 0px 22px;
+    height:16px;
+    line-height:16px;
+    display:block;
+    cursor:pointer;
+    white-space:nowrap;
+}
+
+ul.controlTree span:hover {
+    color: red;
+}
+
+.control-icon {
+    background-image: url("/images/fd/icons.gif");
+    background-repeat: no-repeat;
+}
+
+.control-icon.tool-input, .control-icon.tool-dsinput{
+    background-position:0 -243px;
+}
+.control-icon.tool-textbox {
+    background-position:0 -278px;
+}
+.control-icon.tool-textarea {
+    background-position:0 -260px;
+}
+.control-icon.tool-dropdown, .control-icon.tool-dsdropdown {
+    background-position:0 -97px;
+}
+.control-icon.tool-checkbox, .control-icon.tool-dscheckbox {
+    background-position:0 -61px;
+}
+.control-icon.tool-radiobox, .control-icon.tool-dsradiobox {
+    background-position:0 -226px;
+}
+.control-icon.tool-dateinput {
+    background-position:0 -11px;
+}
+.control-icon.tool-file, .control-icon.tool-section {
+    background-position:0 -113px;
+}
+.control-icon.tool-dropdown  {
+    background-position:0 -97px;
+}
+.control-icon.tool-column  {
+    height: 15px;
+    line-height: 15px;
+}
+
+
+#dlConnections .container {
+    position: relative;
+    -moz-border-radius:6px 6px 6px 6px;
+    border:1px solid #EFD586;
+}
+
+
+
+#dlConnections .container-body {
+    overflow: auto;
+}
+
+#dlConnections .container-options {
+    position: absolute;
+    bottom: 1px;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    background-color: #fcf4dc;
+    /*padding: 3px 5px;*/
+}
+
+#dlConnections .container-head {
+    color: #BF6F2F;
+    padding:5px;
+    font-size:110%;
+    border-bottom:2px solid #EFD586;
+    background-color:#FFE79F;
+}
+
+#fdConnectionTrees .container-body {
+    height: 310px;
+}
+
+#fdConnectionSources .container-body,
+#fdConnectionTargets  .container-body {
+    height: 115px;
+}
+
+
+#fdConnectionTargets .droppable-active ,
+#fdConnectionSources .droppable-active {
+    color: gray;
+}
+
+#fdConnectionSources .droppable-hover {
+    /*border: dotted;*/
+
+}
+
+#dlConnections .add-btn,
+#dlConnections .del-btn {
+   cursor: pointer;
+}
+
+
+#connection .item {
+    position: relative;
+}
+
+#connection .item-actions {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+
+#fdConnectionTargets .item {
+    padding: 3px 5px;
+}
+
+#fdConnectionTargets .item-conditions {
+    padding: 2px 30px;
+}
+
+

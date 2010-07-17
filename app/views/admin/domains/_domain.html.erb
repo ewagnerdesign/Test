@@ -1,0 +1,35 @@
+ <tr>
+        <td class="td_1 td_f"></td>
+        <td class="td_2"><span><em class="lts"><%= highlight_search_result(domain.code, @current_query[:query]) %></em><em class="dsc">Events</em></span></td>
+        <td class="td_3">
+                <span>
+			<em class="clr_000"><%= highlight_search_result(domain.domain_class, @current_query[:query]) %></em><br />
+			See 1.1
+                </span>
+        </td>
+        <td class="td_4 td_l"><div class="edits"><a class="hd" href="#link">Hide</a><a class="ed" href="#link">edit</a><a class="de" href="#link">delete</a></div></td>
+ </tr>
+
+<li id="<%= dom_id(domain) %>"
+  <%= highlightable(dom_id(domain, :tools), true) %>
+  <%= clickable admin_domain_path(domain) %>   >
+  <div class="strip">
+    <%= highlight_search_result(domain.code, @current_query[:query]) %>
+    <br/>
+    <%= highlight_search_result(domain.domain_class, @current_query[:query]) %>
+  </div>
+  <div class="tools" id="<%= dom_id(domain, :tools) %>" style="display:none;">
+    <%= link_to_remote 'Show', {:method => :get, :url => admin_domain_path(domain)}, {:onclick => "event.cancelBubble=true;"} %> |
+    <%= link_to_remote 'Edit',
+      {:method => :get, :url => edit_admin_domain_path(domain), :condition => "close_previous_crud_form()"},
+      {:onclick => "event.cancelBubble=true;" } %> |
+    <%= link_to_remote_if domain.removable?, 'Delete',
+      {:method=> :delete, :url => admin_domain_path(domain),
+       :confirm => 'Are you sure you want to delete the "' + domain.name + '"?'},
+       {:onclick => "event.cancelBubble=true;"} %>
+  </div>
+  <div class="indent">
+    <%= highlight_search_result(domain.name, @current_query[:query]) %><br/>
+    <%= highlight_search_result(domain.description, @current_query[:query]) %><br/>
+  </div>
+</li>

@@ -1,0 +1,20 @@
+<div id="<%= dom_id(@user, :system_roles_index)%>">
+
+<div style="clear: both"></div>
+  <% unless @roles.empty? %>
+    <br/>
+    <% form_remote_tag :url => admin_user_roles_path(@user) do -%>
+    <table class="changes">
+      <tr><th></th><th>Role:</th><th>Permissions:</th></tr>
+      <%= render :partial => 'common/role_as_table_row', :collection => @roles, :as => :role, :locals => { :selected_roles => @selected_roles} %>
+    </table>
+    <p>
+      <%= submit_tag "Update" %> or <%= link_to_cancel "Revert", admin_user_roles_path(@user) %>
+    </p>
+    <% end %>
+  <% else %>
+    <p>
+      There are no Roles defined in the system.
+    </p>
+  <% end %>
+</div>

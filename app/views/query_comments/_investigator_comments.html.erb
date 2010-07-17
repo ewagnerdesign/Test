@@ -1,0 +1,14 @@
+<% remote_form_for @query_comment, :url => new_query_comment_path(@last_query) do |f| %>
+  <% unless @last_query.closed %>
+    <table>
+      <tr><td>Resolution:</td><td>Action:</td></tr>
+      <tr><td><%= f.text_area :comment, :rows => 2  %></td>
+          <td><%= collection_select(:query_comment, :query_action, QueryComment::ACTIONS, :to_s, :humanize)  %></td>
+      </tr>
+    </table>
+  <% end %>
+  <p>
+    <%= submit_to_remote :submit, "Save", {:method => :post, :url => query_comments_path(@last_query), :before => "close_query_popup()" } unless @last_query.closed %>
+    <%= submit_tag "Cancel", :onclick => "close_query_popup(); return false;" %>
+  </p>
+<% end %>

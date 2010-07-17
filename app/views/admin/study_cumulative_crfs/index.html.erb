@@ -1,0 +1,17 @@
+<div id="<%= dom_id_nested(:index, @study) %>">
+  <div class="list">
+    <strong><%= @study.name %> Cumulative CRFs:</strong>
+    <ul>
+      <%= render :partial => 'admin/study_cumulative_crfs/crf_listed', :collection => @forms, :as => :form %>
+    </ul>
+  </div>
+  <div id="<%= dom_id_nested(:emptiness_messages_cumulative_crfs, @study) %>">
+    <% if @forms.blank? %>
+      <p>
+        There are no linked Cumulative CRFs at the moment.
+      </p>
+    <% end %>
+    <%= link_to_remote "Add CRFs...", { :url => new_admin_study_crf_path(@study), :method => :get, :condition => "close_previous_crud_form()" } %>
+    <div id="<%= dom_id_nested(:create, @study) %>"></div>
+  </div>
+</div>

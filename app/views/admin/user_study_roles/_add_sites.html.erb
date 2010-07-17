@@ -1,0 +1,24 @@
+<div class="block-container" style="border-color:LimeGreen;">
+  <div class="title">Add <%= @user.full_name %> to "<%= @study_user.study.name %>" Study Sites</div>
+  <div id="<%= dom_id(@user, :add_study_sites) %>" class="input-form">
+  <% if @sites.empty? %>
+    <p>There are no Sites in the Study</p>
+  <% else %>
+    <% form_remote_tag :url => assign_sites_admin_user_study_role_path(@user, @study_user), :method => :put do %>
+      <p>
+				<table class="changes">
+					<tr><th><th>Site:</th></tr>
+					<%= render :partial => 'site', :collection => @sites, :locals => { :selected_sites => @selected_sites} %>
+				</table>
+      </p>
+      <%= submit_tag "Update", :onclick => "close_add_study_popup();" %>
+      <%= submit_tag "Cancel", :onclick => "close_add_study_popup(); return false;" %>
+    <% end %>
+  <% end %>
+  </div>
+</div>
+
+
+
+
+

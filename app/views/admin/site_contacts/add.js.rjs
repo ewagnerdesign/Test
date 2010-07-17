@@ -1,0 +1,5 @@
+if params[:cancel]
+  page[dom_id(@site, :create_contact)].replace_html ""
+else
+  page[dom_id(@site, :create_contact)].replace_html :file => "admin/site_contacts/add.html.erb"
+end

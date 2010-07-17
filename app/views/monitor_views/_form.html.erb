@@ -1,0 +1,25 @@
+<% if !@monitor_view.errors.empty? %>
+  <h2>The following problems prevent this View from being saved:</h2>
+  <ul>
+  <% @monitor_view.errors.each do |e| %>
+    <li>
+     <%= e.first.humanize + " " + e.second -%>
+    </li>
+  <% end %>
+  </ul>
+<% end %>
+<% html_options = limited_edit ? { :disabled => true } : {} %>
+<p>
+  <%= f.label :name, "Name" %>
+  <%= f.text_field :name, :size => 25  %>
+</p>
+
+<p>
+  <%= f.label :study %>
+  <%= f.select :study_id, Study.ascend_by_name.search.all.collect{|s| [s.name, s.id]}, {}, html_options %>
+</p>
+
+<p>
+  <%= f.label :form %>
+  <%= f.select :form_id, Form.ascend_by_name.search.all.collect{|f| [f.name, f.id]}, {}, html_options %>
+</p>

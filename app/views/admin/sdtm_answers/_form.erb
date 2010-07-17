@@ -1,0 +1,40 @@
+<% if !@sdtm_answer.errors.empty? %>
+  <h2>The following problems prevent this SDTM from being saved:</h2>
+  <ul>
+  <% @sdtm_answer.errors.each do |e| %>
+    <li>
+     <%= e.first.humanize + " " + e.second -%>
+    </li>
+  <% end %>
+  </ul>
+<% end %>
+
+<p>
+  <%= f.label :code %><br />
+  <%= f.text_field :code %>
+</p>
+
+<p>
+  CDISC Submission Value<br />
+  <%= f.text_field :submission_value %>
+</p>
+
+<p>
+  CDISC Preferred Term<br />
+  <%= f.text_field :cdisc_preferred_term %>
+</p>
+
+<p>
+  CDISC Synonym(s)<br />
+  <%= f.text_field :synonyms %>
+</p>
+
+<p>
+  CDISC Definition<br />
+  <%= f.text_field :definition %>
+</p>
+
+<p>
+  NCI Preferred Term<br />
+  <%= f.text_field :nci_preferred_term %>
+</p>

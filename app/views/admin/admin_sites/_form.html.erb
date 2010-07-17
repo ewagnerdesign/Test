@@ -1,0 +1,69 @@
+<% if !@site.errors.empty? %>
+  <h2>The following problems prevent this Site from being saved:</h2>
+  <ul>
+  <% @site.errors.each do |e| %>
+    <li>
+     <%= e.first.humanize + " " + e.second -%>
+    </li>
+  <% end %>
+  </ul>
+<% end %>
+
+<p>
+  <%= f.submit (@site.new_record? ? "Create" : "Update") %>
+</p>
+
+<p>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+</p>
+
+<p>
+  <%= f.label :number %>
+  <%= f.text_field :number %>
+</p>
+
+<p>
+  <%= f.label :investigator, "Principal Investigator" %>
+  <%= f.text_field :investigator %>
+</p>
+
+<p>
+  <%= f.label :address_1 %>
+  <%= f.text_field :address_1 %>
+</p>
+
+<p>
+  <%= f.label :address_2 %>
+  <%= f.text_field :address_2 %>
+</p>
+
+<p>
+  <%= f.label :city %>
+  <%= f.text_field :city %>
+</p>
+
+<p>
+  <%= f.label :state_cd, "State" %>
+  <%= f.text_field :state_cd %>
+</p>
+
+<p>
+  <%= f.label :zip %>
+  <%= f.text_field :zip %>
+</p>
+<p>
+  <%= f.label :phone %>
+  <%= f.text_field :phone, :size => 25  %><br/>
+  <%= f.label :ext %>
+  <%= f.text_field :ext, :size => 5  %>
+</p>
+<p>
+  <%= f.label :fax %>
+  <%= f.text_field :fax, :size => 25  %>
+</p>
+<p>
+  Time Zone:<br />
+  <%= time_zone_select :site, :time_zone, nil, { :include_blank => 'Please select...', :selected => @site.time_zone} %>
+</p>
+

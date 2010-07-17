@@ -1,0 +1,12 @@
+<%- content_for :form_scripts do -%>
+  <%- control.metadata['validators'].each do |validator| -%>
+      <%- next unless validator['data']['enable'] -%>
+      <%= render :partial => "admin/forms/validators/#{validator['type']}",
+                 :locals => {
+                     :control => control,
+                     :validator=> validator,
+                     :control_id => former_control_options(control)[:id]
+                 }
+      %>
+  <%- end -%>
+<%- end -%>

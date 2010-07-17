@@ -1,0 +1,10 @@
+if params[:cancel] == "true"
+  page[dom_id(@cdash_question)].replace :partial => "cdash_question"
+else
+  page[dom_id(@cdash_question)].replace_html :partial => "show"
+  page << "$('##{dom_id(@cdash_question)}').get(0).onmouseover = null"
+   page << "$('##{dom_id(@cdash_question)}').get(0).onclick = null"
+  #TODO: set white color
+  page.call "$('##{dom_id(@cdash_question, :show)}').tabify"
+  #page[dom_id(@cdash_question)].onclick = ""
+end

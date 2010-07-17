@@ -1,0 +1,363 @@
+{"form":{"title":"Check validators","description":"","formId":57},"controls":[
+  {
+    "control":{"options":{"label":"Range","description":"1 .. 4"},
+    "id":{"internalId":"1","controlId":""},"type":"section","validators":[]}
+  },
+  {
+    "group":{"size":"3","columns":[
+      [
+        {
+          "control":{"options":{"label":"min","description":""},"id":{"internalId":"2","controlId":""},"type":"input","validators":[
+            {
+              "type":"required",
+              "data":{"enable":false,"message":"This field is required"}
+            },
+            {
+              "type":"size",
+              "data":{"enable":false,"message":"Length should be between {arg1} and {arg2}","minimum":"","maximum":""}
+            },
+            {
+              "type":"format",
+              "data":{"enable":false,"message":"Not valid format!","formatType":"email"}
+            },
+            {
+              "type":"inclusion",
+              "data":{"enable":false,"message":"Value should be inclusion in {args}","params":{"1":""}}
+            },
+            {
+              "type":"exclusion",
+              "data":{"enable":false,"message":"Value should be exclusion in {args}","params":{"1":""}}
+            },
+            {
+              "type":"range",
+              "data":{"enable":true,"message":"Value should be more than {arg1}.","minimum":"1","maximum":""}
+            }
+          ]}
+        },
+        {
+          "control":{"options":{"label":"min","cdash":"21","selected":["656","655","654"],"description":"","options":{"656":"Small","655":"Medium","654":"Large"}},
+            "id":{"internalId":"3","controlId":""},"type":"dsinput","validators":[
+            {
+              "type":"dslength",
+              "data":{"enable":false,"message":"Length should be between {arg1} and {arg2}","childs":{"656":{"maximum":"","minimum":""},"655":{"maximum":"","minimum":""},"654":{"maximum":"","minimum":""}}}
+            },
+            {
+              "type":"dsrange",
+              "data":{"enable":true,"message":"Value should be more than {arg1} .","childs":{"656":{"maximum":"","minimum":"1"},"655":{"maximum":"","minimum":"2"},"654":{"maximum":"","minimum":"3"}}}
+            },
+            {
+              "type":"dsinclusion",
+              "data":{"enable":false,"message":"Value should be inclusion in {args}","childs":{"656":{"params":{"1":""},"count":1},"655":{"params":{"1":""},"count":1},"654":{"params":{"1":""},"count":1}}}
+            },
+            {
+              "type":"dsexclusion",
+              "data":{"enable":false,"message":"Value should be exclusion in {args}","childs":{"656":{"params":{"1":""},"count":1},"655":{"params":{"1":""},"count":1},"654":{"params":{"1":""},"count":1}}}
+            },
+            {
+              "type":"dsformat",
+              "data":{"enable":false,"message":"Invalid format!","childs":{"656":{"formatType":"digit"},"655":{"formatType":"digit"},"654":{"formatType":"digit"}}}
+            }
+          ]}
+        }
+      ],
+      [
+        {
+          "control":{"options":{"label":"max","description":""},"id":{"internalId":"4","controlId":""},"type":"input","validators":[
+            {
+              "type":"required",
+              "data":{"enable":false,"message":"This field is required"}
+            },
+            {
+              "type":"size",
+              "data":{"enable":false,"message":"Length should be between {arg1} and {arg2}","minimum":"","maximum":""}
+            },
+            {
+              "type":"format",
+              "data":{"enable":false,"message":"Not valid format!","formatType":"email"}
+            },
+            {
+              "type":"inclusion",
+              "data":{"enable":false,"message":"Value should be inclusion in {args}","params":{"1":""}}
+            },
+            {
+              "type":"exclusion",
+              "data":{"enable":false,"message":"Value should be exclusion in {args}","params":{"1":""}}
+            },
+            {
+              "type":"range",
+              "data":{"enable":true,"message":"Value should less than {arg2}","minimum":"","maximum":"5"}
+            }
+          ]}
+        },
+        {
+          "control":{"options":{"label":"max","cdash":"21","selected":["656","655","654"],"description":"","options":{"656":"Small","655":"Medium","654":"Large"}},
+            "id":{"internalId":"5","controlId":""},"type":"dsinput","validators":[
+            {
+              "type":"dslength",
+              "data":{"enable":false,"message":"Length should be between {arg1} and {arg2}","childs":{"656":{"maximum":"","minimum":""},"655":{"maximum":"","minimum":""},"654":{"maximum":"","minimum":""}}}
+            },
+            {
+              "type":"dsrange",
+              "data":{"enable":true,"message":"Value should be more than {arg2}.","childs":{"656":{"maximum":"4","minimum":""},"655":{"maximum":"5","minimum":""},"654":{"maximum":"6","minimum":""}}}
+            },
+            {
+              "type":"dsinclusion",
+              "data":{"enable":false,"message":"Value should be inclusion in {args}","childs":{"656":{"params":{"1":""},"count":1},"655":{"params":{"1":""},"count":1},"654":{"params":{"1":""},"count":1}}}
+            },
+            {
+              "type":"dsexclusion",
+              "data":{"enable":false,"message":"Value should be exclusion in {args}","childs":{"656":{"params":{"1":""},"count":1},"655":{"params":{"1":""},"count":1},"654":{"params":{"1":""},"count":1}}}
+            },
+            {
+              "type":"dsformat",
+              "data":{"enable":false,"message":"Invalid format!","childs":{"656":{"formatType":"digit"},"655":{"formatType":"digit"},"654":{"formatType":"digit"}}}
+            }
+          ]}
+        }
+      ],
+      [
+        {
+          "control":{"options":{"label":"min max","description":""},"id":{"internalId":"6","controlId":""},"type":"input","validators":[
+            {
+              "type":"required",
+              "data":{"enable":false,"message":"This field is required"}
+            },
+            {
+              "type":"size",
+              "data":{"enable":false,"message":"Length should be between {arg1} and {arg2}","minimum":"","maximum":""}
+            },
+            {
+              "type":"format",
+              "data":{"enable":false,"message":"Not valid format!","formatType":"email"}
+            },
+            {
+              "type":"inclusion",
+              "data":{"enable":false,"message":"Value should be inclusion in {args}","params":{"1":""}}
+            },
+            {
+              "type":"exclusion",
+              "data":{"enable":false,"message":"Value should be exclusion in {args}","params":{"1":""}}
+            },
+            {
+              "type":"range",
+              "data":{"enable":true,"message":"Value should be between {arg1} and {arg2}.","minimum":"1","maximum":"5"}
+            }
+          ]}
+        },
+        {
+          "control":{"options":{"label":"min/max","cdash":"21","selected":["656","655","654"],"description":"","options":{"656":"Small","655":"Medium","654":"Large"}},
+            "id":{"internalId":"7","controlId":""},"type":"dsinput","validators":[
+            {
+              "type":"dslength",
+              "data":{"enable":false,"message":"Length should be between {arg1} and {arg2}","childs":{"656":{"maximum":"","minimum":""},"655":{"maximum":"","minimum":""},"654":{"maximum":"","minimum":""}}}
+            },
+            {
+              "type":"dsrange",
+              "data":{"enable":true,"message":"Value should be between {arg1} and {arg2}.","childs":{"656":{"maximum":"4","minimum":"1"},"655":{"maximum":"5","minimum":"2"},"654":{"maximum":"6","minimum":"3"}}}
+            },
+            {
+              "type":"dsinclusion",
+              "data":{"enable":false,"message":"Value should be inclusion in {args}","childs":{"656":{"params":{"1":""},"count":1},"655":{"params":{"1":""},"count":1},"654":{"params":{"1":""},"count":1}}}
+            },
+            {
+              "type":"dsexclusion",
+              "data":{"enable":false,"message":"Value should be exclusion in {args}","childs":{"656":{"params":{"1":""},"count":1},"655":{"params":{"1":""},"count":1},"654":{"params":{"1":""},"count":1}}}
+            },
+            {
+              "type":"dsformat",
+              "data":{"enable":false,"message":"Invalid format!","childs":{"656":{"formatType":"digit"},"655":{"formatType":"digit"},"654":{"formatType":"digit"}}}
+            }
+          ]}
+        }
+      ]
+    ]}
+  },
+  {
+    "control":{"options":{"label":"Length","description":"1 .. 5 "},
+      "id":{"internalId":"7","controlId":""},"type":"section","validators":[]}
+  },
+  {
+    "group":{"size":"3","columns":[
+      [
+        {
+          "control":{"options":{"label":"Length min","description":""},
+            "id":{"internalId":"8","controlId":""},"type":"input","validators":[
+            {
+              "type":"required",
+              "data":{"enable":false,"message":"This field is required"}
+            },
+            {
+              "type":"size",
+              "data":{"enable":true,"message":"Length should be more than {arg1} ","minimum":"5","maximum":""}
+            },
+            {
+              "type":"format",
+              "data":{"enable":false,"message":"Not valid format!","formatType":"email"}
+            },
+            {
+              "type":"inclusion",
+              "data":{"enable":false,"message":"Value should be inclusion in {args}","params":{"1":""}}
+            },
+            {
+              "type":"exclusion",
+              "data":{"enable":false,"message":"Value should be exclusion in {args}","params":{"1":""}}
+            },
+            {
+              "type":"range",
+              "data":{"enable":false,"message":"Value should be between {arg1} and {arg2}.","minimum":"","maximum":""}
+            }
+          ]}
+        },
+        {
+          "control":{"options":{"label":"Length min","cdash":"4","selected":["26","27"],"description":"","options":{"26":"Day","27":"Hour"}},
+            "id":{"internalId":"9","controlId":""},"type":"dsinput","validators":[
+            {
+              "type":"dslength",
+              "data":{"enable":true,"message":"Length should be more than {arg1} ","childs":{}}
+            },
+            {
+              "type":"dsrange",
+              "data":{"enable":false,"message":"Value should be between {arg1} and {arg2}.","childs":{}}
+            },
+            {
+              "type":"dsinclusion",
+              "data":{"enable":false,"message":"Value should be inclusion in {args}","childs":{}}
+            },
+            {
+              "type":"dsexclusion",
+              "data":{"enable":false,"message":"Value should be exclusion in {args}","childs":{}}
+            },
+            {
+              "type":"dsformat",
+              "data":{"enable":false,"message":"Invalid format!","childs":{}}
+            }
+          ]}
+        },
+        {
+          "control":{"options":{"label":"min","selected":[],"description":"","options":["First Choice","Second Choice","Third Choice"]},
+            "id":{"internalId":"10","controlId":""},"type":"checkbox","validators":[]}
+        }
+      ],
+      [
+        {
+          "control":{"options":{"label":"length max","description":""},
+            "id":{"internalId":"11","controlId":""},"type":"input","validators":[
+            {
+              "type":"required",
+              "data":{"enable":false,"message":"This field is required"}
+            },
+            {
+              "type":"size",
+              "data":{"enable":true,"message":"Length should be less than {arg2}","minimum":"","maximum":"5"}
+            },
+            {
+              "type":"format",
+              "data":{"enable":false,"message":"Not valid format!","formatType":"email"}
+            },
+            {
+              "type":"inclusion",
+              "data":{"enable":false,"message":"Value should be inclusion in {args}","params":{"1":""}}
+            },
+            {
+              "type":"exclusion",
+              "data":{"enable":false,"message":"Value should be exclusion in {args}","params":{"1":""}}
+            },
+            {
+              "type":"range",
+              "data":{"enable":false,"message":"Value should be between {arg1} and {arg2}.","minimum":"","maximum":""}
+            }
+          ]}
+        },
+        {
+          "control":{"options":{"label":"max","cdash":"21","selected":["656","655","654"],"description":"","options":{"655":"Medium","656":"Small","654":"Large"}},
+            "id":{"internalId":"12","controlId":""},"type":"dsinput","validators":[
+            {
+              "type":"dslength",
+              "data":{"enable":true,"message":"Length should be between {arg1} and {arg2}","childs":{}}
+            },
+            {
+              "type":"dsrange",
+              "data":{"enable":false,"message":"Value should be between {arg1} and {arg2}.","childs":{}}
+            },
+            {
+              "type":"dsinclusion",
+              "data":{"enable":false,"message":"Value should be inclusion in {args}","childs":{}}
+            },
+            {
+              "type":"dsexclusion",
+              "data":{"enable":false,"message":"Value should be exclusion in {args}","childs":{}}
+            },
+            {
+              "type":"dsformat",
+              "data":{"enable":false,"message":"Invalid format!","childs":{}}
+            }
+          ]}
+        },
+        {
+          "control":{"options":{"label":"max","selected":[],"description":"","options":["First Choice","Second Choice","Third Choice"]},
+            "id":{"internalId":"18","controlId":""},"type":"checkbox","validators":[]}
+        }
+      ],
+      [
+        {
+          "control":{"options":{"label":"length","description":""},
+            "id":{"internalId":"13","controlId":""},"type":"input","validators":[
+            {
+              "type":"required",
+              "data":{"enable":false,"message":"This field is required"}
+            },
+            {
+              "type":"size",
+              "data":{"enable":true,"message":"Length should be between {arg1} and {arg2}","minimum":"1","maximum":"5"}
+            },
+            {
+              "type":"format",
+              "data":{"enable":false,"message":"Not valid format!","formatType":"email"}
+            },
+            {
+              "type":"inclusion",
+              "data":{"enable":false,"message":"Value should be inclusion in {args}","params":{"1":""}}
+            },
+            {
+              "type":"exclusion",
+              "data":{"enable":false,"message":"Value should be exclusion in {args}","params":{"1":""}}
+            },
+            {
+              "type":"range",
+              "data":{"enable":false,"message":"Value should be between {arg1} and {arg2}.","minimum":"","maximum":""}
+            }
+          ]}
+        },
+        {
+          "control":{"options":{"label":"min / max","cdash":"21","selected":["656","655","654"],"description":"","options":{"655":"Medium","656":"Small","654":"Large"}},
+            "id":{"internalId":"14","controlId":""},"type":"dsinput","validators":[
+            {
+              "type":"dslength",
+              "data":{"enable":true,"message":"Length should be between {arg1} and {arg2}","childs":{}}
+            },
+            {
+              "type":"dsrange",
+              "data":{"enable":false,"message":"Value should be between {arg1} and {arg2}.","childs":{}}
+            },
+            {
+              "type":"dsinclusion",
+              "data":{"enable":false,"message":"Value should be inclusion in {args}","childs":{}}
+            },
+            {
+              "type":"dsexclusion",
+              "data":{"enable":false,"message":"Value should be exclusion in {args}","childs":{}}
+            },
+            {
+              "type":"dsformat",
+              "data":{"enable":false,"message":"Invalid format!","childs":{}}
+            }
+          ]}
+        },
+        {
+          "control":{"options":{"label":"min/max","selected":[],"description":"","options":["First Choice","Second Choice","Third Choice"]},
+            "id":{"internalId":"15","controlId":""},"type":"checkbox","validators":[]}
+        }
+      ]
+    ]}
+  }
+],"connections":[]}

@@ -1,0 +1,74 @@
+<div id="<%= dom_id_n(:data_area) %>">
+  <div class="data_area_sidebar">
+    <div class="queries_studies_list">
+      <%= render :partial => "common/studies_list_bar", :locals => { :path => :monitor_views_path } %>
+    </div>
+  </div>
+  <div class="data_area_content">
+
+    <div id="<%= dom_id_n(:index) %>">
+      <div class="title_tools">
+        <% content_for :search_params do %>
+          <div class="multiline_search">
+          <%= label_tag :study %>:
+          <%= collection_select(:search, :study_id, @studies, :id, :name, {:prompt => "All Studies", :selected => @current_query[:study_id]} , {:onchange =>
+                                  "$.getJSON( Routes.%s({format: 'json'}), { 'search[study_id]': $('#search_study_id').val() },
+                                     function(data) {
+                                       var s = $('#%s');
+                                       s.empty().append('<option selected=\"selected\" value=\"\">Select %s</option>');
+                                       $.each(data, function(index, itemData) {
+                                         var option = new Option(itemData.%s, itemData.id);
+                                         option.innerText = itemData.%s;
+                                         s.append(option);
+                                       });
+                                     });" * 3 % [ 'visitsPath', 'search_visit_id', 'Visit', 'name', 'name',
+                                                  'studyArmsPath', 'search_study_arm_id', 'Arm', 'code', 'code',
+                                                  'formsPath', 'search_form_id', 'CRF', 'name', 'name']
+
+                        })  %>
+          <%= label_tag :visit %>:
+          <%= collection_select(:search, :visit_id, @visits, :id, :name, {:prompt => "Select Visit", :selected => @current_query[:visit_id]} )  %>
+          <br/>
+          <%= label_tag "Arm" %>:
+          <%= collection_select(:search, :study_arm_id, @study_arms, :id, :code, {:prompt => "Select Arm", :selected => @current_query[:study_arm_id]} )  %>
+          <%= label_tag "CRF" %>:
+          <%= collection_select(:search, :form_id, @forms, :id, :name, {:prompt => "Select CRF", :selected => @current_query[:form_id]} )  %>
+          <%= label_tag :site %>:
+          <%= collection_select(:search, :site_id, Site.all, :id, :name, {:prompt => "Select Site", :selected => @current_query[:site_id]} )  %>
+          Show:
+          <% [%w(all_cond All), %w(form_cumulative_is_not Visit), %w(form_cumulative_is Cumulative)].each do |value, label| %>
+            <%= radio_button_tag "search[show]", value, @current_query[:show] == value %>
+            <%= label_tag "search_show_#{value}", label %>
+          <% end %>
+        </div>
+        <% end %>
+        <%= filter_form(monitor_views_path(:js)) %>
+        <%= link_to_remote "Create new",
+          { :url => new_monitor_view_path, :condition => "close_previous_crud_form()", :method => :get },
+          { :id => :add_monitor_view }%>
+      </div>
+
+      <div style="clear: both"></div>
+        <table class="changes" id="<%= dom_id_n(:list) %>">
+          <tr id="views_table_headers">
+            <th>Name:</th><th>CRF:</th><th>Type:</th><th>Date Created:</th><th>Study:</th><th>Sites:</th><th></th>
+          </tr>
+          <tr id="<%= dom_id_n(:create_monitor_view) %>"></tr>
+          <%= render :partial => 'monitor_view', :collection => @monitor_views %>
+        </table>
+        <%= will_paginate @monitor_views %>
+      <div id="<%= dom_id_n(:emptiness_messages) %>">
+        <% if @monitor_views.empty?
+          query = @current_query[:query] %>
+          <p>
+            <% if @current_query.blank? %>
+              There are no Views at the moment.
+            <% else %>
+              There are no Views found<% unless query.blank? %> matching <strong><%= query %></strong><% end -%>.
+            <% end %>
+          </p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

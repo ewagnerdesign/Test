@@ -1,0 +1,35 @@
+<td colspan="7">
+  <div class="block-container">
+    <%= link_to_close(admin_study_visit_path(@study, @visit, :selected_study_arm_id => @selected_study_arm)) %>
+    <p>
+      <strong>Visit: </strong> <%= highlight_search_result(@visit.name, @current_query) %>
+    </p>
+    <p>
+      <strong>Number: </strong> <%= highlight_search_result(@visit.number, @current_query) %>
+    </p>
+
+    <% if @visit.prev_visit.nil? %>
+      <p>
+        <strong>Start Date: </strong> <%= @visit.start_date %>
+      </p>
+      <p>
+        <strong>End Date: </strong> <%= @visit.end_date %>
+      </p>
+    <% else %>
+      <p>
+        <strong>Previous Visit: </strong> <%= @visit.prev_visit.name %>
+      </p>
+      <p>
+        Between <%= @visit.prev_visit_start_offset_day %> and <%= @visit.prev_visit_end_offset_day %> days
+      </p>
+    <% end %>
+
+    <p>
+      <strong>In use: </strong> <%= (!@visit.editable?).to_s %>
+    </p>
+
+    <p>
+      <strong>Notes: </strong> <%= highlight_search_result(@visit.notes, @current_query) %>
+    </p>
+  </div>
+</td>

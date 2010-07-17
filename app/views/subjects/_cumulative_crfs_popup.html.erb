@@ -1,0 +1,35 @@
+<div style="display:none;"><a id="cumcrf-popup-loader" rel="#cumcrf-popup" href=""></a></div>
+<div id="cumcrf-popup" class="popup-overlay"></div>
+<% javascript_tag do -%>
+$(function() {
+  // loader
+  $("#cumcrf-popup-loader").overlay({
+
+    mask: 'slategrey',
+
+    onBeforeLoad: function() {
+      // grab wrapper element inside content
+      var wrap = $("#cumcrf-popup");
+
+      // load the page specified in the trigger
+      wrap.load(this.getTrigger().attr("href"));
+    },
+
+    onClose: function() {
+      $("#cumcrf-popup").empty();
+    }
+  });
+});
+
+function close_cumcrf_popup() {
+  $("#cumcrf-popup-loader").data('overlay').close();
+}
+
+function show_subject_cumcrfs(subject_id) {
+  $("#cumcrf-popup-loader").attr("href", Routes.listSubjectCumcrfsPath({subject_id: subject_id}));
+  $("#cumcrf-popup-loader").click();
+}
+
+<% end %>
+
+

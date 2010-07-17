@@ -1,0 +1,30 @@
+<div id="<%= dom_id(@study, :sites_index)%>">
+<div class="title_tools">
+  <% content_for :search_params do %>
+    <input id="search" name="search" size="30" type="text" value="<%= @current_query %>" />
+  <% end %>
+  <%= filter_form(admin_study_sites_path(@study, :js), @study) %>
+  <%= link_to_remote "Add existing",
+    { :url => add_admin_study_sites_path(@study), :method => :get },
+    {:id => "#{dom_id(@study, :add_site)}"}%> |
+  <%= link_to_ni "Options" %>
+</div>
+<div style="clear: both"></div>
+<div id="<%= dom_id(@study, :create_site) %>"></div>
+<ul class="list" id="<%= dom_id(@study, :sites_list) %>">
+      <% unless @entities.empty? %>
+        <%= render :partial => 'admin/study_sites/site', :collection => @entities  %>
+      <% end %>
+</ul>
+<div id="<%= dom_id(@study, :sites_emptiness_messages) %>">
+  <% if @entities.empty? %>
+    <p>
+    <% if @current_query.blank? %>
+       There are no Sites at the moment.
+    <% else %>
+       There are no Sites found matching <strong><%= @current_query %></strong>.
+     <% end %>
+    </p>
+  <% end %>
+</div>
+</div>

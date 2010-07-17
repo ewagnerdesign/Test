@@ -1,0 +1,12 @@
+<div class="block-container" style="border-color:LimeGreen;">
+  <div class="title">Add child for Parent - <%= @sdtm_category.name %>: Control Type Code: <%= @sdtm_category.code %> </div>
+  <%= link_to_close(new_admin_sdtm_category_sdtm_answer_path(@sdtm_category)) %>
+  <div id="<%= dom_id(@sdtm_category, :sdtm_answer) %>" class="input-form crud-form">
+    <% remote_form_for [:admin, @sdtm_category, @sdtm_answer], :url => admin_sdtm_category_sdtm_answers_path(@sdtm_category) do |f| %>
+      <%= render :partial => "admin/sdtm_answers/form", :locals => {:f => f} %>
+      <p>
+        <%= f.submit "Create" %> or <%= link_to_cancel "cancel", new_admin_sdtm_category_sdtm_answer_path(@sdtm_category) %>
+      </p>
+    <% end %>
+  </div>
+</div>

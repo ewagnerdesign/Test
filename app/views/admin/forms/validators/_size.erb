@@ -1,0 +1,7 @@
+<% if !validator['data']['minimum'].blank? && !validator['data']['maximum'].blank? %>
+  $('#<%= control_id %>').validate().add({rangelength: [<%= validator['data']['minimum']  %>, <%= validator['data']['maximum'] %>] })
+<% elsif !validator['data']['minimum'].blank? && validator['data']['maximum'].blank? %>
+   $('#<%= control_id %>').validate().add({minlength: <%= validator['data']['minimum'] %>});
+<% elsif validator['data']['minimum'].blank? && !validator['data']['maximum'].blank? %>
+   $('#<%= control_id %>').validate().add({maxlength: <%= validator['data']['maximum'] %> });
+<% end %>

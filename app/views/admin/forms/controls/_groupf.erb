@@ -1,0 +1,10 @@
+<div class="colcontainer" id="<%= control_id(control) %>">
+<% control.columns.each_with_index do |col, colno| %>
+    <fieldset id="<%= "#{control_id(control)}_#{colno+1}" %>" class="col<%=control.columns.length %> <%= "c#{colno+1}" %> ">
+        <% col.each do |colcontrol| %>
+          <%= render :partial => "admin/forms/controls/base",
+                     :locals => {:control => colcontrol } %>
+        <% end %>
+    </fieldset>
+<% end %>
+</div>

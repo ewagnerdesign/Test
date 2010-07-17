@@ -1,0 +1,29 @@
+<h3>Study Arm:</h3>
+<% if @study.study_arms.empty? %>
+<p>No Arms</p>
+<% else %>
+<ul class="study_arm-menu" id="<%= dom_id_n(:list, @study) %>">
+  <%= render :partial => "admin/study_arms/study_arm.html.erb", :collection => @study.study_arms %>
+</ul>
+<% end %>
+<%= javascript_tag %Q{
+  function add_study_arm(study_id)
+  {
+    if (!close_previous_crud_form()) return false;
+
+    var name = prompt('Name for new Study Arm', '');
+    if (name == null || name=="") return;
+    jQuery.ajax({data:({name: name}), dataType:'script', type:'post', url:Routes.adminStudyStudyArmsPath(study_id)})
+  }
+
+  function rename_study_arm(study_id, id, oldname, selected_study_arm_id)
+  {
+    var name = prompt('New name for the Study Arm', oldname);
+    if (name == null || name=="" || name==oldname) return;
+    jQuery.ajax({data:({name: name, selected_study_arm_id: selected_study_arm_id}), dataType:'script', type:'put', url:Routes.renameAdminStudyStudyArmPath(study_id, id)})
+  }
+} %>
+<div style="clear: both"></div>
+<div id="<%= dom_id_n(:add_arm_msg, @study) %>" style="font-weight: bold"></div>
+<%= link_to_function 'Add Arm', 'add_study_arm(' + @study.id.to_s + ')' %>
+

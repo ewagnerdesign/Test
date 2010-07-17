@@ -1,0 +1,12 @@
+<div class="block-container" style="border-color:LimeGreen;">
+  <div class="title">Add Visit to Study - <%= h(@study.name) %> </div>
+  <%= link_to_close(new_admin_study_visit_path(@study)) %>
+  <div id="<%= dom_id(@study, :visit) %>" class="input-form crud-form">
+    <% remote_form_for [:admin, @study, @visit], :url => admin_study_visits_path(@study, :selected_study_arm_id => @selected_study_arm) do |f| %>
+      <%= render :partial => "admin/study_visits/form", :locals => {:f => f} %>
+      <p>
+        <%= f.submit "Create" %> or <%= link_to_cancel "cancel", new_admin_study_visit_path(@study) %>
+      </p>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+<% remote_form_for @query_comment, :url => new_query_comment_path(@last_query) do |f| %>
+  <% unless @last_query.closed %>
+    <p>
+      Query:<br>
+      <%= f.text_area :comment, :rows => 2  %>
+    </p>
+  <% end %>
+  <p>
+    <% unless @last_query.closed %>
+      <%= submit_to_remote :submit_and_close, "Accept&Close", {:method => :put, :url => close_query_path(@last_query), :before => "close_query_popup()"} %>
+      <%= submit_to_remote :submit, "Submit", {:method => :post, :url => query_comments_path(@last_query), :before => "close_query_popup()"} %>
+    <% else %>
+      <%= button_to_function "ReQuery", "close_query_popup(); show_create_query(#{@last_query.form_field_value.id}, #{@reload_queries})" %>
+    <% end %>
+    <%= submit_tag "Cancel", :onclick => "close_query_popup(); return false;" %>
+  </p>
+<% end %>
+

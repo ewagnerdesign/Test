@@ -1,0 +1,21 @@
+<div id="<%= dom_id(@user, :study_users_index)%>">
+  <% if @study_users.empty? %>
+    <p>No Studies assigned</p>
+  <% else %>
+    <table class="changes">
+      <tr><th>Study:</th><th>Sites:</th><th></th></tr>
+      <% @study_users.each do |s| %>
+        <tr <%= 'class="selected_study"' if @study_user == s %> id="<%= dom_id_n(:study_role, @user, s)%>">
+          <td><%= link_to_remote s.study.name,
+            :url => admin_user_study_roles_path(@user.id, :study_user_id => s.id), :method => :get,
+            :update => { :success => dom_id(@user, :study_roles_tab) }%></td>
+          <td><%= link_to s.study.sites.count, '#', {:onclick => "show_add_sites_popup(#{@user.id}, #{s.id})"} %></td>
+					<td><%= link_to_remote 'X', :url => admin_user_study_role_path(@user.id, s.id, :study_user_id => @study_user.id), :method => :delete,
+            :update => { :success => dom_id(@user, :study_roles_tab)  } %></td>
+        </tr>
+      <% end %>
+    </table>
+  <% end %>
+  <br/>
+  <%= link_to "Add Study", '#', {:onclick => "show_add_study_popup(#{@user.id})"} %>
+</div>

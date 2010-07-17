@@ -1,0 +1,14 @@
+<% 
+errors = @ffvs.map{|ffv| ffv.errors.to_a}.flatten
+if !errors.empty? %>
+  <h2>The following problems prevents from being saved:</h2>
+  <ul>
+  <% errors.each do |e| %>
+    <li>
+     <%= e.first.humanize + " " + e.second -%>
+    </li>
+  <% end %>
+  </ul>
+<% else %>
+  Has been saved.
+<% end %>

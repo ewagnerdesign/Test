@@ -1,0 +1,5 @@
+if params[:cancel]
+  page[dom_id_n(:create_monitor_view)].replace_html ""
+else
+  page[dom_id_n(:create_monitor_view)].replace_html :file => "monitor_views/new.html.erb"
+end

@@ -1,0 +1,14 @@
+<% tooltip_id = host_id + "_tooltip" -%>
+<div class="query-tooltip" id="<%= tooltip_id %>"></div>
+<% javascript_tag do -%>
+$('#<%= host_id %>').tooltip({
+  position: 'bottom right',
+  onBeforeShow: function() {
+    $.ajax({success:function(request){jQuery('#<%= tooltip_id %>').html(request);}, type:'get',
+          url: '<%= url %>' })
+  },
+  onHide: function() {
+    $('#<%= tooltip_id %>').empty();
+  }
+});
+<% end %>

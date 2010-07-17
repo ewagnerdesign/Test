@@ -1,0 +1,9 @@
+<strong>Title: </strong> <%= highlight_search_result(@user.title, @current_query) %><br/>
+<strong>Email: </strong> <%= highlight_search_result(@user.email, @current_query) %><br/>
+<strong>Address: </strong> <%= highlight_search_result([@user.address_1, @user.address_2].reject(&:blank?).join(", "), @current_query) %><br/>
+<strong>City: </strong> <%= highlight_search_result(@user.city, @current_query) %><br/>
+<strong>State: </strong> <%= highlight_search_result(@user.state_cd, @current_query) %><br/>
+<strong>ZIP: </strong> <%= highlight_search_result(@user.zip, @current_query) %><br/>
+<strong>Phone: </strong> <%= highlight_search_result(number_to_phone(@user.phone, :extension => @user.ext), @current_query) %><br/>
+<strong>Fax: </strong> <%= highlight_search_result(@user.fax, @current_query) %><br/>
+<strong>Website: </strong> <%= highlight_search_result(@user.web_site, @current_query) %><br/>

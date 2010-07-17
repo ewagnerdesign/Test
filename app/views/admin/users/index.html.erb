@@ -1,0 +1,46 @@
+ <!--div class="container"-->
+        <!--div class="container_bg"-->
+                <div class="data filter">
+                        <label for="filter_by">Filter by:</label>
+                        <select id="filter_by">
+                                <option>Gender</option>
+                        </select>
+                </div>
+                <span class="b_btn"><span><%= link_to_remote "Add new User",
+                       { :url => new_admin_user_path, :method => :get, :condition => "close_previous_crud_form()" },
+                       { :id => :add_user } %> |<em class="ico ico_plus">&nbsp;</em></span></span>
+                
+		<table class="tbl_rounded tbl_users">
+                        <% unless @users.empty? %>
+                        <%= render :partial => 'admin/users/user',:collection => @users  %>
+                        <% end %>
+                </table>
+		
+        <!--/div-->
+<!--/div-->	
+
+<div id="users_index">
+  <div class="title_tools">
+    <div class="search-bar">
+    </div>
+    <%= link_to "Logins", logins_admin_users_path %> |
+    <%= link_to_ni "Options" %>
+  </div>
+  <div style="clear: both"></div>
+  <div id="create_user"></div>
+  <div id="emptiness_messages">
+    <% if @users.empty? %>
+      <p>
+        <% if @current_query.blank? %>
+          There are no Users at the moment.
+        <% else %>
+          There are no Users found matching <strong><%= @current_query %></strong>.
+        <% end %>
+      </p>
+    <% end %>
+  </div>
+  
+<%= will_paginate @users %>
+</div>
+<%= render :partial => "admin/user_study_roles/add_popup" %>
+

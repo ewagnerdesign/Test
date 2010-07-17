@@ -1,0 +1,39 @@
+ <table class="tbl_rounded tbl_users tbl_sdtm tbl_domains">
+	<%= render :partial => 'domain', :collection => @domains %>
+ </table>
+
+<div id="<%= dom_id_nested(:index) %>">
+  <div class="title_tools">
+    <% content_for :search_params do %>
+      <input id="search_query" name="search[query]" size="30" type="text" value="<%= @current_query[:query] %>" /> <br/>
+      Search children:
+      <input id="search_inc_children" name="search[inc_children]" type="hidden"
+        value="<%= @current_query[:inc_children].to_s %>"/>
+      <input id="search_inc_children_cb" name="search_inc_children_cb" size="30" type="checkbox"
+        <%= @current_query[:inc_children] ? "checked" : "" %>
+        onclick="getElementById('search_inc_children').value=getElementById('search_inc_children_cb').checked"/>
+    <% end %>
+    <%= filter_form(admin_domains_path(:js)) %>
+    <%= link_to_remote "Add ", {:url => new_admin_domain_path(), :condition => "close_previous_crud_form()", :method => :get } %>
+  </div>
+    
+  <div style="clear: both"></div>
+  <ul>
+     <div id="<%= dom_id_nested(:create) %>"></div>
+    <div class="list" id="<%= dom_id_nested(:list) %>">
+      <%= render :partial => 'domain', :collection => @domains %>
+    </div>
+  </ul>
+  <%= will_paginate @domains, :param_name => dom_id_nested(:page) %>
+  <div id="<%= dom_id_nested(:emptiness_messages) %>">
+    <% if @domains.empty? %>
+      <p>
+      <% if @current_query[:query].blank? %>
+         There are no domains at the moment.
+      <% else %>
+         There are no domains found matching <strong><%= @current_query[:query] %></strong>.
+      <% end %>
+      </p>
+    <% end %>
+  </div>
+</div>

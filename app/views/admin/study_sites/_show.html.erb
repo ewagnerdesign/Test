@@ -1,0 +1,29 @@
+<div class="block-container">
+     <%= link_to_close(admin_study_site_path(@study, @site)) %>
+    <div class="title">Site <%= highlight_search_result(@site.name, @current_query) %> </div>
+        <tt>
+          Name: <%= highlight_search_result(@site.name, @current_query) %><br/>
+          Number: <%= highlight_search_result(@site.number, @current_query) %><br/>
+          Principal Investigator: <%= highlight_search_result(@site.investigator, @current_query) %><br/>
+          Address 1: <%= highlight_search_result(@site.address_1, @current_query) %><br/>
+          Address 2: <%= highlight_search_result(@site.address_2, @current_query) %><br/>
+          City: <%= highlight_search_result(@site.city, @current_query) %><br/>
+          State: <%= highlight_search_result(@site.state_cd, @current_query) %><br/>
+          Zip: <%= highlight_search_result(@site.zip, @current_query) %><br/>
+          Updated at: <%=  @site.updated_at %>
+        </tt>
+   <br/><br/>
+    <div class="tabs" id="<%= dom_id(@study, dom_id(@site, :show)) %>">
+      <!-- tabs -->
+      <ul class="tabNavigation">
+        <li><a href="#<%= dom_id(@study, dom_id(@site, :study_coordinators)) %>">Study Coordinators</a></li>
+      </ul>
+      <!-- tab containers -->
+      <div id="<%= dom_id(@study, dom_id(@site, :study_coordinators)) %>">
+        <div id="<%= dom_id(@study, dom_id(@site, :contacts_index)) %>">
+          <%= lazy_ajax_loader(dom_id(@study, dom_id(@site, :study_coordinators)), admin_study_site_contacts_path(@study, @site)) %>
+        </div>
+      </div>
+    </div>
+</div>
+

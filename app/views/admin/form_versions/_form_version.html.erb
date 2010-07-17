@@ -1,0 +1,13 @@
+<tr id="<%= dom_id_nested(:item, form_version) %>" class="<%= cycle("even", "odd") %>">
+  <td><%= form_version.name %></td>
+  <td><%= form_version.created_at.to_s(:date_time24s) %></td>
+  <td><%= form_version.created_by.try(:full_name) %></td>
+  <td>
+    <%= link_to 'Preview', preview_fv_admin_forms_path(:form_version_id => form_version.id), {:target => "_blank"}  %>
+  </td>
+  <td>
+    <%= link_to_remote_if form_version.removable?, 'Delete',
+            {:method=> :delete, :url => admin_study_form_form_version_path(@study, form_version.form, form_version),
+             :confirm => 'Are you sure?'} %>
+  </td>
+</tr>

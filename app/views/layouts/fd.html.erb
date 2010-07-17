@@ -1,0 +1,354 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta content="text/html; charset=utf-8" />
+  <%= javascript_include_tag "jquery-1.4.2", "jquery-ui",
+                             "json2" , "jquery.tools.min.js", "jquery.inherit-1.1.1",
+                              "jquery.autocomplete"
+  %>
+  <%= javascript_include_tag 'validate/sv.utils.js', 'validate/sv.validators', 'validate/sv.field.validator', 'validate/sv.form.validator' %>
+
+   <%= javascript_include_tag %w(
+        fdapplication
+        fdcontrol controls/fdcontrol_column_item controls/fdcontrol_column controls/fdcontrol_id
+        fdadvancedcontrols fbdnd
+        fdcontroller fdmultiselect fddsmultiselect  fdform fddomainselect fdview
+     ).map{|e| "fd/"+e}%>
+
+  <%= javascript_include_tag %w(
+        fdoption_helper fdview_helper
+        fdvalidator
+
+        fdvalidator_required fdvalidator_select_count
+        fdvalidator_length fdvalidator_format
+        fdvalidator_date fdvalidator_range
+        fdvalidator_inclusion fdvalidator_exclusion
+
+        fdvalidator_ds
+        fdvalidator_dslength fdvalidator_dsrange
+        fdvalidator_dsinclusion fdvalidator_dsexclusion
+        fdvalidator_dsformat
+
+        fdvalidator_collection
+       ).map{|e| "fd/validators/"+e }
+  %>
+
+  <%= javascript_include_tag %w(
+           fdconnection_collection fdconnection
+           fdconnection_base  fdconnection_base_dropable
+           fdconnection_tree
+
+           fdconnection_item_base
+
+           fdconnection_condition fdconnection_condition_item fdconnection_condition_item_conditions
+           fdconnection_operational fdconnection_operational_item
+       ).map{|e| "fd/connections/"+e }
+  %>
+
+  <%= javascript_named_routes %>
+  <%= stylesheet_link_tag "fd/form", "fd/style", "fd/base", "fd/connections" %>
+  <%= stylesheet_link_tag "ui-lightness/jquery-ui-1.8.1.custom" %>
+
+  <%=stylesheet_link_tag "uform/uni-form-generic.css" %>
+  <%=stylesheet_link_tag "uform/uni-form.css" %>
+  <%=stylesheet_link_tag "jquery.autocomplete" %>
+  <%= javascript_include_tag "uni-form.jquery"   %>
+
+  <!-- Validation -->
+  <%= javascript_include_tag 'validate/sv.utils.js', 'validate/sv.validators', 'validate/sv.field.validator', 'validate/sv.form.validator' %>
+  <%= javascript_include_tag "fconnection.js" %>
+
+  <title>Form Designer</title>
+</head>
+<body>
+
+<div id="menu">
+  <div id="designer-menu">
+    <b>Form Designer &rarr;</b>
+    <a href="#" id="fdLoad"><%= icon(:document_stand)%>Load</a>
+    <a href="#" id="fdNew"><%= icon(:blueprint) %>New</a>
+    <a href="#" id="fdSave"><%= icon(:disk) %>Save</a>
+    <a href="#" id="fdSaveas" rel="#dlSaveAs"><%= icon(:disks) %>Save As</a>
+    <a href="#" id="fdPreview" rel="#dlSaveAs" url="<%= preview_admin_forms_path %>"><%= icon(:document_search_result) %>Preview</a>
+    <a id="fdConnections"><%= icon(:chain) %>Connections</a>
+  </div>
+  <div id="connection-menu" style="display:none">
+    <b>Connections Manager &rarr;</b>
+    <a id="fdBack"><%= icon(:blueprint) %>Back to designer</a>
+  </div>
+  <div id="preview-menu" style="display:none">
+    <b>Form Preview &rarr;</b>
+    <a id="fdBackPreview"><%= icon(:blueprint) %>Back to designer</a>
+  </div>
+</div>
+<div id="pane-container">
+  <div class="pane-view" id="designer">
+    <div id="builderpane" class="unselectable">
+      <form></form>
+
+      <!-- here will be controls -->
+      <div id="nofields" class="notice" style="display:none">
+        <h2><b>No Fields!</b> You should add a field &rarr;</h2>
+
+        <p>This is a <strong>live preview</strong> of your form. Currently, <strong>you don't have
+        any fields</strong>. Use the buttons under the <strong>Add a Field</strong> tab on the
+        left to create inputs for your form. Click on the fields to change their properties.</p>
+      </div>
+      <div id="placeholder"></div>
+    </div>
+    <!-- Designer sidebar -->
+    <div id="panel-options" class="fdc">
+      <!-- Tabs -->
+      <ul id="ptabs">
+        <li id="fdc">
+          <a href="#">Add field</a>
+        </li>
+        <li id="fdo">
+          <a href="#">Field settings</a>
+        </li>
+        <li id="fdf">
+          <a href="#">Form setting</a>
+        </li>
+      </ul>
+
+      <div id="fdc-container" class="sidebar-container unselectable" unselectable="on">
+        <span id="toolbox">
+	 <h3 class="titleheader btext">CDISC/CDASH Components</h3>
+         <ul class="col3">
+           <li class="tool-dropdown" fdtype="dsdropdown"><b></b>DropDown</li>
+           <li class="tool-checkbox" fdtype="dscheckbox"><b></b>CheckBox</li>
+           <li class="tool-radiobox" fdtype="dsradiobox"><b></b>RadioButton</li>
+           <li class="tool-datetime" fdtype="dateinput"><b></b>DatePicker</li>
+
+         </ul>
+         <ul class="col4">
+           <li class="tool-textbox" fdtype="dsinputtext"><b></b>TextBox</li>
+           <li class="tool-textarea" fdtype="dstextarea"><b></b>TextArea</li>
+           <li class="tool-textbox" fdtype="dsinput"><b></b>TextInput</li>
+           <li class="tool-file" fdtype="file"><b></b>FileUpload</li>
+         </ul>
+         <div style="clear:both"></div>
+	 <h3 class="titleheader btext">Form Layout</h3>
+         <ul class="col1">
+           <%#<li class="tool-textbox" fdtype="input"><b></b>TextBox</li>
+           <li class="tool-textarea" fdtype="textarea"><b></b>TextArea</li>
+           <li class="tool-dropdown" fdtype="dropdown"><b></b>DropDown</li>
+           <li class="tool-checkbox" fdtype="checkbox"><b></b>CheckBox</li>
+           <li class="tool-radiobox" fdtype="radiobox"><b></b>RadioButton</li>%>
+           <li class="tool-file" fdtype="section"><b></b>SectionBreak</li>
+
+         </ul>
+         <ul class="col2">
+           <li class="tool-column" fdtype="column"><b></b>ColumnControl</li>
+         </ul>
+        </span>
+      </div>
+
+      <div id="fdo-container" class="sidebar-container" style="display:none;">
+        <div id="noFieldSlection" class="notice">
+          <h3><b>No Field Selected</b></h3>
+          Please click on a field in the form preview on the left to change its properties.
+        </div>
+        <div id="optionGroup" style="display:none;">
+          <h3 class="titleheader btext">General Options</h3>
+          <%= render :partial=>"fd/settings" %>
+        </div>
+      </div>
+
+      <div id="fdf-container" class="sidebar-container" style="display:none;">
+        <ul id="opt-form">
+          <li>
+            <label class="desc">Form Name</label>
+          </li>
+          <li>
+            <label class="desc">Form Title</label>
+            <div>
+              <textarea cols="35" rows="10" id="form-title" name="label"></textarea>
+            </div>
+          </li>
+          <li>
+            <label class="desc">Description</label>
+            <div>
+              <textarea cols="35" rows="10" id="form-description"></textarea>
+            </div>
+          </li>
+          <li>
+            <input type="checkbox" id="form-cumulative" ></input>
+            <label>Cumulative</label>
+          </li>
+        </ul>
+        <a href="#" id="form-save">Save Form Options</a>
+      </div>
+      <div id="fdv-container" class="sidebar-container"></div>
+    </div>
+    <div style="clear:both"></div>
+    <div class="modal" id="modal" style="display:none;">&nbsp;</div>
+
+    <!-- Save as dialog container -->
+    <div class="modal" id="dlSaveAs">
+      <div class="modal-head">Save Form As</div>
+      <div class="modal-content">
+        <form>
+          <div class="error" style="display:none"></div>
+          <label for="frmName">form name</label><br/>
+          <input type="text" id="frmName" name="form[name]"/><br/>
+          <label for="frmDescription">short description</label><br/>
+          <textarea cols="35" rows="10" id="frmDescription" name="form[description]"></textarea><br/>
+          <a class="button positive" id="frmSaveAs"><%= icon(:disk) %>Save!</a>
+          <a class="button negative close"><%= icon(:cross) %>Cancel</a>
+        </form>
+      </div>
+    </div>
+
+    <!-- Domain select dialog container-->
+    <div class="modal domainmodal" id="dlDomain">
+      <h1 class="modal-head"><%= icon(:document_stamp) %>Domain questions selector
+        <div class="close modal-close"><%= icon(:cross) %></div>
+      </h1>
+      <div class="modal-content">
+        <div class="search col3">
+          <input type="text" id="dlDomainSearch"/>
+        </div>
+        <div class="search col4">
+          <input type="text" id="dlQuestionSearch"/>
+        </div>
+        <ul class="col1" id="dlDomainList"></ul>
+        <ul class="col2" id="dlQuestionList">
+          <li>Please select from left</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="modal dictmodal" id="dlDict">
+      <h1 class="modal-head"><%= icon(:document_stamp) %>Associated Dictionary
+        <div class="close modal-close"><%= icon(:cross) %></div>
+      </h1>
+      <div class="content"></div>
+    </div>
+
+    <div class="tooltip">&nbsp;</div>
+  </div>
+  <div class="pane-view" id="connection" style="display:none">
+    <%= render :partial=>"connections" %>
+  </div>
+  <div class="pane-view" id="preview" style="display:none;"></div>
+</div> <!-- pane-container end -->
+
+<div id="loader" class="notice" style="display:none">
+  <%= image_tag "fd/loading.gif" %>
+  <h3>loading...</h3>
+</div>
+<div id="loadmask" style="display:none"></div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    FDController.init({
+      "sdtmCategories": <%= SdtmCategory.all.to_json(:only => [:id, :code, :name, :definition]) %>
+      <%= ",data: #{@form.form_versions.last.metadata}" unless @form.nil?  %>
+    });
+
+    //New button action
+    $('#fdNew').click(function(){FDController.load({})});
+
+    //Save as button click on save as overlay
+    $('#frmSaveAs').click(function(e) {
+      var baseParams = $('#dlSaveAs form').serialize();
+      var form = FDController.save(true);
+      baseParams += '&form[metadata]=' + escape(JSON.stringify(form));
+      baseParams += '&form[cumulative]=' + escape(form.form.cumulative);
+      $.post( Routes.adminFormsPath({format: 'json'}), baseParams, function(result) {
+        if(result.error) {
+          $('#dlSaveAs .error').html(result.error.join(',')).show();
+        } else {
+          //Reload form with new params
+          FDController.load(result);
+          $('#fdSaveas').overlay().close();
+        }
+      });
+    });
+
+    //Save as button on toolbar
+    $('#fdSaveas').overlay({
+      onClose: function(){ $('#dlSaveAs .error').html('').hide() },
+      onBeforeLoad: function(){
+         $('#frmName').val('')
+         $('#frmDescription').val('')
+
+         $(document).bind('keypress', function(e){
+           if( (e.keyCode || e.which) ==13 ){ // on press enter
+             $('#frmSaveAs').trigger('click')
+           }
+         })
+      },
+      onBeforeClose: function() {
+        $(document).unbind('keypress')
+      }
+    });
+
+    //Toolbar load button
+    $('#fdLoad').overlay({
+      target:'#modal',
+      closeOnClick: false,
+      onBeforeLoad: function() {
+        this.getOverlay().load( Routes.adminFormsPath({format:'js'}) );
+      }
+    });
+
+    //Toolbar preview button
+    $('#fdPreview').click(function() {
+      var data = $.param({'_method':'POST','form[metadata]': JSON.stringify(FDController.save())});
+      //TODO: replace this on a href attr
+      $.post($(this).attr('url'), data, function(result) {
+        $('#preview').html(result);
+        FDView.show('preview');
+      });
+    });
+
+    //Toolbar save form
+    $('#fdSave').click(function() {
+      // not saved form, so triggering save as as well
+      if( FDController.form==null || FDController.form.options.formId==0 ){
+        $('#fdSaveas').click();
+        return;
+      }
+
+      var form = FDController.save();
+      var data = $.param({'_method':'PUT','form[metadata]': JSON.stringify(form), 'form[cumulative]': form.form.cumulative});
+      $.post( Routes.adminFormPath(form.form.formId, {format: "json"}), data, function(result) {
+        FDController.load(result);
+      });
+    });
+
+    //Domain init, will be moved into separate file
+    FDDomainSelect.init();
+
+    //Show connections view
+    $('#fdConnections').click(function() {
+      FDView.show('connection');
+    });
+
+    //Back buttons handler
+    $('#fdBack, #fdBackPreview').click(function() {
+      FDView.show('designer');
+    });
+
+    //Init view controller
+    FDView.init({
+      onconnectionShow: FDConnectionCollection.activate,
+      ondesignerShow:  FDConnectionCollection.deactivate
+    });
+
+    FDView.show('designer');
+
+/*
+        // move panel options with scrolling
+        $(window).scroll(function() {
+            $("#panel-options").animate({
+              top: 37+$(this).scrollTop()
+            }, "fast");
+        })
+*/
+  });
+</script>
+</body>
+</html>

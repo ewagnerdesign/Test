@@ -1,0 +1,7 @@
+if @domain.valid?
+   page[dom_id(@domain)].replace :partial => "domain"
+   page[dom_id(@domain)].effect("highlight", {}, 3500)
+else
+  page[dom_id(@domain)].replace_html :file => "admin/domains/edit.html.erb"
+  page[dom_id(@domain)].effect("shake", {:direction => 'up', :distance => '6'}, 100)
+end

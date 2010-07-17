@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+require File.dirname(__FILE__) + '/../config/boot'
+ARGV <<  '-b0.0.0.0'
+ARGV <<  '--debug'
+require 'commands/server'

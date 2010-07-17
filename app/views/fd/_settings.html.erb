@@ -1,0 +1,91 @@
+<ul id="opt-general" fdtype="optblock">
+  <li>
+    <label class="desc">
+      <input id="opt-label_enable" type="checkbox" name="label_enable" fdfield="label_enable" fdtype="option" />
+      Field Label
+    </label>
+
+    <div>
+      <textarea cols="35" rows="10" id="opt-label" name="label" fdfield="label" fdtype="option"></textarea>
+    </div>
+  </li>
+
+  <li>
+    <label class="desc">
+      Description
+    </label>
+
+    <div>
+      <textarea cols="35" rows="10" id="opt-description" fdfield="description" fdtype="option"></textarea>
+    </div>
+  </li>
+
+</ul>
+
+<ul id="opt-multiple" fdtype="optblock">
+  <li>
+    <label class="desc">
+      Options list
+    </label>
+
+    <div>
+      <ul id="opt-options"></ul>
+    </div>
+  </li>
+</ul>
+
+<ul id="opt-datasource" fdtype="optblock">
+  <li>
+    <label class="desc">
+      Domain &amp; CDASH
+    </label>
+
+    <div id="domain-info">
+      <label>Domain:</label> 
+      <span id="fd-domain">1</span>
+      <a class="dict-icon" rel="#dlDict" href="<%= admin_domains_path %>"><%= icon(:arrow_right)%></a>
+      <input id="opt-domain_id" type="hidden" fdfield="domain_id" fdtype="option" value="-1">
+      <br/>
+
+      <label>CDASH:</label>
+      <span id="fd-cdash">2</span>
+      <%#<a class="dict-icon" rel="#dlDict" href="<%= admin_sdtm_categories_path % >"><%= icon(:arrow_right)% ></a>%>
+      <input id="opt-cdash_question_id" type="hidden" fdfield="cdash_question_id" fdtype="option" value="-1">
+    </div>
+
+    <a href="#" id="fdomainselect" class="button positive toolbox-li" style="text-decoration: none;width:175px;" rel="#dlDomain">Select
+      Domain & CDASH
+    </a>
+  </li>
+</ul>
+<ul id="opt-sdtm" fdtype="optblock">
+ <li>
+    <label class="desc">
+      SDTM
+    </label>
+
+    <div id="opt-cdash"></div>
+  </li>
+</ul>  
+
+<ul id="opt-dropdownOptions" fdtype="optblock">
+  <li>
+    <fieldset>
+      <input id="opt-emptyElement" name="emptyElement" type="checkbox" fdfield="emptyElement" fdtype="option">
+      <label for="opt-emptyElement">Allow blank option</label>
+    </fieldset>
+  </li>
+</ul>
+
+<ul id="opt-columnBlockOptions" fdtype="optblock">
+  <li>
+    <label for="opt-columns">Columns</label>
+    <select id="opt-columns" name="columns" type="text" fdfield="columns" fdtype="option">
+      <%= options_for_select (1..3).to_a %>
+    </select>
+  </li>
+</ul>
+
+<%= render :partial=>"fd/validators" %>
+
+<a href="#" id="save-options">Save!</a>

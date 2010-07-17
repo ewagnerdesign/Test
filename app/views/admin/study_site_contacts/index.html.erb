@@ -1,0 +1,31 @@
+<div id="<%= dom_id(@study, dom_id(@site, :contacts_index)) %>">
+<div class="title_tools">
+  <% content_for :search_params do %>
+    <input id="search" name="search" size="30" type="text" value="<%= @current_query %>" />
+  <% end %>
+  <%= filter_form(admin_study_site_contacts_path(@study, @site, :js), @site) %>
+  <%= link_to_remote "Add existing", 
+    { :url => add_admin_study_site_contacts_path(@study, @site), :method => :get },
+    { :id => dom_id(@study, dom_id(@site, :add_contact)) }%> |
+  <%= link_to_ni "Options" %>
+</div>
+<div style="clear: both"></div>
+<ul>
+  <div id="<%= dom_id(@study, dom_id(@site, :create_contact)) %>"></div>
+  <div class="list" id="<%= dom_id(@study, dom_id(@site, :contacts_list)) %>">
+    <%= render :partial => 'site_user', :collection => @entities %>
+  </div>
+</ul>
+<%= will_paginate @entities, :param_name => @template.dom_id_nested(:page, @study, @site) %>
+<div id="<%= dom_id(@study, dom_id(@site, :contacts_emptiness_messages)) %>">
+  <% if @entities.empty? %>
+    <p>
+    <% if @current_query.blank? %>
+       There are no Contacts added from the Site to the Study.
+    <% else %>
+       There are no Contacts found matching <strong><%= @current_query %></strong>.
+     <% end %>
+    </p>
+  <% end %>
+</div>
+</div>

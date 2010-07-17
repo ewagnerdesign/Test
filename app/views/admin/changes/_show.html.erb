@@ -1,0 +1,25 @@
+<div class="block-container">
+  <%= link_to_close(admin_change_path(@change)) %>
+  <h2>Change #<%= @change.id %></h2>
+  <p>
+    <strong>Date:</strong> <%= @change.created_at.to_s :date_time24 %> <strong>by:</strong> <%= @change.user.full_name unless @change.user.nil? %>
+  </p>
+  <p>
+    <strong>Action:</strong> <span class="ch-action-<%= @change.action %>"><%= @change.action %></span>
+  </p>
+  <p>
+    <strong>Observed:</strong> <%= @change.auditable_type  %>: <%= @change.auditable_id %> <strong>v:</strong> <%= @change.version %>
+  </p>
+  <p>
+    <table class="changes">
+      <th>Field</th><th>Old value</th><th>New value</th>
+      <% @change.changes.keys.sort.each do |k| %>
+      <tr class="<%= cycle("even", "odd") %>">
+        <td><%= k.humanize %></td>
+				<td <% if @change.action == Audit::DESTROY %>class="new"<% end %>><%= @change.changes[k].first.to_s %></td>
+				<td <% if @change.action != Audit::DESTROY %>class="new"<% end %>><%= @change.changes[k].second.to_s %></td>
+      </tr>
+      <% end %>
+    </table>
+  </p>
+</div>

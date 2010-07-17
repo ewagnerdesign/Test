@@ -1,0 +1,7 @@
+if params[:cancel] == "true"
+  page[dom_id(@study)].replace :partial => "study"
+else
+  page[dom_id(@study)].replace_html :file => "admin/admin_studies/edit.html.erb"
+  page << "$('##{dom_id(@study)}').get(0).onmouseover = null"
+  page << "$('##{dom_id(@study)}').get(0).onclick = null"
+end

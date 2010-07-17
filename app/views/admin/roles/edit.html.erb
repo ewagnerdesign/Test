@@ -1,0 +1,14 @@
+<td colspan="9">
+<div class="block-container" style="border-color:LimeGreen;">
+  <div class="title">Edit <%= h(@role.name) %> </div>
+  <%= link_to_close(edit_admin_role_path(@role)) %>
+  <div id="<%= dom_id_nested(:item, @role) %>" class="input-form crud-form">
+  <% remote_form_for @role, :url => admin_role_path(@role) do |f| %>
+    <%= render :partial => "form", :locals => {:f => f} %>
+    <p>
+      <%= f.submit "Update" %> or <%= link_to_cancel "cancel", edit_admin_role_path(@role) %>
+    </p>
+  <% end %>
+  </div>
+</div>
+</td>

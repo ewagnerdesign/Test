@@ -1,0 +1,34 @@
+<% form_tag "", :class=>"uniForm", :id=>'eform' do %>
+
+  <%= render  :partial => 'form' %>
+  <%= submit_tag "Check Form", :id=>"eformSubmit" %>
+<% end %>
+
+<script type="text/javascript" charset="utf-8">
+$(document).ready(function() {
+  $('#eform').validateForm({}, {
+    onError: function(e, errors){
+      var block =  $(e.target).parents('.ctrlHolder');
+      block.addClass('error');
+      block.prepend($('<p>').addClass('errorField').html('<strong>'+e.errors.join(',') +'</strong>') );
+      e.preventDefault();
+    },
+    onReset: function(e, element) {
+      var block =  $(e.target).parents('.ctrlHolder');
+      block.removeClass('error');
+      block.find('.errorField').remove();
+      e.preventDefault();
+    },
+    onFormSubmit: function(e, element) {
+      $('#eformSubmit').val( e.valid? "Valid form": "Invalid form" )
+      return true;
+    }
+  });
+
+  $('#eform').submit(function(){
+    return false;
+  })
+
+});
+
+</script>

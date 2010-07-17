@@ -1,0 +1,6 @@
+<tr class="underlined_row">
+  <td>
+    <%= check_box_tag "sites[]", site.id, selected_sites.include?(site), :id => dom_id_nested(:site, @user, site) %>
+  </td>
+  <td><%= label_tag dom_id_nested(:site, @user, site), site.name %></td>
+</tr>

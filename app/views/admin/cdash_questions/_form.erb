@@ -1,0 +1,51 @@
+<% if !@cdash_question.errors.empty? %>
+  <h2>The following problems prevent this question from being saved:</h2>
+  <ul>
+  <% @cdash_question.errors.each do |e| %>
+    <li>
+     <%= e.first.humanize + " " + e.second -%>
+    </li>
+  <% end %>
+  </ul>
+<% end %>
+
+<p>
+  <%= f.label :variable_name %><br />
+  <%= f.text_field :variable_name %>
+</p>
+
+<p>
+  <%= f.label :data_collection_field %><br />
+  <%= f.text_field :data_collection_field %>
+</p>
+
+<p>
+  <%= f.label :number %><br />
+  <%= f.text_field :number %>
+</p>
+
+<p>
+  <%= f.label :definition %><br />
+  <%= f.text_area :definition, :cols => 100, :rows => 5 %>
+</p>
+
+<p>
+  <%= f.label :completion_instructions %><br />
+  <%= f.text_area :completion_instructions, :cols => 100, :rows => 5 %>
+</p>
+
+<p>
+  <%= f.label :sponsor_info %><br />
+  <%= f.text_area :sponsor_info, :cols => 100, :rows => 5 %>
+</p>
+
+<p>
+  <%= f.label :core %><br />
+  <%= f.text_field :core %>
+</p>
+
+<p>
+  SDTM<br />
+  <%= f.select :sdtm_category_id, SdtmCategory.ascend_by_name.search.all.collect{|e| [e.name, e.id]}, {:include_blank => "- Empty -"} %>
+</p>
+

@@ -1,0 +1,14 @@
+<li <%= 'class="selected_study"' if @selected_study_arm.try(:id) == study_arm.id %> id="<%= dom_id_n(:item, @study, study_arm) %>">
+  <%= link_to_remote study_arm.code, { :url => admin_study_visits_path(@study, :js, :selected_study_arm_id => study_arm), :method => :get } %>
+  <span style="float:right;">
+    <small>
+      <%= link_to_function 'Rename', "rename_study_arm(#{@study.id.to_s}, #{study_arm.id.to_s}, '#{study_arm.code}', '#{@selected_study_arm.try(:id)}')" %> |
+      <%= link_to_remote_if study_arm.removable?, 'Del',
+        {:method=> :delete, :url => admin_study_study_arm_path(@study, study_arm),
+         :confirm => 'Are you sure you want to delete the Study Arm "' + study_arm.code + '"?',
+         :loaded => remote_function(:method=> :get, :url => admin_study_visits_path(@study, :selected_study_arm_id => @selected_study_arm))
+       },
+        {:onclick => "event.cancelBubble=true;"} %>
+    </small>
+  </span>
+</li>

@@ -1,0 +1,14 @@
+<div class="block-container">
+     <%= link_to_close(admin_sdtm_category_sdtm_answer_path(@sdtm_category, @sdtm_answer)) %>
+    <div class="title">SDTM <%= highlight_search_result(@sdtm_answer.nci_preferred_term, @current_query) %> </div>
+        <tt>
+          Code: <%= highlight_search_result(@sdtm_answer.code, @current_query) %><br/>
+          CDISC Preferred Term: <%= highlight_search_result(@sdtm_answer.cdisc_preferred_term, @current_query) %><br/>
+          CDISC Submission Value: <%= highlight_search_result(@sdtm_answer.submission_value, @current_query) %><br/>
+          CDISC Synonym(s): <%= highlight_search_result(@sdtm_answer.synonyms, @current_query) %><br/>
+          CDISC Definition: <%= highlight_search_result(@sdtm_answer.definition, @current_query) %><br/>
+
+          Updated at: <%= h(@sdtm_answer.updated_at) %>
+        </tt>
+   <br/>
+</div>

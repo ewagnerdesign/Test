@@ -1,0 +1,2 @@
+page['site_users_list'].replace_html render 'users'
+page.show_flash

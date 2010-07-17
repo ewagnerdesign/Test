@@ -1,0 +1,17 @@
+<% crf = crfs_data[:form_instance] %>
+<% if @current_query[:show] == "all_cond" || (@current_query[:show] != "all_cond" && !crf.nil?) %>
+<tr id="<%= dom_id_nested(:item, crfs_data[:form]) %>" class="<%= cycle("even", "odd") %>">
+  <td><%= obj_monitored_status_icon(crf) %></td>
+  <td><%= obj_submit_status_icon(crf) %></td>
+  <td><%= obj_query_status_icon(crf) %></td>
+  <td><%= ecrf_form_link(crfs_data[:form], crf, crfs_data[:subject], crfs_data[:visit]) %></td>
+  <td><%= ecrf_status_name(crf) %></td>
+  <td><%= crf.try(:submitted_at) %></td>
+  <td><%= (crfs_data[:visit].prev_visit.nil?)? crfs_data[:visit].start_date : "Relative" %></td>
+  <td><%= h crfs_data[:visit].name %></td>
+  <td><%= h crfs_data[:subject].number %></td>
+  <td><%= h crfs_data[:subject].site.name %></td>
+  <td><%= h crfs_data[:subject].study.name %></td>
+  <td><%= h crfs_data[:subject].study_arm.code %></td>
+</tr>
+<% end %>

@@ -1,0 +1,25 @@
+<div id="<%= dom_id_nested(:index, @domain) %>">
+  <div class="title_tools">
+    <%= link_to_remote "Add question", { :url => new_admin_domain_cdash_question_path(@domain), :condition => "close_previous_crud_form()", :method => :get } %>
+  </div>
+    
+  <div style="clear: both"></div>
+  <ul>
+    <div id="<%= dom_id_nested(:create, @domain) %>"></div>
+    <div class="list" id="<%= dom_id_nested(:list, @domain) %>">
+      <%= render :partial => 'cdash_question', :collection => @cdash_questions %>
+    </div>
+  </ul>
+  <%= will_paginate @cdash_questions, :param_name => dom_id_nested(:page, @domain) %>
+  <div id="<%= dom_id_nested(:emptiness_messages, @domain) %>">
+    <% if @cdash_questions.empty? %>
+      <p>
+      <% if @current_query.blank? %>
+         There are no questions at the moment.
+      <% else %>
+         There are no questions found matching <strong><%= @current_query %></strong>.
+      <% end %>
+      </p>
+    <% end %>
+  </div>
+</div>

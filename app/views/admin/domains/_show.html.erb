@@ -1,0 +1,24 @@
+<div class="block-container">
+  <%= link_to_close(admin_domain_path(@domain)) %>
+  <div class="title">Domain <%= highlight_search_result(@domain.name, @current_query[:query]) %> </div>
+  <tt>
+    Code: <%= highlight_search_result(@domain.code, @current_query[:query]) %><br/>
+    Domain class: <%= highlight_search_result(@domain.domain_class, @current_query[:query]) %><br/>
+    Description: <%= highlight_search_result(@domain.description, @current_query[:query]) %><br/>
+
+    Updated at: <%=  @domain.updated_at %>
+  </tt>
+  <br/>
+  <div class="tabs" id="<%= dom_id(@domain, :show) %>">
+    <!-- tabs -->
+    <ul class="tabNavigation">
+      <li><a href="#<%= dom_id(@domain, :cdash_questions_tab) %>">Questions</a></li>
+    </ul>
+    <!-- tab containers -->
+    <div id="<%= dom_id(@domain, :cdash_questions_tab) %>">
+      <div id="<%= dom_id(@domain, :cdash_questions_index)%>">
+        <%= lazy_ajax_loader(dom_id(@domain, :cdash_questions_tab), admin_domain_cdash_questions_path(:domain_id => @domain.id)) %>
+      </div>
+    </div>
+  </div>
+</div>

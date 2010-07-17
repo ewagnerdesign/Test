@@ -1,0 +1,20 @@
+<table class="unselectable changes" style="width: 500px">
+  <tr class="head">
+    <th>#</th>
+    <th>First_name</th>
+    <th>Last name</th>
+    <th></th>
+  </tr>
+  <%= render :partial=>'user', :collection=>@users %>
+
+  <% if @users.empty? %>
+  <tr class="even">
+    <td colspan="4" class="center">
+      There are no Contacts at the moment.
+    </td>
+  </tr>
+  <% end %>
+
+</table>
+
+<%= will_paginate @users %>

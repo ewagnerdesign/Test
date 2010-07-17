@@ -1,0 +1,150 @@
+  <div class="simple_box tab_s_box">
+        <div class="tl"></div><div class="tr"></div>
+
+        <div class="inner_part">
+	        <% if !@user.errors.empty? %>
+  <h2>The following problems prevent this user from being saved:</h2>
+  <ul>
+  <% @user.errors.each do |e| %>
+    <li>
+     <%= e.first.humanize + " " + e.second -%>
+    </li>
+  <% end %>
+  </ul>
+<% end %> 
+                
+		
+                <fieldset class="data">
+
+                        <div class="row">
+                                <%= f.label :login %>
+                                <div class="col">
+                                        <%= f.text_field :login, :size => 25  %>        
+                                </div>
+                        </div>
+                        <div class="row">
+                                 <%=f.label :active  %>
+                                <div class="col">
+					<%= f.check_box :active %>	
+                                </div>
+                        </div>
+                        <div class="row">
+                                <%= f.label :first_name %>
+                                <div class="col">
+                                        <%= f.text_field :first_name, :size => 25  %>
+                                </div>
+                        </div>
+			<div class="row">
+                                <%= f.label :last_name %>
+                                <div class="col">
+                                        <%= f.text_field :last_name, :size => 25  %>
+                                </div>
+                        </div>
+			<div class="row">
+                                <%= f.label :middle_name %>
+                                <div class="col">
+                                        <%= f.text_field :middle_name, :size => 25  %>
+                                </div>
+                        </div>
+                        <div class="row">
+                                <%= f.label :title %>
+                                <div class="col">
+					<%= f.text_field :title, :size => 25  %>
+                                </div>
+                         </div>
+			 
+			 
+			 <div class="row">
+                                 <%= f.label :email %>
+                                <div class="col">
+                                        <%= f.text_field :email, :size => 25  %>        
+                                </div>
+                        </div>
+                        <div class="row">
+                                 <%= f.label :address_1 %>
+                                <div class="col">
+					 <%= f.text_field :address_1, :size => 25  %>	
+                                </div>
+                        </div>
+			 <div class="row">
+                                 <%= f.label :address_2 %>
+                                <div class="col">
+					 <%= f.text_field :address_2, :size => 25  %>	
+                                </div>
+                        </div>
+                        <div class="row">
+                                <%= f.label :city %>
+                                <div class="col">
+                                         <%= f.text_field :city, :size => 25  %>
+                                </div>
+                        </div>
+			<div class="row">
+                                 <%= f.label :state_cd %>
+                                <div class="col">
+					<%= f.text_field :state_cd, :size => 2  %>
+                                </div>
+                        </div>
+			<div class="row">
+                                <%= f.label :zip %> 
+                                <div class="col">
+                                        <%= f.text_field :zip, :size => 25  %>
+                                </div>
+                        </div>
+                        <div class="row">
+                                 <%= f.label :phone %>
+                                <div class="col">
+					<%= f.text_field :phone, :size => 25  %><br/>
+				</div>
+		        </div>
+			 <div class="row">
+				<%= f.label :ext %>
+				<div class="col">
+					<%= f.text_field :ext, :size => 5  %>
+                                </div>
+			</div>
+			
+			<div class="row">
+                                <%= f.label :fax %>
+                                <div class="col">
+					<%= f.text_field :fax, :size => 25  %>	
+				</div>
+		        </div>
+			<div class="row">
+				<%= f.label :web_site %>
+				<div class="col">
+					 <%= f.text_field :web_site, :size => 25  %>	
+                                </div>
+			</div>
+			 <div class="row">
+				<label> Time Zone: </label>
+				<div class="col">
+					<%= time_zone_select :user, :time_zone, nil, { :include_blank => 'Please select...', :selected => @user.time_zone} %>	
+                                </div>
+			</div>
+			
+			
+                        <br />
+                        <div class="row row_btns">
+				<span class="btn"><%= f.submit (@user.new_record? ? "Create" : "Update") %></span>
+				<!--span class="btn"><i>&nbsp;</i><span><em class="ch">&nbsp;</em>Save</span><b>&nbsp;</b></span-->
+				<span class="btn"><i>&nbsp;</i><span><em class="dl">&nbsp;</em>Cancel</span><b>&nbsp;</b></span>
+                        </div>
+
+                </fieldset>
+
+        </div>
+        <div class="bl"></div><div class="br"></div>
+</div>
+
+ 
+<% if false %>
+<p>
+  <%= f.label :password, 'Password'   %>
+  <%= f.password_field :password, :size => 25  %>
+</p>
+<p>
+  <%= f.label :password_confirmation %>
+  <%= f.password_field :password_confirmation, :size => 25  %>
+</p>
+<% end %>
+

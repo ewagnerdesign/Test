@@ -1,0 +1,40 @@
+<div style="display:none;"><a id="add-study-popup-loader" rel="#add-study-popup" href=""></a></div>
+<div id="add-study-popup" class="popup-overlay"></div>
+<% javascript_tag do -%>
+$(function() {
+  // loader
+  $("#add-study-popup-loader").overlay({
+
+    mask: 'slategrey',
+
+    onBeforeLoad: function() {
+
+      // grab wrapper element inside content
+      var wrap = $("#add-study-popup");
+
+      // load the page specified in the trigger
+      wrap.load(this.getTrigger().attr("href"));
+    },
+
+    onClose: function() {
+      $("#add-study-popup").empty();
+    }
+  });
+});
+
+function close_add_study_popup() {
+  $('#add-study-popup-loader').data('overlay').close();
+}
+
+function show_add_study_popup(user_id) {
+  $("#add-study-popup-loader").attr("href", Routes.newAdminUserStudyRolePath({user_id: user_id}));
+  $("#add-study-popup-loader").click();
+}
+
+function show_add_sites_popup(user_id, study_user_id) {
+  $("#add-study-popup-loader").attr("href", Routes.addSitesAdminUserStudyRolePath({user_id: user_id, id: study_user_id}));
+  $("#add-study-popup-loader").click();
+}
+<% end %>
+
+

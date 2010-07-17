@@ -1,0 +1,17 @@
+
+<div id="logins_index">
+<div style="clear: both"></div>
+  <div class="list" id="changes_list">
+    <ul>
+      <% @logins.each do |la| %>
+      <% if la.successfull %> <li style="color:green;"> <% else %> <li style="color:red;"> <% end %>
+        <strong>Login: </strong><%= la.login %> <strong>from: </strong><%= la.ip %> <strong>at: </strong><%= la.created_at.to_s %>
+        <strong>success: </strong><%= la.successfull %><br/>
+        <strong>User-agent: </strong><%= la.user_agent %>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+  <%= will_paginate @logins %>
+</div>
+

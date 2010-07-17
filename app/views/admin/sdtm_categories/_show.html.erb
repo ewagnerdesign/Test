@@ -1,0 +1,29 @@
+<div class="block-container">
+  <%= link_to_close(admin_sdtm_category_path(@sdtm_category)) %>
+  <div class="title">SDTM <%= highlight_search_result(@sdtm_category.name, @current_query[:query]) %> </div>
+  <tt>
+    Code: <%= highlight_search_result(@sdtm_category.code, @current_query[:query]) %><br/>
+    Extensible: <%= bool_to_s(@sdtm_category.extensible) %><br/>
+    Name: <%= highlight_search_result(@sdtm_category.name, @current_query[:query]) %><br/>
+    CDISC Submission Value: <%= highlight_search_result(@sdtm_category.submission_value, @current_query[:query]) %><br/>
+    CDISC Preferred Term: <%= highlight_search_result(@sdtm_category.cdisc_preferred_term, @current_query[:query]) %><br/>
+    CDISC Synonym(s): <%= highlight_search_result(@sdtm_category.synonyms, @current_query[:query]) %><br/>
+    CDISC Definition: <%= highlight_search_result(@sdtm_category.definition, @current_query[:query]) %><br/>
+    NCI Preferred Term: <%= highlight_search_result(@sdtm_category.nci_preferred_term, @current_query[:query]) %><br/>
+
+    Updated at: <%=  @sdtm_category.updated_at %>
+  </tt>
+  <br/>
+  <div class="tabs" id="<%= dom_id(@sdtm_category, :show) %>">
+    <!-- tabs -->
+    <ul class="tabNavigation">
+      <li><a href="#<%= dom_id(@sdtm_category, :sdtm_answers_tab) %>">SDTMs</a></li>
+    </ul>
+    <!-- tab containers -->
+    <div id="<%= dom_id(@sdtm_category, :sdtm_answers_tab) %>">
+      <div id="<%= dom_id(@sdtm_category, :sdtm_answerss_index)%>">
+        <%= lazy_ajax_loader(dom_id(@sdtm_category, :sdtm_answers_tab), admin_sdtm_category_sdtm_answers_path(:sdtm_category_id => @sdtm_category.id)) %>
+      </div>
+    </div>
+  </div>
+</div>

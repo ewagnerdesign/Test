@@ -1,0 +1,25 @@
+$('#<%= control_id %>').datepicker({
+    dateFormat: '<%= dateFormat %>',
+    changeMonth: <%= changeMonth %>,
+    changeYear: <%= changeYear %>,
+    yearRange: '<%= yearRange %>',
+    maxDate: '<%= maxDate %>',
+    onSelect: function(dateText, inst) {
+    <% if show_time.blank? %>
+       $('#<%= control_id %>').val(dateText.toUpperCase()).focus().blur();
+    <% else %>
+       obj = $('#<%= control_id %>');
+       $('#<%= show_time %>_1i').val(obj.datepicker("getDate").getFullYear());
+       $('#<%= show_time %>_2i').val(obj.datepicker("getDate").getMonth() + 1);
+       $('#<%= show_time %>_3i').val(obj.datepicker("getDate").getDate());
+       obj.val(dateText.toUpperCase()).focus().blur();
+    <% end %>
+    },
+    beforeShow: function(input, inst) {
+       month_part = input.value.substr(4,2);
+       input.value = input.value.replace(month_part, month_part.toLowerCase());
+    },
+    onClose: function(dateText, inst) {
+       this.value = this.value.toUpperCase();
+    }
+});

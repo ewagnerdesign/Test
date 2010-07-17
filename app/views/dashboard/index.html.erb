@@ -1,0 +1,13 @@
+<%= stylesheet_link_tag "weekly" %>
+<div id="dashboard_data_area" class="data_area">
+  <div class="data_area_sidebar">
+    <div id="dashboard_studies_list">
+      <%= render :partial => "studies_list" %>
+    </div>
+  </div>
+  <div id="data_area_content">
+    <%= render :partial => "visits_week" %>
+    <%= render :partial => "latest_activities" %>
+  </div>
+</div>
+

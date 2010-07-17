@@ -1,0 +1,35 @@
+<div id="<%= dom_id(@site, :contacts_index) %>">
+  <div class="title_tools">
+    <% content_for :search_params do %>
+      <input id="search" name="search" size="30" type="text" value="<%= @current_query %>" />
+    <% end %>
+    <%= filter_form(admin_site_contacts_path(@site, :js), @site) %>
+    <%= link_to_remote "Add existing", 
+      { :url => add_admin_site_contacts_path(@site), :method => :get },
+      { :id => "#{dom_id(@site, :add_contact)}"} %> |
+      <%= link_to_remote "Create new", 
+      { :url => new_admin_site_contact_path(@site), :condition => "close_previous_crud_form()", :method => :get },
+      { :id => "#{dom_id(@site, :new_contact)}"} %> |
+    <%= link_to_ni "Options" %>
+  </div>
+
+  <div style="clear: both"></div>
+  <ul>
+    <div id="<%= dom_id(@site, :create_contact) %>"></div>
+    <div class="list" id="<%= dom_id(@site, :contacts_list) %>">
+      <%= render :partial => 'user', :collection => @entities %>
+    </div>
+  </ul>
+  <%= will_paginate @entities, :param_name => dom_id_nested(:page, @site) %>
+  <div id="<%= dom_id(@site, :contacts_emptiness_messages) %>">
+    <% if @entities.empty? %>
+      <p>
+      <% if @current_query.blank? %>
+         There are no Contacts at the moment.
+      <% else %>
+         There are no Contacts found matching <strong><%= @current_query %></strong>.
+      <% end %>
+      </p>
+    <% end %>
+  </div>
+</div>

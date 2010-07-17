@@ -1,0 +1,11 @@
+if @subject.valid?
+  page[dom_id_nested(:list)].show
+  page.insert_html :after, :subjects_table_headers, :partial => "subject", :collection => [ @subject ]
+  page[dom_id_nested(:item, @subject)].effect("highlight", {}, 3500)
+  page[dom_id_nested(:create)].replace_html ""
+  page[dom_id_nested(:emptiness_messages)].replace_html ""
+  #TODO: Hide form
+else
+  page[dom_id_nested(:create)].replace_html :file => "subjects/new.html.erb"
+  page[dom_id_nested(:create)].effect("shake", {:direction => 'up', :distance => '6'}, 100)
+end

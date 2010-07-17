@@ -1,0 +1,11 @@
+<%- validator['data']['childs'].each do |value,child|  -%>
+    <% unless child['minimum'].blank? && child['maximum'].blank? %>
+        $("#<%= control_id %>").validate().add({
+              range:{
+                  options: <%= [ child['minimum'], child['maximum'] ].to_json  %>,
+                  message: <%= validator['data']['message'].to_json %>,
+                  condition: [ '#<%= control_id2(control) %>', 'eq', '<%= value %>' ]
+              }
+        })
+    <% end %>
+<%- end -%>

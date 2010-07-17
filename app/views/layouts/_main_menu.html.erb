@@ -1,0 +1,79 @@
+<ul id="main_menu" class="wrap menu <%= gorizontal ? 'gorizontal_menu' : 'vertical_menu'%>">
+  <%= render :partial => 'layouts/main_menu_item',
+             :collection => [
+               {
+                 :id => "dashboard",
+                 :caption => "Dashboard",
+                 :path => dashboard_path,
+                 :controller => 'dashboard'
+               },
+               {
+                 :id => "subjects",
+                 :caption => "Subjects",
+                 :path => subjects_path,
+                 :controller => 'subjects'
+               },
+               {
+                 :id => "visits",
+                 :caption => "Visits",
+                 :path => visits_path,
+                 :controller => 'visits'
+               },
+               {
+                 :id => "views",
+                 :caption => "Views",
+                 :path => monitor_views_path,
+                 :controller => 'monitor_views'
+               },
+               {
+                 :id => "queries",
+                 :caption => "Queries",
+                 :path => queries_path,
+                 :controller => 'queries'
+               },
+               {
+                 :id => "ecrf",
+                 :caption => "CRF",
+                 :path => ecrfs_path,
+                 :selected => (controller.controller_name == 'ecrfs')
+               },
+
+               # {
+               #   :id => "monitor",
+               #   :caption => "Monitor",
+               #   :path => "" #monitor_path
+               # },
+
+               # {
+               #   :id => "data_mgmt",
+               #   :caption => "Data Mgmt",
+               #   :path => "" #data_mgmt_path
+               # },
+
+               # {
+               #   :id => "reports",
+               #   :caption => "Reports",
+               #   :path => "" #reports_path
+               # },
+               # {
+               #  :caption => "Vital Signs",
+               #  :id => "vital_digns",
+               #  :controller => "vital_signs",
+               #  :path => vital_signs_path
+
+               # },
+               {
+                   :id => "users",
+                   :caption=> "Users",
+                   :controller => "site_users",
+                   :path => site_users_path
+               },
+               {
+                 :id => "admin",
+                 :caption => "Admin",
+                 :controller => "admin",
+                 :path => admin_path
+               }
+             ]
+  %>
+</ul>

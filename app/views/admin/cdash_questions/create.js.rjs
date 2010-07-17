@@ -1,0 +1,10 @@
+if @cdash_question.valid?
+  page.insert_html :top, dom_id_nested(:list, @domain), :partial => "cdash_question", :collection => [ @cdash_question ]
+  page[dom_id(@cdash_question)].effect("highlight", {}, 3500)
+  page[dom_id_nested(:create, @domain)].replace_html ""
+  page[dom_id_nested(:emptiness_messages, @domain)].replace_html ""
+  #TODO: Hide form
+else
+  page[dom_id_nested(:create, @domain)].replace_html :file => "admin/cdash_questions/new.html.erb"
+  page[dom_id_nested(:create, @domain)].effect("shake", {:direction => 'up', :distance => '6'}, 100)
+end

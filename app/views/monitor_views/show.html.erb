@@ -1,0 +1,57 @@
+<div style="float:right">
+  <%= label_tag "View"%>: <%= @monitor_view.name %> |
+  <%= label_tag "CRF"%>: <%= @monitor_view.form.name %> |
+  <%= label_tag "Study"%>: <%= @monitor_view.study.name %>
+  <%= link_to "Back to views list", monitor_views_path %> <br/>
+</div>
+<div style="clear: both"></div>
+<div class="title_tools">
+  <% content_for :search_params do %>
+    <div class="multiline_search">
+    <%= hidden_field :search, :form_id, :value => @monitor_view.form.id %>
+    <%= hidden_field :search, :study_id, :value => @monitor_view.study.id %>
+    <%= label_tag :subject %>:
+    <%= collection_select(:search, :subject_id, @monitor_view.study.subjects, :id, :number, {:prompt => "Select Subject", :selected => @subject_id} )  %>
+    <%= label_tag :visit %>:
+    <%= collection_select(:search, :visit_id, @monitor_view.study.visits, :id, :name, {:prompt => "Select Visit", :selected => @visit_id} )  %>
+    <span id="date_from_block"><%= label_tag :search_date_from, "Date Range" %>:
+          <%= text_field_tag :"search[date_from]", @date_from, { :size => 10, :readonly => "readonly"} %></span>
+    <span id="date_to_block">to
+          <%= text_field_tag :"search[date_to]", @date_to, { :size => 10, :readonly => "readonly"} %></span>
+    </div>
+  <% end %>
+  <%= filter_form(monitor_view_path(:id => @monitor_view.id, :format => :js)) %>
+</div>
+<div style="clear: both"></div>
+<%= link_to_remote "Edit fields", {:method => :get, :url => edit_fields_monitor_view_path(@monitor_view), :condition => "close_previous_crud_form()"}, :id => dom_id_n(:edit_fields, @monitor_view) %>
+<div style="clear: both"></div>
+<div id="<%= dom_id_n(:fields, @monitor_view) %>">
+</div>
+
+<% remote_form_for [@monitor_view],
+  :url => monitored_monitor_view_path(@monitor_view, :js),
+  :html => { :id => dom_id_nested(:monitored_form, @study) }  do |f| %>
+  <table class="changes" id="<%= dom_id_n(:list_events, @monitor_view) %>">
+    <tr id="monitor_view_ecrf_table_headers">
+      <th>Subject ID:</th><th>Visit Date</th>
+      <% @monitor_view.form_fields.each do |ff| %>
+        <th>
+          <%= h ff.label %>
+        </th>
+      <% end %>
+      <th>Monitored:</th><th></th>
+    </tr>
+    <%= render :partial => "monitor_view_ecrf", :collection => @ecrfs, :locals => { :monitor_view => @monitor_view } %>
+  </table>
+  <%= will_paginate @ecrfs %>
+  <%= f.submit "Save Results", :html => {:id => dom_id_nested(:save_monitored, @monitor_view), :style => 'margin-right: 50px' } %>
+  <div id="<%= dom_id_n(:save_message, @monitor_view) %>">
+  </div>
+<% end %>
+
+<%= render :partial => "queries/query_popup" %>
+
+<% javascript_tag do -%>
+<%= date_picker(:control_id => 'search_date_from', :yearRange => '-15:+1') %>
+<%= date_picker(:control_id => 'search_date_to', :yearRange => '-15:+1') %>
+<% end %>

@@ -1,0 +1,10 @@
+if @sdtm_category.valid?
+  page.insert_html :top, dom_id_nested(:list), :partial => "sdtm_category", :collection => [ @sdtm_category ]
+  page[dom_id(@sdtm_category)].effect("highlight", {}, 3500)
+  page[dom_id_nested(:create)].replace_html ""
+  page[dom_id_nested(:emptiness_messages)].replace_html ""
+  #TODO: Hide form
+else
+  page[dom_id_nested(:create)].replace_html :file => "admin/sdtm_categories/new.html.erb"
+  page[dom_id_nested(:create)].effect("shake", {:direction => 'up', :distance => '6'}, 100)
+end

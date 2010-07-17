@@ -1,0 +1,21 @@
+<li id="<%= dom_id(study) %>"
+  <%= highlightable(dom_id(study, :tools), true) %>
+  <%= clickable admin_study_path(study) %>   >
+  <div class="tools" id="<%= dom_id(study, :tools) %>" style="display:none;">
+    <%= link_to_remote 'Show', 
+      {:method => :get, :url => admin_study_path(study)}, 
+      {:id => dom_id(study, :show), :onclick => "event.cancelBubble=true;"} %> |
+    <%= link_to_remote 'Edit',
+      {:method => :get, :url => edit_admin_study_path(study), :condition => "close_previous_crud_form()"},
+      {:id => dom_id(study, :edit), :onclick => "event.cancelBubble=true;" } %> |
+    <%= link_to_remote_if study.removable?,   'Delete',
+      {:method=> :delete, :url => admin_study_path(study),
+       :confirm => 'Are you sure you want to delete the study "' + study.name + '"?'},
+       {:id => dom_id(study, :delete) ,:onclick => "event.cancelBubble=true;"} %>
+  </div>
+  <div class="strip<%= "-create" if study.active %>"><strong>ID:</strong> <%= study.id %><br/><%= study.created_at %></div>
+  <div class="indent">
+    <strong><%= highlight_search_result(study.name, @current_query) %></strong><br/>
+    <i><%= highlight_search_result(study.title, @current_query) %></i>
+  </div>
+</li>

@@ -1,0 +1,6 @@
+$('#<%= control_id %>').validate().add({
+    rangelength: {
+        options: <%= [ validator['data']['minimum'], validator['data']['maximum'] ].to_json %>,
+        message: <%= validator['data']['message'].to_json %>
+    }
+})

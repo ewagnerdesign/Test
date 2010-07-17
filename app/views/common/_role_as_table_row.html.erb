@@ -1,0 +1,8 @@
+<tr class="underlined_row">
+  <td>
+    <%= check_box_tag "roles[]", role.id, selected_roles.include?(role), :id => dom_id_nested(:roles, @user, role) %>
+  </td>
+  <td><%= label_tag dom_id_nested(:roles, @user, role), role.name %></td>
+  <td><%= label_tag dom_id_nested(:roles, @user, role), double_truncate(role.permissions.map(&:name), 20, 125 ) %></td>
+</tr>
+

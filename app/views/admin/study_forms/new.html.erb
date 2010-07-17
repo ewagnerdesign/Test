@@ -1,0 +1,29 @@
+<div class="block-container" style="border-color:LimeGreen;">
+  <div class="title">Add CRF</div>
+  <%= link_to_close(new_admin_study_form_path(@study)) %>
+  <div id="<%= dom_id_nested(:item, @study) %>" class="input-form crud-form">
+    <% refresh_available_forms = {:url => {:action => :new, :study_arm_visit_id => @study_arm_visit.id}, :method => :get, :with => "'selected_study_id='+$('#selected_study').val()"} %>
+    <strong>Study: </strong>
+    <%= select_tag :selected_study,
+      options_for_select([["All Studies", 0]] + Study.all.map {|s| [s.name, s.id]}),
+      :onchange => remote_function(refresh_available_forms) %>
+    <%= link_to_remote 'Refresh', refresh_available_forms %>
+
+    <% remote_form_for [:admin, @study], :url => admin_study_forms_path(@study, :study_arm_visit_id => @study_arm_visit.id), :html => { :method => :post } do |f| %>
+      <div id="<%= dom_id_nested(:available_forms, @study) %>">
+        <% if @forms.empty? -%>
+          <p>There are no unassigned CRFs left</p>
+        <% else -%>
+          <%= render :partial => "admin/study_forms/form", :collection => @forms %>
+        <% end -%>
+      </div>
+      <div>
+        <%= link_to 'New form', {:controller => "/fd"}, :popup => true, :style => "margin-right:150px" %>
+      </div>
+      <div>
+        <%= f.submit "OK" %> or <%= link_to_cancel "cancel", new_admin_study_form_path(@study, :study_arm_visit_id => @study_arm_visit.id) %>
+      </div>
+
+    <% end %>
+  </div>
+</div>

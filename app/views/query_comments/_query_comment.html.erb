@@ -1,0 +1,14 @@
+<tr>
+  <td><%= query_comment.created_at.to_s(:date_time24s) %></td>
+  <td><%= query_comment.user.full_name %></td>
+  <% td_class = ''
+     if query_comment.query?
+       td_class = 'query_comment_query'
+     end
+     if query_comment.reply?
+       td_class = 'query_comment_reply'
+     end -%>
+  <td class="<%= td_class %>"><%= query_comment.query_type.humanize.upcase %></td>
+  <td class="<%= td_class %>"><%= query_comment.comment %></td>
+  <td class="<%= td_class %>"><%= (query_comment.reply?)? query_comment.query_action.humanize : "" %></td>
+</tr>

@@ -1,0 +1,11 @@
+<% javascript_tag do %>
+global_loader_map["#<%= id %>"] = [];
+global_loader_map["#<%= id %>"]["loaded"] = false;
+global_loader_map["#<%= id %>"]["loader"] = function(){
+<%= remote_function(
+                  :url => url,
+                  :method => :get,
+                  :update => {:success => id},
+                  :success => "global_loader_map['##{id}']['loaded'] = true;"
+) %> };
+<% end %>

@@ -1,0 +1,6 @@
+<table class="changes">
+  <th colspan="3"></th><th>CRF:</th><th>Status:</th><th>Submitted Date:</th>
+  <%= render :partial => 'cumulative_crf', :collection => @forms, :as => :form %>
+</table>
+<%= will_paginate @forms %>
+<%= button_to "Back to Subjects", { :action => "index", :controller => "subjects" }, :method => :get %>

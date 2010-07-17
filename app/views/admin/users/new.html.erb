@@ -1,0 +1,9 @@
+<div class="block-container" style="border-color:LimeGreen;">
+  <h3 class="tab"><span>New User<em class="ico ico_plus">&nbsp;</em></span></h3>
+  <%= link_to_close(new_admin_user_path(@site)) %>
+  <div id="<%= dom_id(:user) %>" class="input-form crud-form">
+  <% remote_form_for @user, :url => admin_users_path do |f| %>
+    <%= render :partial => "admin/users/form", :locals => {:f => f} %>
+  <% end %>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  comment: MyString
+  user: 
+  query: 
+  query_type: 
+  query_action: 
+
+two:
+  comment: MyString
+  user: 
+  query: 
+  query_type: 
+  query_action: 

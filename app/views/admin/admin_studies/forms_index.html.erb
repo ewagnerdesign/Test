@@ -1,0 +1,15 @@
+<div id="<%= dom_id_nested(:forms, @study) %>">
+  <div class="list">
+    <strong>Visit CRF:</strong>
+    <ul>
+      <%= render :partial => 'study_form', :collection => @study_forms %>
+    </ul>
+  </div>
+  <div id="<%= dom_id_nested(:emptiness_messages_forms, @study) %>">
+    <% if @study_forms.nil? || @study_forms.empty? %>
+      <p>
+       There are no Forms at the moment.
+      </p>
+    <% end %>
+  </div>
+</div>

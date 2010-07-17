@@ -1,0 +1,14 @@
+<div id="site_user_roles" style="float:right">
+  <h2>Site-Level Roles</h2>
+  <ul>
+    <% @available_roles.each do |role| %>
+      <li>
+        <%= check_box_tag "site_user_role_#{role.id}", role.id,  @user_roles.include?(role.id) %>
+        <%= label_tag "site_user_role_#{role.id}", role.name %>
+      </li>
+    <% end %>
+  </ul>
+</div>
+<% javascript_tag do %>
+
+<% end %>

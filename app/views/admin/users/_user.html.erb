@@ -1,0 +1,21 @@
+<tr>
+        <td class="td_1 td_f"></td>
+        <td class="td_2"><span><em class="date"><%= user.created_at %></em><em class="id">ID: <%= user.id %></em></span></td>
+        <td class="td_3"><span><%= user.title %><%= user.full_name %><em class="si">&nbsp;</em></span></td>
+        <td class="td_4 td_l">
+		  
+		<%= link_to_remote 'Show', {:method => :get, :url => admin_user_path(user)}, {:onclick => "event.cancelBubble=true;"} %> |
+		<%= link_to_remote 'Edit',
+		{:method => :get, :url => edit_admin_user_path(user), :condition => "close_previous_crud_form()"},
+		{:onclick => "event.cancelBubble=true;", :id => dom_id(user, :edit)} %> |
+		<%= link_to_remote 'Delete',
+		{:method=> :delete, :url => admin_user_path(user),
+		:confirm => 'Are you sure you want to delete the user "' + user.full_name + '"?'},
+		{:onclick => "event.cancelBubble=true;", :id => dom_id(user, :delete)} %>
+  
+		<div class="edits"><a class="hd" href="#link">Hide</a><a class="ed" href="#link">edit</a><a class="de" >delete</a></div>
+	</td>
+</tr>
+			
+
+

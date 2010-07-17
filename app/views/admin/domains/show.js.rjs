@@ -1,0 +1,10 @@
+if params[:cancel] == "true"
+  page[dom_id(@domain)].replace :partial => "domain"
+else
+  page[dom_id(@domain)].replace_html :partial => "show"
+  page << "$('##{dom_id(@domain)}').get(0).onmouseover = null"
+   page << "$('##{dom_id(@domain)}').get(0).onclick = null"
+  #TODO: set white color
+  page.call "$('##{dom_id(@domain, :show)}').tabify"
+  #page[dom_id(@domain)].onclick = ""
+end

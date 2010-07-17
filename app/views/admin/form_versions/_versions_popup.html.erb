@@ -1,0 +1,37 @@
+<div style="display:none;"><a id="form-popup-loader" rel="#form-popup" href=""></a></div>
+<div id="form-popup" class="popup-overlay"></div>
+<div id="form-tooltip" class="form-tooltip"></div>
+<% javascript_tag do -%>
+$(function() {
+  // loader
+  $("#form-popup-loader").overlay({
+
+    mask: 'slategrey',
+
+    onBeforeLoad: function() {
+
+      // grab wrapper element inside content
+      var wrap = $("#form-popup");
+
+      // load the page specified in the trigger
+      wrap.load(this.getTrigger().attr("href"));
+    },
+
+    onClose: function() {
+      $("#form-popup").empty();
+    }
+  });
+});
+
+function close_form_versions_popup() {
+  $('#form-popup-loader').data('overlay').close();
+}
+
+function show_form_versions(form_id, study_id) {
+  $("#form-popup-loader").attr("href", Routes.adminStudyFormFormVersionsPath({form_id: form_id, study_id: study_id}));
+  $("#form-popup-loader").click();
+}
+
+<% end %>
+
+

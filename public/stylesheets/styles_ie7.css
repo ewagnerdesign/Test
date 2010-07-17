@@ -1,0 +1,14 @@
+.tl, .tr, .bl, .br, .simple_box,
+.edits .de,
+.edits .ed,
+.row, .tab,
+h3.title,
+.clearfix {
+    zoom: 1;
+}
+.edits .de,
+.edits .ed {
+
+}
+.tab { display: inline; }
+.tl, .tr, .bl, .br { font-size: 0px; line-height: 0px; }

@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  accepted: false
+  study_site: 
+  form_version: 
+
+two:
+  accepted: false
+  study_site: 
+  form_version: 

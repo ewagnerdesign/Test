@@ -1,0 +1,10 @@
+<% if (monitor? || investigator?) && form_field_value.form_instance.submitted? %>
+  <% query = form_field_value.queries.last %>
+  <%= if query.nil?
+       if monitor?
+         link_to query_new_icon(form_field_value), '#', {:onclick => "show_create_query(#{form_field_value.id})", :id => dom_id(form_field_value, :query_status_icon)}
+       end
+     else
+        link_to query_status_icon(query), '#', {:onclick => "show_query_comments(#{form_field_value.id})"}
+     end %>
+<% end %>

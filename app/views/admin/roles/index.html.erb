@@ -1,0 +1,28 @@
+<div id="<%= dom_id_nested(:index) %>">
+  <div class="title_tools">
+    <%= link_to_remote "Add Role", {:url => new_admin_role_path(), :condition => "close_previous_crud_form()", :method => :get } %>
+  </div>
+    
+  <div style="clear: both"></div>
+  <ul>
+    <div id="<%= dom_id_nested(:create) %>"></div>
+    <div class="list" id="<%= dom_id_nested(:list) %>"  <% if @roles.empty? %>style="display:none;"<% end %>>
+    <table class="changes">
+      <tr id="roles_table_headers">
+        <th>Role:</th>
+        <th>Role Category:</th>
+        <th>Users:</th>
+        <th></th>
+      </tr>
+      <%= render :partial => 'role', :collection => @roles %>
+    </table>
+    </div>
+  </ul>
+  <div id="<%= dom_id_nested(:emptiness_messages) %>">
+    <% if @roles.empty? %>
+      <p>
+         There are no roles at the moment.
+      </p>
+    <% end %>
+  </div>
+</div>

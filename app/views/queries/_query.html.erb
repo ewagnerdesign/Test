@@ -1,0 +1,13 @@
+<tr id="<%= dom_id_nested(:item, query) %>" class="<%= cycle("even", "odd") %>">
+  <td><%= query_status_icon(query, true) %></td>
+  <td><%= link_to query.comment, '#', {:onclick => "show_query_comments(#{query.form_field_value.id}, #{query.id}, true)", :id => dom_id(query, :comment)} %></td>
+  <td><%= link_to query.form_field_value.form_instance.name, ecrf_path(query.form_field_value.form_instance) %></td>
+  <td><%= (query.form_field_value.form_instance.form_version.form.cumulative?)? "Cumulative" : "Visit CRF" %></td>
+  <td><%= query.created_at %></td>
+  <td><%= query.form_field_value.form_instance.subject.number %></td>
+  <td><%= query.form_field_value.form_instance.visit.try(:name) %></td>
+  <td><%= query.form_field_value.form_instance.subject.study.name %></td>
+  <td><%= query.form_field_value.form_instance.subject.site.try(:name) %></td>
+</tr>
+
+

@@ -1,0 +1,10 @@
+if params[:cancel] == "true"
+  page[dom_id_n(:fields, @monitor_view)].replace_html :text => ""
+  page[dom_id_n(:edit_fields, @monitor_view)].show
+else
+  page[dom_id_n(:fields, @monitor_view)].replace_html :file => "monitor_views/edit_fields.html.erb"
+  page[dom_id_n(:edit_fields, @monitor_view)].hide
+
+  page << "$('##{dom_id_n(:fields, @monitor_view)}').get(0).onmouseover = null"
+  page << "$('##{dom_id_n(:fields, @monitor_view)}').get(0).onclick = null"
+end

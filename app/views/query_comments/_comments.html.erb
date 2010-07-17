@@ -1,0 +1,27 @@
+<% if previous
+     previous_class = "query_comments_previous"
+     current_class = "query_comments_previous_current" if query.id == current_query_id
+   end
+   table_class = "#{previous_class} #{current_class}"
+%>
+<div class="query_comments <%= table_class %>">
+<table id="query_comments">
+  <tr>
+    <td><%= query.created_at.to_s(:date_time24s) %></td>
+    <td><%= query.user.full_name %></td>
+    <td class="query_comment_query">QUERY</td>
+    <td class="query_comment_query"><%= query.comment %></td>
+  </tr>
+  <%= render :partial => 'query_comments/query_comment', :collection => query.comments_with_changes %>
+<% if query.closed? %>
+  <tr>
+    <td><%= query.updated_at.to_s(:date_time24s) %></td>
+    <td><%= query.closed_by.full_name %></td>
+    <td class="query_comment_query">ACCEPTED&CLOSED</td>
+    <td></td>
+    <td></td>
+</tr>
+<% end %>
+</table>
+<hr>
+</div>

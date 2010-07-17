@@ -1,0 +1,85 @@
+<%= javascript_include_tag "jquery.numeric" %>
+<% javascript_tag do -%>
+function toggle_controls(rb) {
+  if ($('#relative_visit_true').attr('checked')) {
+    $('#div_relative_visit_false').hide();$('#div_relative_visit_true').show();
+  } else {
+    $('#div_relative_visit_true').hide();$('#div_relative_visit_false').show();
+  }
+}
+<% end %>
+
+<% if !@visit.errors.empty? || !@study.errors.empty?%>
+  <h2>The following problems prevent this Visit from being saved:</h2>
+  <ul>
+  <% @visit.errors.each do |e| %>
+    <li>
+     <%= e.first.humanize + " " + e.second -%>
+    </li>
+  <% end %>
+  <% @study.errors.each do |e| %>
+    <li>
+     <%= e.first + " " + e.second -%>
+    </li>
+  <% end %>
+  </ul>
+<% end %>
+
+<p>
+  <%= f.label :name %>
+  <%= f.text_field :name, :size => 25  %>
+</p>
+<p>
+  <%= f.label :number %>
+  <%= f.text_field :number, :size => 25  %>
+</p>
+<div class="block-container">
+  <div class="title">Date constraint</div>
+  <p>
+    <%= radio_button_tag "relative_visit", :false, @visit.prev_visit.nil?, :onclick => "toggle_controls(this)" %>
+    Absolute - visit that has start date / end date defined and does not depend on other visits
+  </p>
+  <p>
+    <% disable_relative = (@study.visits.length == 0) || ((@study.visits.length == 1) && (@study.visits[0] == @visit)) %>
+    <%= radio_button_tag "relative_visit", :true, !@visit.prev_visit.nil?, :onclick => "toggle_controls(this)", :disabled => disable_relative%>
+    Relative - visit that reference to the previous one
+    <% if disable_relative %>
+      <br/>
+      <div style="color: red">
+        Should be at least one absolute visit to create a relative one.
+      </div>
+    <% end %>
+  </p>
+  <div id="div_relative_visit_false" <%= 'style="display:none"' if !@visit.prev_visit.nil? %>>
+    <p>
+      <%= f.label :start_date %>
+      <%= f.text_field :start_date, :value => @visit.start_date.to_s, :size => 10, :readonly => "readonly"  %>
+    </p>
+    <p>
+      <%= f.label :end_date %>
+      <%= f.text_field :end_date, :value => @visit.end_date.to_s, :size => 10, :readonly => "readonly"  %>
+    </p>
+  </div>
+  <div id="div_relative_visit_true" <%= 'style="display:none"' if @visit.prev_visit.nil? %>>
+    <p>
+      <%= f.label :prev_visit, "Previous Visit" %>
+      <%= f.select :prev_visit_id,
+        options_from_collection_for_select(@study.visits.id_is_not(@visit.id||0), :id, :name, :selected => @visit.prev_visit_id,
+          :disabled => @visit.descendant_visits.collect {|v| v.id}) %>
+      <%#= collection_select(:visit, :prev_visit_id, @study.visits.id_is_not(@visit.id), :id, :name, {:prompt => true})  %>
+    </p>
+    <p>
+      Between <%= f.text_field :prev_visit_start_offset_day, :size => 5 %> and <%= f.text_field :prev_visit_end_offset_day, :size => 5  %> days
+    </p>
+  </div>
+</div>
+<p>
+  <%= f.label :notes %>
+  <%= f.text_area :notes, :rows => 5 %>
+</p>
+
+<% javascript_tag do -%>
+<%= date_picker(:control_id => 'visit_start_date', :yearRange   => '-0:+10') %>
+<%= date_picker(:control_id => 'visit_end_date', :yearRange   => '-0:+10') %>
+<% end %>
+

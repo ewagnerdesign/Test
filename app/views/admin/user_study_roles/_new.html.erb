@@ -1,0 +1,19 @@
+<div class="block-container" style="border-color:LimeGreen;">
+  <div class="title">Add <%= @user.full_name %> to existing Studies</div>
+  <div id="<%= dom_id(@user, :add_studies) %>" class="input-form">
+  <% if @studies.empty? %>
+    <p>There are no unassigned Studies left</p>
+  <% else %>
+    <% form_remote_tag :url => admin_user_study_roles_path(@user),
+                    :update => { :success => dom_id(@user, :study_roles_tab) }  do %>
+      <p>
+        <%= select_tag 'studies[]', options_for_select(
+          @studies.map {|m| [m.name, m.id]}, []),
+          :multiple => true, :size => 10 %>
+      </p>
+      <%= submit_tag "Add", :onclick => "close_add_study_popup();" %>
+      <%= submit_tag "Cancel", :onclick => "close_add_study_popup(); return false;" %>
+    <% end %>
+  <% end %>
+  </div>
+</div>

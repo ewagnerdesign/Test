@@ -1,0 +1,11 @@
+if @site.valid?
+  #page << "<script language=\"javascript\">$.nyroModalRemove()</script>"
+  page.insert_html :top, :sites_list, :partial => "site", :collection => [ @site ]
+  page[dom_id(@site)].effect("highlight", {}, 3500)
+  page["create_site"].replace_html ""
+
+  #TODO: Hide form
+else
+  page["create_site"].replace_html :file => "admin/admin_sites/new.html.erb"
+  page["create_site"].effect("shake", {:direction => 'up', :distance => '6'}, 100)
+end

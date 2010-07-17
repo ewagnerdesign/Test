@@ -1,0 +1,8 @@
+@site_users_added.each do |site_user|
+  page.insert_html :top, dom_id(@study, dom_id(@site, :contacts_list)), :partial => "site_user", :collection => [site_user]
+  page[dom_id(@study, dom_id(@site, dom_id(site_user.user)))].effect("highlight", {}, 3500)
+end
+page[dom_id(@study, dom_id(@site, :create_contact))].replace_html ""
+page[dom_id(@study, dom_id(@site, :contacts_emptiness_messages))].replace_html ""
+
+

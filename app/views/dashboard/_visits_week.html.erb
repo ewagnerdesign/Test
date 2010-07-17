@@ -1,0 +1,16 @@
+<div id="dashboard_visits_week">
+  <h2>Late & Upcoming Visits</h2>
+  <% if @study_id.nil? %>
+    <p>Select Study to show visits</p>
+  <% end %>
+  <% short_weekly_calendar(:date => @date) do |w|
+    w.week do |day| %>
+      <%= if @visits_by_week.include?(day) && @visits_by_week[day] > 0
+        link_to(@visits_by_week[day], visits_path(:"search[study_id]" => @study_id, :"search[show]" => "by_date", :"search[planned_date]" => day))
+      end %>
+    <% end
+  end -%>
+  <br/>
+  <% short_weekly_links(:date => @date, :study_id => @study_id) %>
+  <%= link_to "Clear conditions", dashboard_path, {:class => "dashboard_clear"} %>
+</div>

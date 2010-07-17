@@ -1,0 +1,11 @@
+if @role.valid?
+  page[dom_id_nested(:list)].show
+  page.insert_html :after, :roles_table_headers, :partial => "role", :collection => [ @role ]
+  page[dom_id_nested(:item, @role)].effect("highlight", {}, 3500)
+  page[dom_id_nested(:create)].replace_html ""
+  page[dom_id_nested(:emptiness_messages)].replace_html ""
+  #TODO: Hide form
+else
+  page[dom_id_nested(:create)].replace_html :file => "admin/roles/new.html.erb"
+  page[dom_id_nested(:create)].effect("shake", {:direction => 'up', :distance => '6'}, 100)
+end

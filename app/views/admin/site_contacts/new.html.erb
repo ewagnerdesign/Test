@@ -1,0 +1,9 @@
+<div class="block-container" style="border-color:LimeGreen;">
+  <div class="title">Add user to Site - <%= @site.name %> </div>
+  <%= link_to_close(new_admin_site_contact_path(@site)) %>
+  <div id="<%= dom_id(@site, :contact) %>" class="input-form crud-form">
+  <% remote_form_for [:admin, @site, @user], :url => admin_site_contacts_path(@site) do |f| %>
+    <%= render :partial => "admin/users/form", :locals => {:f => f} %>
+  <% end %>
+  </div>
+</div>

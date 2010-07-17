@@ -1,0 +1,27 @@
+<li id="<%= dom_id(sdtm_category) %>"
+  <%= highlightable(dom_id(sdtm_category, :tools), true) %>
+  <%= clickable admin_sdtm_category_path(sdtm_category) %>   >
+  <div class="strip <%= sdtm_category.read_only ? 'read_only_sdtm' : 'editable_sdtm' %>">
+    <%= sdtm_category.read_only ? 'Read-Only' : 'Editable' %>
+    <br/>
+    Extensible: <%= bool_to_s(sdtm_category.extensible) %>
+  </div>
+  <div class="tools" id="<%= dom_id(sdtm_category, :tools) %>" style="display:none;">
+    <%= link_to_remote 'Show', {:method => :get, :url => admin_sdtm_category_path(sdtm_category)}, 
+      {:onclick => "event.cancelBubble=true;", :id => dom_id(sdtm_category, :show)} %>
+    <% if !sdtm_category.read_only %> |
+      <%= link_to_remote 'Edit',
+        {:method => :get, :url => edit_admin_sdtm_category_path(sdtm_category), :condition => "close_previous_crud_form()"},
+        {:onclick => "event.cancelBubble=true;", :id => dom_id(sdtm_category, :edit) } %> |
+      <%= link_to_remote_if sdtm_category.removable?, 'Delete',
+        {:method=> :delete, :url => admin_sdtm_category_path(sdtm_category),
+         :confirm => 'Are you sure you want to delete the "' + sdtm_category.name + '"?'},
+         {:onclick => "event.cancelBubble=true;", :id => dom_id(sdtm_category, :delete) } %>
+    <%  end   %>
+  </div>
+  <div class="indent">
+    <%= highlight_search_result(sdtm_category.code, @current_query[:query]) %><br/>
+    <%= highlight_search_result(sdtm_category.name, @current_query[:query]) %><br/>
+    <%= highlight_search_result(sdtm_category.nci_preferred_term, @current_query[:query]) %><br/>
+  </div>
+</li>

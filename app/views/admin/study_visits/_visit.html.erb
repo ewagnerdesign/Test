@@ -1,0 +1,32 @@
+<tr id="<%= dom_id_n(:item, @study, visit) %>" class="underlined_row"
+<% if @selected_study_arm.visits.include?(visit) -%>
+  onclick = "<%= remote_function(:method => :get, :url => admin_study_forms_path(@study, :format => "js", :study_arm_visit_id => @selected_study_arm.study_arm_visits.visit_id_eq(visit.id).first)) %>; $('tr[id^=\'<%= dom_id_n(:item, @study) %>\']').css('backgroundColor', '#FFFFFF'); $(this).css('backgroundColor', '#BED1FF'); return false;"
+<% end -%> >
+  <td>
+    <input type="checkbox" name="visits[]" value="<%= visit.id %>" onclick="event.cancelBubble=true;"
+           <%= @selected_study_arm.nil? || @selected_study_arm.visits.include?(visit) ? "checked='checked' " : "" %>
+           <%= @selected_study_arm.nil? ? "disabled='disabled'" : "" %>/>
+  </td>
+  <td><%= highlight_search_result(visit.number, @current_query) %></td>
+  <td><%= visit.editable? ? "not used" : "in use" %></td>
+  <td><%= highlight_search_result(visit.name, @current_query) %></td>
+  <td><%= visit.prev_visit ? (h visit.prev_visit.name) : "-" %></td>
+  <td>
+    <%= visit.prev_visit.nil? ? "#{visit.start_date} .. #{visit.end_date}"  : "+ #{visit.prev_visit_start_offset_day} .. #{visit.prev_visit_end_offset_day}" %>
+  </td>
+
+  <td>
+    <%= link_to_remote 'Show', {:method => :get, :url => admin_study_visit_path(@study, visit, :selected_study_arm_id => @selected_study_arm)}, {:onclick => "event.cancelBubble=true;"} %>
+    <% if visit.editable? %> |
+      <%= link_to_remote 'Edit',
+        {:method => :get, :url => edit_admin_study_visit_path(@study, visit, :selected_study_arm_id => @selected_study_arm), :condition => "close_previous_crud_form()"},
+        {:onclick => "event.cancelBubble=true;", :id => dom_id(@study, dom_id(visit,:edit))} %>
+      <% if visit.study_arms.empty? %> |
+        <%= link_to_remote 'Delete',
+          {:method=> :delete, :url => admin_study_visit_path(@study, visit),
+           :confirm => 'Are you sure you want to delete the visit "' + visit.name + '"?'},
+           {:onclick => "event.cancelBubble=true;", :id => dom_id(@study, dom_id(visit,:delete))} %>
+      <% end %>
+    <% end %>
+  </td>
+</tr>

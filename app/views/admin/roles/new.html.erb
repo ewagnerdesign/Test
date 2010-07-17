@@ -1,0 +1,12 @@
+<div class="block-container" style="border-color:LimeGreen;">
+  <div class="title">Add new Role</div>
+  <%= link_to_close(new_admin_role_path) %>
+  <div id="<%= dom_id_nested(:item, @role) %>" class="input-form crud-form">
+    <% remote_form_for @role, :url => admin_roles_path do |f| %>
+      <%= render :partial => "form", :locals => {:f => f} %>
+      <p>
+        <%= f.submit "Create" %> or <%= link_to_cancel "cancel", new_admin_role_path %>
+      </p>
+    <% end %>
+  </div>
+</div>

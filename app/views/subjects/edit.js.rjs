@@ -1,0 +1,7 @@
+if params[:cancel] == "true"
+  page[dom_id_nested(:item, @subject)].replace :partial => "subject"
+else
+  page[dom_id_nested(:item, @subject)].replace_html :file => "subjects/edit.html.erb"
+  page << "$('##{dom_id_nested(:item, @subject)}').get(0).onmouseover = null"
+  page << "$('##{dom_id_nested(:item, @subject)}').get(0).onclick = null"
+end

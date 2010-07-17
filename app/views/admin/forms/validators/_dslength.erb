@@ -1,0 +1,27 @@
+<%- validator['data']['childs'].each do |value,child|  -%>
+    <% if !child['minimum'].blank? && !child['maximum'].blank? %>
+      $('#<%= control_id %>').validate().add({
+         rangelength: {
+            options: [<%= child['minimum'].to_json %>, <%= child['maximum'].to_json %>],
+            message: <%= validator['data']['message'].to_json %>,
+            condition: [ '#<%= control_id2(control) %>', 'eq', '<%= value %>' ]
+         }
+      })
+    <% elsif !child['minimum'].blank? && child['maximum'].blank? %>
+       $('#<%= control_id %>').validate().add({
+            minlength: {
+                options: <%= child['minimum'] %>,
+                message: <%= validator['data']['message'].to_json %>,
+                condition: [ '#<%= control_id2(control) %>', 'eq', '<%= value %>' ]
+            }
+        });
+    <% elsif child['minimum'].blank? && !child['maximum'].blank? %>
+       $('#<%= control_id %>').validate().add({
+            maxlength: {
+                options: <%= child['maximum'].to_json %>,
+                message: <%= validator['data']['message'].to_json %>,
+                condition: [ '#<%= control_id2(control) %>','eq','<%= value %>']
+            }
+        });
+    <% end %>
+<%- end -%>

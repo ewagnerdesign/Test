@@ -1,0 +1,177 @@
+#toolbox li {
+    -MozUserSelect: none;
+
+}
+
+.active {
+    background-color: #FFF7C0; /*border-top : 1 px solid #d9ca87;*/
+/*border-bottom : 1 px solid #d9ca87;*/
+    -moz-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15);
+}
+
+.toolbox-li, #toolbox li {
+
+    background-image: url('../../images/fd/icons.gif');
+    background-repeat: no-repeat;
+    padding-left: 25px;
+    -moz-border-radius-bottomleft: 9px;
+    -moz-border-radius-bottomright: 9px;
+    -moz-border-radius-topleft: 9px;
+    -moz-border-radius-topright: 9px;
+    -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border-color: #EEEEEE #CCCCCC #CCCCCC #EEEEEE;
+    border-style: solid;
+    border-width: 1px;
+    display: block;
+    font-size: 95%;
+    padding: 4px 0 4px 4px;
+    background: #EAEAEA url(../../images/fd/white-grad.png) repeat-x scroll left top;
+    color: #464646;
+    cursor: pointer;
+    line-height: 130%;
+
+    margin: 0 0 6px 0;
+}
+
+.tool-text b {
+    background-position: 0 -243px;
+
+}
+
+.tool-textbox b {
+    background-position: 0 -278px;
+}
+
+.tool-textarea b {
+    background-position: 0 -260px;
+}
+
+.tool-dropdown b {
+    background-position: 0 -97px;
+}
+
+.tool-checkbox b {
+    background-position: 0 -61px;
+}
+
+.tool-radiobox b {
+    background-position: 0 -227px;
+}
+
+.tool-datetime b {
+    background-position: 0 -11px;
+}
+
+.tool-file b {
+    background-position: 0 -113px;
+}
+
+.tool-textarea b {
+    background-position: 0 -261px;
+}
+
+#panel-toolbox {
+    cursor: pointer;
+}
+
+#panel-options {
+  position: absolute;
+  width: 360px;
+  top: 37px;
+  right: 0;
+
+  -khtml-user-select: none;
+}
+
+.dict-icon {
+    display:inline-block;
+    text-decoration: none;
+}
+
+.dict-icon img{
+}
+
+div.dictmodal{
+    overflow:auto;
+    width:600px;
+    z-index:100;
+}
+
+#builderpane {
+    border: 2px dashed #ccc;
+    width: 65%;
+    min-height: 200px;
+    min-width: 670px;
+    -moz-border-radius: 11px;
+    float: left;
+}
+
+#placeholder {
+    position: absolute;
+    top: -1000px;
+    right: -1000px;
+    margin-left: 13px;
+    width: 69%;
+    border-top: 2px dashed #f00;
+}
+
+#panel-toolbox {
+    float: right;
+    border: 3px dashed #E5CF73;
+    -moz-border-radius: 11px;
+    width: 28%;
+    padding: 16px 6px;
+}
+
+#panel-toolbox ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#builderpane ul {
+    list-style: none;
+    padding: 0;
+
+}
+
+#builderpane ul li {
+    padding-left: 10px;
+}
+
+#toolbox {
+    padding-left: 6px;
+}
+
+.sidebar-container {
+    padding: 15px 12px 15px 19px;
+    margin-top: 26px;
+}
+
+#toolbox li b {
+    background-image: url('../../images/fd/icons.gif');
+    background-repeat: no-repeat;
+    height: 16px;
+    width: 18px;
+    line-height: 16px;
+    display: inline-block;
+    padding-right: 5px;
+}
+
+#builderpane h3 {
+    font-size: 110%;
+    font-weight: normal;
+    line-height: 135%;
+    margin: 0 0 0.2em;
+}
+
+.form-note {
+    font-size: 85%;
+    margin: 0 0 1.2em;
+    padding: 0;
+}
+
+.section {
+    border-top: 1px dotted #CCCCCC;
+    padding-top: 0.9em !important;
+}

@@ -1,0 +1,13 @@
+<%= render :partial => 'query_comments/comments', :collection => @previous_queries, :as => :query,
+                  :locals => {:previous => true, :current_query_id => @current_query_id} %>
+<%= render :partial => 'query_comments/comments',
+                  :locals => {:query => @last_query, :previous => false, :current_query_id => nil} %>
+
+<% if monitor? %>
+  <%= render :partial => 'query_comments/monitor_comments' %>
+<% end %>
+
+<% if investigator? %>
+  <%= render :partial => 'query_comments/investigator_comments' %>
+<% end %>
+

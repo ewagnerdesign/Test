@@ -1,0 +1,8 @@
+if params[:cancel] == "true"
+  page[dom_id_n(:item, @monitor_view)].replace :partial => "monitor_view"
+else
+  page[dom_id_n(:item, @monitor_view)].replace_html :file => "monitor_views/edit.html.erb"
+
+  page << "$('##{dom_id_n(:item, @monitor_view)}').get(0).onmouseover = null"
+  page << "$('##{dom_id_n(:item, @monitor_view)}').get(0).onclick = null"
+end

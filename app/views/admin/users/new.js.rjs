@@ -1,0 +1,5 @@
+if params[:cancel]
+  page[:create_user].replace_html ""
+else
+  page[:create_user].replace_html :file => "admin/users/new.html.erb"
+end

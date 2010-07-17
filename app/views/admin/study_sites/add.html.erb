@@ -1,0 +1,18 @@
+<div class="block-container" style="border-color:LimeGreen;">
+  <div class="title">Add existing sites to "<%= @study.name %>" Study </div>
+  <%= link_to_close(add_admin_study_sites_path(@study)) %>
+  <div id="<%= dom_id(@study, :site) %>" class="input-form">
+  <% if @candidates.empty? %>
+    <p>There are no unassigned Users left</p>
+  <% else %>
+    <% remote_form_for [:admin, @study], :url => enroll_admin_study_sites_path(@study) do |f| %>
+      <p>
+        <%= select_tag 'sites[]', options_for_select(
+          @candidates.map {|m| [m.name, m.id]}, []),
+          :multiple => true, :size => 10 %>
+      </p>
+      <%= submit_tag "Add", :id => "#{dom_id(@study, :add_site_submit)}"%>
+    <% end %>
+  <% end %>
+  </div>
+</div>

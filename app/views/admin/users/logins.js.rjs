@@ -1,0 +1,2 @@
+#Render sites list
+page["logins_index"].replace_html :file => "admin/users/logins"

@@ -1,0 +1,41 @@
+<div class="block-container">
+     <%= link_to_close(admin_site_path(@site)) %>
+    <div class="title">Site <%= highlight_search_result(@site.name, @current_query) %> </div>
+    <p>
+          <strong>Name:</strong> <%= highlight_search_result(@site.name, @current_query) %>
+    </p>
+    <p>
+          <strong>Number:</strong> <%= highlight_search_result(@site.number, @current_query) %>
+    </p>
+    <p>
+          <strong>Principal Investigator:</strong> <%= highlight_search_result(@site.investigator, @current_query) %>
+    </p>
+    <p>
+          <strong>Address 1:</strong> <%= highlight_search_result(@site.address_1, @current_query) %>
+    </p>
+    <p>
+          <strong>Address 2:</strong> <%= highlight_search_result(@site.address_2, @current_query) %>
+    </p>
+    <p>
+          <strong>City:</strong> <%= highlight_search_result(@site.city, @current_query) %>
+    </p>
+    <p>
+          <strong>State:</strong> <%= highlight_search_result(@site.state_cd, @current_query) %>
+    </p>
+    <p>
+          <strong>Zip:</strong> <%= highlight_search_result(@site.zip, @current_query) %>
+    </p>
+    <p>
+      <strong>Phone: </strong> <%= highlight_search_result(number_to_phone(@site.phone, :extension => @site.ext), @current_query) %>
+    </p>
+    <p>
+      <strong>Fax: </strong> <%= highlight_search_result(@site.fax, @current_query) %>
+    </p>
+    <p>
+      <strong>Timezone: </strong> <%= @site.time_zone %>
+    </p>
+    <p>
+          <strong>Updated at:</strong> <%=  @site.updated_at %>
+    </p>
+    <%= render :partial => 'admin/admin_sites/nested' %>
+</div>

@@ -1,0 +1,8 @@
+<tr class="<%= cycle("even", "odd") %>">
+  <td><%= obj_monitored_status_icon(form) %></td>
+  <td><%= obj_submit_status_icon(form) %></td>
+  <td><%= obj_query_status_icon(form) %></td>
+  <td><%= link_to h(form.name), ecrf_path(form) %>
+  <td><%= ecrf_status_name(form) %></td>
+  <td><%= form.submitted_at %></td>
+</tr>

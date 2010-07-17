@@ -1,0 +1,9 @@
+<tr id="<%= dom_id_nested(:item, permission) %>" class="underlined_row">
+  <td>
+    <input type="checkbox" name="role[permissions][]" value="<%= permission.id %>" onclick="event.cancelBubble=true;" 
+           id="<%= dom_id_nested(:permission, permission) %>"
+           <%= selected_permissions.include?(permission) ? "checked='checked' " : "" %> />
+    </td>
+  <td><%=  label_tag dom_id_nested(:permission, permission), permission.name %></td>
+</tr>
+

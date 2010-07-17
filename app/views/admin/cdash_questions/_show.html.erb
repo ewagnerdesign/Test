@@ -1,0 +1,16 @@
+<div class="block-container">
+     <%= link_to_close(admin_domain_cdash_question_path(@domain, @cdash_question)) %>
+    <div class="title">Question <%= highlight_search_result(@cdash_question.variable_name, @current_query) %> </div>
+        <tt>
+          Data Collection Field: <%= highlight_search_result(@cdash_question.data_collection_field, @current_query) %><br/>
+          Number: <%= @cdash_question.number %><br/>
+          Definition: <%= highlight_search_result(@cdash_question.definition, @current_query) %><br/>
+          Completion Instructions: <%= highlight_search_result(@cdash_question.completion_instructions, @current_query) %><br/>
+          Sponsor Info: <%= highlight_search_result(@cdash_question.sponsor_info, @current_query) %><br/>
+          Core: <%= highlight_search_result(@cdash_question.core, @current_query) %><br/>
+          SDTM: <%= highlight_search_result(@cdash_question.sdtm_category.try(:name), @current_query) %><br/>
+
+          Updated at: <%= h(@cdash_question.updated_at) %>
+        </tt>
+   <br/>
+</div>

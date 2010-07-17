@@ -1,0 +1,9 @@
+<div class="block-container" style="border-color:LimeGreen;">
+  <div class="title">Add user to Study - <%= @study.name %> </div>
+  <%= link_to_close(new_admin_study_contact_path(@study)) %>
+  <div id="<%= dom_id(@study, :contact) %>" class="input-form crud-form">
+  <% remote_form_for [:admin, @study, @user], :url => admin_study_contacts_path(@study) do |f| %>
+    <%= render :partial => "admin/users/form", :locals => {:f => f} %>
+  <% end %>
+  </div>
+</div>

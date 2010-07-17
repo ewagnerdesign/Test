@@ -1,0 +1,41 @@
+<h2>
+  <div style="float: left">
+    Case Report Form: <%= h @form.name %>
+  </div>
+  <div style="float: right">
+    Study: <%= h @study.name %>
+  </div>
+</h2>
+
+<div style="clear: both"></div>
+<ul>
+  <div class="list" id="<%= dom_id_nested(:list) %>">
+  <table class="changes">
+    <tr id="versions_table_headers">
+      <th>Version:</th><th>Created On:</th><th>Created By:</th><th></th><th></th>
+    </tr>
+    <%= render :partial => 'form_version', :collection => @form_versions %>
+  </table>
+  </div>
+</ul>
+<br/>
+<% form_remote_tag :url => publish_admin_study_form_form_versions_path(@study, @form), :html => { :method => :post } do -%>
+<ul>
+  <div class="list" id="<%= dom_id_nested(:sites_list) %>">
+  <table class="changes">
+    <tr>
+      <th>Site:</th><th>Version:</th><th>Updated On:</th>
+    </tr>
+    <%= render :partial => 'site', :collection => @study.sites %>
+  </table>
+  </div>
+</ul>
+
+<div style="float:right">
+  <%= submit_tag "Publish" %>
+  <%= button_to_function "Cancel", "close_form_versions_popup();", :style => "float:right"  %>
+</div>
+
+<% end  %>
+
+

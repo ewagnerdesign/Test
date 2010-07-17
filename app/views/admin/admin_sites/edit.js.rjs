@@ -1,0 +1,10 @@
+if params[:cancel] == "true"
+  page[dom_id(@site)].replace :partial => "site"
+else
+    page[dom_id(@site)].replace_html :file => "admin/admin_sites/edit.html.erb"
+    page << "$('##{dom_id(@site)}').get(0).onmouseover = null"
+    page << "$('##{dom_id(@site)}').get(0).onclick = null"
+    #page["site_pane"].replace_html :partial => "show"
+    #page["site_pane"].show
+    #page.call "$('##{dom_id(@site, :show)}').tabify"
+end

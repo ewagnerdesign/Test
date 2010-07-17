@@ -1,0 +1,7 @@
+if @role.valid?
+  page[dom_id_nested(:item, @role)].replace :partial => "role"
+  page[dom_id_nested(:item, @role)].effect("highlight", {}, 3500)
+else
+  page[dom_id_nested(:item, @role)].replace_html :file => "admin/roles/edit.html.erb"
+  page[dom_id_nested(:item, @role)].effect("shake", {:direction => 'up', :distance => '6'}, 100)
+end

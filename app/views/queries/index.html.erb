@@ -1,0 +1,70 @@
+<div id="<%= dom_id_nested(:data_area) %>">
+  <div class="data_area_sidebar">
+    <div class="queries_studies_list">
+      <%= render :partial => "common/studies_list_bar", :locals => { :path => :queries_path } %>
+    </div>
+  </div>
+  <div class="data_area_content">
+
+    <div id="<%= dom_id_nested(:index) %>">
+      <div class="title_tools">
+        <% content_for :search_params do %>
+          <div class="multiline_search">
+          <%= label_tag :study %>:
+          <%= collection_select(:search, :study_id, @studies, :id, :name, {:prompt => "All Studies", :selected => @current_query[:study_id]} , {:onchange =>
+                                  "$.getJSON( Routes.subjectsPath({format: 'json'}), { 'search[study_id]': $('#search_study_id').val() },
+                                     function(data) {
+                                       var s = $('#search_subject_id');
+                                       s.empty().append('<option selected=\"selected\" value=\"\">Select Subject</option>');
+                                       $.each(data, function(index, itemData) {
+                                         var option = new Option(itemData.code, itemData.id);
+                                         option.innerText = itemData.code;
+                                         s.append(option);
+                                       });
+                                     });"
+
+                        })  %>
+          <%= label_tag :subject %>:
+          <%= collection_select(:search, :subject_id, @subjects, :id, :number, {:prompt => "Select Subject", :selected => @current_query[:subject_id]} )  %>
+          <br/>
+          <%= label_tag :site %>:
+          <%= collection_select(:search, :site_id, Site.all, :id, :name, {:prompt => "Select Site", :selected => @current_query[:site_id]} )  %>
+          Show:
+          <% [%w(all_cond All), %w(opened Opened), %w(closed Closed)].each do |value, label| %>
+            <%= radio_button_tag "search[show]", value, @current_query[:show] == value %>
+            <%= label_tag "search_show_#{value}", label %>
+          <% end %>
+        </div>
+        <% end %>
+        <%= filter_form(queries_path(:js)) %>
+        <%= link_to_ni "Options" %>&nbsp;
+      </div>
+
+      <div style="clear: both"></div>
+        <div id="<%= dom_id_nested(:create) %>"></div>
+        <div class="list" id="<%= dom_id_nested(:list) %>">
+        <% unless @queries.empty? %>
+          <table class="changes">
+            <th></th><th>Description:</th><th>Form:</th><th>Type:</th><th>Date Opened:</th><th>Subject:</th><th>Visit:</th><th>Study:</th><th>Site:</th>
+            <%= render :partial => 'query', :collection => @queries %>
+          </table>
+          <%= will_paginate @queries %>
+        <% end %>
+        </div>
+      <div id="<%= dom_id_nested(:emptiness_messages) %>">
+        <% if @queries.empty?
+          query = @current_query[:query] %>
+          <p>
+            <% if @current_query.blank? %>
+              There are no Queries at the moment.
+            <% else %>
+              There are no Queries found<% unless query.blank? %> matching <strong><%= query %></strong><% end -%>.
+            <% end %>
+          </p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= render :partial => "queries/query_popup" %>

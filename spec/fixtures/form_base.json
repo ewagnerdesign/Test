@@ -1,0 +1,277 @@
+{
+   "form":{
+      "title":"RSpec Test Form",
+      "description":"Some nice form description",
+      "formId":0
+   },
+   "controls":[
+      {
+         "group":{
+            "size":1,
+            "id": {
+              "internalId": 21,
+              "controlId": ""
+            },
+            "columns":[
+               [
+                  {
+                     "control":{
+                        "type":"textarea",
+                        "id": {
+                          "internalId": 1,
+                          "controlId": ""
+                        },
+                        "options":{
+                           "label":"General in-column textarea",
+                           "required":"false",
+                           "description":"Please fill it out with your text",
+                           "rows":5,
+                           "cols":25
+                        },
+                        "validators":[
+                           {
+                              "type":"size",
+                              "data":{
+                                 "enable":false,
+                                 "message":"Must be ${is}, characters long!",
+                                 "minimum":"12",
+                                 "maximum":""
+                              }
+                           }  
+                        ]
+                     }
+                  }
+               ]
+            ]
+         }
+      },
+      {
+         "group":{
+            "size":3,
+            "id": {
+              "internalId": 22,
+              "controlId": ""
+            },
+            "columns":[
+               [
+                  {
+                     "control":{
+                        "type":"radiobox",
+                        "id": {
+                          "internalId": 2,
+                          "controlId": ""
+                        },
+                        "options":{
+                           "label":"One of three",
+                           "required":"false",
+                           "description":"",
+                           "options":[
+                              "First Choice",
+                              "Second Choice",
+                              "Third Choice"
+                           ],
+                           "selected":""
+                        },
+                        "validators":[
+
+                        ]
+                     }
+                  }
+               ],
+               [
+                  {
+                     "control":{
+                        "type":"checkbox",
+                        "id": {
+                          "internalId": 3,
+                          "controlId": ""
+                        },
+                        "options":{
+                           "label":"You can play with it",
+                           "required":"false",
+                           "description":"",
+                           "options":[
+                              "First Choice",
+                              "Second Choice",
+                              "Third Choice"
+                           ],
+                           "selected":[
+
+                           ]
+                        },
+                        "validators":[
+
+                        ]
+                     }
+                  }
+               ],
+               [
+
+               ]
+            ]
+         }
+      },
+      {
+         "control":{
+            "type":"section",
+            "id": {
+              "internalId": 4,
+              "controlId": ""
+            },
+            "options":{
+               "label":"This is section break",
+               "required":"false",
+               "description":"It's non-value control, so it wont be present in form fields"
+            },
+            "validators":[
+
+            ]
+         }
+      },
+      {
+         "control":{
+            "type":"input",
+            "id": {
+              "internalId": 6,
+              "controlId": ""
+            },
+            "options":{
+               "label":"Just in-plase text input",
+               "required":"false",
+               "description":"Enjoy"
+            },
+            "validators":[
+               {
+                  "type":"size",
+                  "data":{
+                     "enable":true,
+                     "message":"Must be ${is}, characters long!",
+                     "minimum":"12",
+                     "maximum":""
+                  }
+               },
+               {
+                  "type":"format",
+                  "data":{
+                     "enable":false,
+                     "message":"Not valid format!",
+                     "formatType":"email"
+                  }
+               }
+            ]
+         }
+      },
+      {
+         "control":{
+            "type":"dropdown",
+            "id": {
+              "internalId": 5,
+              "controlId": ""
+            },
+            "options":{
+               "label":"Dropdown without column",
+               "required":"false",
+               "description":"",
+               "options":[
+                  "1",
+                  "2",
+                  "3"
+               ],
+               "selected":"",
+               "emptyElement":"false"
+            },
+            "validators":[
+
+            ]
+         }
+      },
+      {
+         "group":{
+            "size":3,
+            "id": {
+              "internalId": 23,
+              "controlId": ""
+            },
+            "columns":[
+               [
+
+               ],
+               [
+
+               ],
+               [
+
+               ]
+            ]
+         }
+      },
+      {
+          "control":{
+            "id":{
+              "controlId":'',
+              "internalId":7
+            },
+            "type":"dsinput",
+            "options":{
+              "required":"true",
+              "label":"ds input",
+              "cdash":"19","selected":["645","647","646","648"],
+              "description":"",
+              "options":{"645":"Female","646":"Male","647":"Unknown","648":"Intersex"}
+            },
+
+            "validators":[
+               {
+                 "data":{
+                    "enable":true,
+                    "message":"This field is required"
+                 },
+                 "type":"required"
+               },
+              {
+                "data":{
+                  "childs":{},
+                  "enable":true,
+                  "message":"Not valid!"
+                },
+                "type":"dslength"
+              },
+              {
+                "data":{
+                  "childs":{},
+                  "enable":true,
+                  "message":"should be in a range {arg1} .. {arg2}"
+                },
+                "type":"dsrange"
+              },
+              {
+                "data":{
+                  "childs":{},
+                  "enable":true,
+                  "message":"Must be included in the list!"
+                },
+                "type":"dsinclusion"
+              },
+              { "data":{
+                  "childs":{},
+                  "enable":true,
+                  "message":"Must be excluded in the list!"
+                },
+                "type":"dsexclusion"
+              },
+              {
+                "data":{
+                  "childs":{},
+                  "enable":true,
+                  "message":"Invalid format!"
+                },
+                "type":"dsformat"
+              }
+            ]
+          }
+      }
+   ],
+   "connections": []
+}
+
+

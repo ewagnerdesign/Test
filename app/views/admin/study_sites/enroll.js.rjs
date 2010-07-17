@@ -1,0 +1,8 @@
+@sites_added.each do |site|
+  page.insert_html :top, dom_id(@study, :sites_list), :partial => "site", :collection => [site]  
+  page[dom_id(@study, dom_id(site))].effect("highlight", {}, 3500)
+end
+page[dom_id(@study, :create_site)].replace_html ""
+page[dom_id(@study, :sites_emptiness_messages)].replace_html ""
+
+

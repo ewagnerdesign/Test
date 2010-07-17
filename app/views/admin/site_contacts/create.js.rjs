@@ -1,0 +1,10 @@
+if @user.valid?
+  page.insert_html :top, dom_id(@site, :contacts_list), :partial => "user", :collection => [ @user ]
+  page[dom_id(@site, dom_id(@user))].effect("highlight", {}, 3500)
+  page[dom_id(@site, :create_contact)].replace_html ""
+  page[dom_id(@site, :emptiness_messages)].replace_html ""
+  #TODO: Hide form
+else
+  page[dom_id(@site, :create_contact)].replace_html :file => "admin/site_contacts/new.html.erb"
+  page[dom_id(@site, :create_contact)].effect("shake", {:direction => 'up', :distance => '6'}, 100)
+end

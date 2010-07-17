@@ -1,0 +1,14 @@
+<div class="tabs" id="<%= dom_id(@user, :show) %>">
+  <!-- tabs -->
+  <ul class="tabNavigation">
+    <li><a id="<%= dom_id(@user, :system_roles)%>" href="#<%= dom_id(@user, :system_roles_tab) %>">System Roles</a></li>
+    <li><a id="<%= dom_id(@user, :study_roles)%>" href="#<%= dom_id(@user, :study_roles_tab) %>">Study Roles</a></li>
+  </ul>
+  <!-- tab containers -->
+  <div id="<%= dom_id(@user, :system_roles_tab) %>">
+  	<%= lazy_ajax_loader(dom_id(@user, :system_roles_tab), admin_user_roles_path(@user.id)) %>
+  </div>
+  <div id="<%= dom_id(@user, :study_roles_tab) %>">
+     <%= lazy_ajax_loader(dom_id(@user, :study_roles_tab), admin_user_study_roles_path(@user.id)) %>
+  </div>
+</div>

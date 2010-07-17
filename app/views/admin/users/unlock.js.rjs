@@ -1,0 +1,3 @@
+page.show_flash
+page[dom_id(@user)].replace :partial => "user"
+page[dom_id(@user)].effect("highlight", {}, 3500)

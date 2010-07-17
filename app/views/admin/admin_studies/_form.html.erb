@@ -1,0 +1,71 @@
+<%= javascript_include_tag "jquery.numeric" %>
+
+<% if !@study.errors.empty? %>
+  <h2>The following problems prevent this Study from being saved:</h2>
+  <ul>
+  <% @study.errors.each do |e| %>
+    <li>
+     <%= e.first.humanize + " " + e.second -%>
+    </li>
+  <% end %>
+  </ul>
+<% end %>
+
+<p>
+  <%= f.submit (@study.new_record? ? "Create" : "Update") %>
+</p>
+
+<p>
+  <%= f.label :name, "Study" %>
+  <%= f.text_field :name, :size => 25  %>
+</p>
+<p>
+  <%= f.label :protocol_number %>
+  <%= f.text_field :protocol_number, :size => 25  %>
+</p>
+<p>
+  <%= f.label :title, "Study Title" %>
+  <%= f.text_field :title, :size => 25  %>
+</p>
+<p>
+  <%= f.label :drug_name %>
+  <%= f.text_field :drug_name, :size => 25  %>
+</p>
+<p>
+  <%= f.label :therapeutic_area %>
+  <%= f.text_field :auto_therapeutic_area_name, :class => 'autocomplete', 'autocomplete_url' => admin_therapeutic_areas_path %>
+</p>
+<p>
+  <%= f.label :fpfv %>
+  <%= f.text_field :fpfv, :value => @study.fpfv.to_s, :size => 10, :readonly => "readonly"  %>
+</p>
+<p>
+  <%= f.label :lplv %>
+  <%= f.text_field :lplv, :value => @study.lplv.to_s, :size => 10, :readonly => "readonly"  %>
+</p>
+<p>
+  <%= f.label :expected_db_lock %>
+  <%= f.text_field :expected_db_lock, :value => @study.expected_db_lock.to_s, :size => 10, :readonly => "readonly" %>
+</p>
+<p>
+  <%= f.label :expected_sites_number, "Expected # of Sites" %>
+  <%= f.text_field :expected_sites_number, :size => 25  %>
+</p>
+
+<% javascript_tag do -%>
+<%= date_picker(:control_id => 'study_fpfv', :yearRange   => '-0:+10') %>
+<%= date_picker(:control_id => 'study_lplv', :yearRange   => '-0:+10') %>
+<%= date_picker(:control_id => 'study_expected_db_lock', :yearRange   => '-0:+10') %>
+
+   //autocomplete
+   $('input.autocomplete').each(function(){
+     var input = $(this);
+     input.autocomplete(input.attr('autocomplete_url'),{
+       matchContains:1,//also match inside of strings when caching
+       //    mustMatch:1,//allow only values from the list
+       //    selectFirst:1,//select the first item on tab/enter
+       removeInitialValue:0//when first applying $.autocomplete
+     });
+   });
+
+<% end %>

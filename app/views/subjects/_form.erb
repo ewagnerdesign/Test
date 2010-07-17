@@ -1,0 +1,59 @@
+<% if !@subject.errors.empty? %>
+  <h2>The following problems prevent this Subject from being saved:</h2>
+  <ul>
+  <% @subject.errors.each do |e| %>
+    <li>
+     <%= e.first.humanize + " " + e.second -%>
+    </li>
+  <% end %>
+  </ul>
+<% end %>
+
+<p>
+  <%= f.label :study %>
+  <%= collection_select(:subject, :study_id, Study.all, :id, :name, {:prompt => true} , {:onchange =>
+        remote_function(:update => 'subject_study_arm_id', :method => :get, :with => "'search[study_id]=' + this.value", :url => study_arms_path(@study, :format => :html)) + ";" +
+        remote_function(:update => 'subject_site_id', :method => :get, :with => "'search[study_id]=' + this.value", :url => sites_path(@study, :format => :html))
+    })  %>
+</p>
+<p>
+  <%= f.label :site %>
+  <select name="subject[site_id]" id="subject_site_id">
+    <%= render :file => 'sites/index.html.erb', :locals => {:study => @subject.study} %>
+  </select>
+</p>
+<p>
+  <%= f.label :study_arm %>
+  <select name="subject[study_arm_id]" id="subject_study_arm_id">
+    <%= render :file => 'study_arms/index.html.erb', :locals => {:study => @subject.study} %>
+  </select>
+</p>
+<p>
+  <%= f.label :number %>
+  <%= f.text_field :number %>
+</p>
+<p>
+  <%= f.label :randomization_number %>
+  <%= f.text_field :randomization_number %>
+</p>
+<p>
+  <%= f.label :gender %>
+  <%= gender_select(:subject, :gender) %>
+</p>
+<p>
+  <%= f.label :dob %>
+  <%= f.text_field :dob, :value => @subject.dob.to_s, :size => 10, :readonly => "readonly"  %>
+</p>
+<p>
+  <%= f.label :consent_datetime %>
+  <%= f.text_field :consent_datetime_fake, :value => @subject.consent_datetime.to_s, :size => 10, :readonly => "readonly"  %>
+<%= f.time_select :consent_datetime %>
+</p>
+<p>
+  <%= f.label :inactive %>
+  <%= f.check_box :inactive %>
+</p>
+<% javascript_tag do -%>
+<%= date_picker(:control_id => 'subject_dob') %>
+<%= date_picker(:control_id => 'subject_consent_datetime_fake', :show_time => 'subject_consent_datetime') %>
+<% end %>

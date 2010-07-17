@@ -1,0 +1,36 @@
+<div id="<%= dom_id_nested(:data_area) %>">
+  <div class="data_area_sidebar">
+    <div class="ecrfs_studies_list">
+      <%= render :partial => "common/studies_list_bar", :locals => { :path => :ecrfs_path } %>
+    </div>
+  </div>
+  <div class="data_area_content">
+    <div id="<%= dom_id_nested(:index) %>">
+      <div class="title_tools">
+        <% content_for :search_params do %>
+        <div class="multiline_search">
+          <%= filter_bar %>
+          <br/>Show:
+          <% [%w(all_cond All), %w(completed Completed), ["with_queries", "With Queries"]].each do |value, label| %>
+            <%= radio_button_tag "search[show]", value, @current_query[:show] == value %>
+            <%= label_tag "search_show_#{value}", label %>
+          <% end %>
+        </div>
+        <% end %>
+        <%= filter_form(ecrfs_path(:js)) %>
+      </div>
+
+      <div style="clear: both"></div>
+        <div class="list" id="<%= dom_id_nested(:list) %>">
+          <table class="changes">
+            <th colspan="3"></th><th>CRF:</th><th>Status:</th><th>Submitted Date:</th><th>Planned Date:</th><th>Visit:</th><th>Subject:</th><th>Site:</th><th>Study:</th><th>Arm:</th>
+                <%= render :partial => 'form', :collection => @crf_list, :as => :crfs_data %>
+          </table>
+          <%= will_paginate @crf_list_forms %>
+        </div>
+      <div id="<%= dom_id_nested(:emptiness_messages) %>">
+      </div>
+    </div>
+  </div>
+</div>
+

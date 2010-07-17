@@ -1,0 +1,5 @@
+if params[:cancel]
+  page[dom_id_nested(:create, @domain)].replace_html ""
+else
+  page[dom_id_nested(:create, @domain)].replace_html :file => "admin/cdash_questions/new.html.erb"
+end

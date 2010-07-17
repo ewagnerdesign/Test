@@ -1,0 +1,11 @@
+<%- validator['data']['childs'].each do |value,child|  -%>
+    <% unless child['params'].empty? || child['params'].values==[""] %>
+        $("#<%= control_id %>").validate().add({
+              inclusion:{
+                  options: <%= child['params'].values.to_json %>,
+                  message: <%= validator['data']['message'].to_json %>,
+                  condition: [ '#<%= control_id2(control) %>', 'eq', '<%= value %>' ]
+              }
+        })
+    <%- end -%>
+<%- end -%>

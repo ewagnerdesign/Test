@@ -1,0 +1,21 @@
+<tr id="<%= dom_id_n(:item, monitor_view) %>" class="<%= cycle("even", "odd") %>">
+  <td><%= link_to (h monitor_view.name), monitor_view_path(monitor_view) %></td>
+  <td><%= h monitor_view.form.name %> (<%=  monitor_view.form_fields.map(&:label).join(', ') %>)</td>
+  <td><%= (monitor_view.form.cumulative?)? "Cumulative" : "Visit CRF" %></td>
+  <td><%= monitor_view.created_at %></td>
+  <td><%= monitor_view.study.name %></td>
+  <td><%= Site.subjects_study_arm_study_arm_visits_forms_monitor_views_id_eq(monitor_view.id).all(:group => :id).map(&:name).join(", ") %></td>
+  <td>
+    <%= link_to_remote 'Edit',
+      {:method => :get, :url => edit_monitor_view_path(monitor_view), :condition => "close_previous_crud_form()"},
+      {:onclick => "event.cancelBubble=true;" } %> |
+    <%= link_to_remote 'Delete',
+      {:method=> :delete, :url => monitor_view_path(monitor_view),
+       :confirm => 'Are you sure you want to delete the "' + monitor_view.name + '"?'},
+       {:onclick => "event.cancelBubble=true;"} %> |
+    <%= link_to_ni "Clone" %>
+  </td>
+</tr>
+
+
+

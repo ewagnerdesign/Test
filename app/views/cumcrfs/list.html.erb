@@ -1,0 +1,6 @@
+<h1>Add Cumulutive CRF for <%= @subject.number %></h1>
+<ul>
+  <%= render :partial => "cumulative_crf_adding", :collection => @forms, :as => :form %>
+</ul>
+<%= submit_tag "Cancel", :onclick => "close_cumcrf_popup(); return false;" %>
+

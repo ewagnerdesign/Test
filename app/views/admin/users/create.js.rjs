@@ -1,0 +1,10 @@
+if @user.valid?
+  page.insert_html :top, :users_list, :partial => "user", :collection => [ @user ]
+  page[dom_id(@user)].effect("highlight", {}, 3500)
+  page[:create_user].replace_html ""
+  page[:emptiness_messages].replace_html ""
+  #TODO: Hide form
+else
+  page[:create_user].replace_html :file => "admin/users/new.html.erb"
+  page[:create_user].effect("shake", {:direction => 'up', :distance => '6'}, 100)
+end

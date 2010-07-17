@@ -1,0 +1,7 @@
+if @sdtm_category.valid?
+   page[dom_id(@sdtm_category)].replace :partial => "sdtm_category"
+   page[dom_id(@sdtm_category)].effect("highlight", {}, 3500)
+else
+  page[dom_id(@sdtm_category)].replace_html :file => "admin/sdtm_categories/edit.html.erb"
+  page[dom_id(@sdtm_category)].effect("shake", {:direction => 'up', :distance => '6'}, 100)
+end

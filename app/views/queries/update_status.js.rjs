@@ -1,0 +1,4 @@
+page[dom_id(@query, :status_icon)].replace query_status_icon(@query, true)
+page[dom_id(@query.form_field_value, :query_status_icon)].replace query_status_icon(@query)
+
+

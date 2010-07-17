@@ -1,0 +1,9 @@
+<div class="block-container" style="border-color:LimeGreen;">
+  <div class="title">Add Site</div>
+  <%= link_to_close(new_admin_site_path) %>
+  <div id="site" class="input-form crud-form">
+  <% remote_form_for @site, :url => admin_sites_path do |f| %>
+    <%= render :partial => "admin/admin_sites/form", :locals => {:f => f} %>
+  <% end %>
+  </div>
+</div>

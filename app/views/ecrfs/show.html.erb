@@ -1,0 +1,35 @@
+<h3>Case Report From: <%= @form_instance.name %>&nbsp;&nbsp;&nbsp;
+    Study: <%= @form_instance.subject.study.name %>&nbsp;&nbsp;&nbsp;
+    Visit: <%= (@form_instance.visit.nil?)? "N/A" : @form_instance.visit.name %>&nbsp;&nbsp;&nbsp;
+    Subject: <%= @form_instance.subject.number %></h3>
+<% form_tag ecrf_path(@form_instance), :method => :put, :class=>'uniForm', :id => 'eform' do -%>
+  <%= hidden_field_tag 'id', @form_instance.form_version.id %>
+  <% unless @form_instance.submitted? %>
+  Submit? <%= check_box_tag :submit_form %>
+  <% end %>
+  The data was collected at:<br/>
+  <%= text_field :form_instance, :actual_date_time_fake, :value => @form_instance.actual_date_time.to_s, :size => 10, :readonly => "readonly"  %>
+  <%= time_select :form_instance, :actual_date_time, { }, {:style => "width: auto;"} %>
+  <%= render :partial =>  'admin/forms/form', :locals => {:values => @form_instance.form_field_values } %>
+  <%= submit_tag %>
+<% end -%>
+<%= render :partial => "queries/query_popup" %>
+<script type="text/javascript" charset="utf-8">
+$(document).ready(function() {
+  $('#eform').validateForm({}, {onError: function(e, errors){
+      var block =  $(e.target).parents('.ctrlHolder');
+      block.addClass('error');
+      block.prepend($('<p>').addClass('errorField').html('<strong>'+e.errors.join(',') +'</strong>') );
+      e.preventDefault();
+    },
+    onReset: function(e, element) {
+      var block =  $(e.target).parents('.ctrlHolder');
+      block.removeClass('error');
+      block.find('.errorField').remove();
+      e.preventDefault();
+    }
+  });
+});
+
+<%= date_picker(:control_id => 'form_instance_actual_date_time_fake', :show_time => 'form_instance_actual_date_time') %>
+</script>

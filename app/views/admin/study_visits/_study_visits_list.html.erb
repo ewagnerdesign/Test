@@ -1,0 +1,7 @@
+<table class="changes" id="<%= dom_id_nested(:list, @study) %>">
+  <tr id="<%= dom_id_nested(:table_headers, @study) %>">
+    <th></th><th>#</th><th>Used:</th><th>Name:</th><th>Previous Visit:</th><th>Date:</th><th></th>
+  </tr>
+  <%= render :partial => 'visit', :collection => @visits %>
+</table>
+<div id="<%= dom_id_nested(:create, @study) %>"></div>

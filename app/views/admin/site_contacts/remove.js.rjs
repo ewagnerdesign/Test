@@ -1,0 +1,1 @@
+page[dom_id(@site, dom_id(@user))].remove()

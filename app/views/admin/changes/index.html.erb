@@ -1,0 +1,43 @@
+
+<div id="changes_index">
+      <div class="title_tools">
+        <% content_for :search_params do %>
+          <input id="search-query" name="search[query]" size="30" type="text" autocomplete="off" value="<%= @current_query[:query] %>" /><br/>
+          <div class="multiline_search">
+						<strong>Changes from:</strong>
+              <%= text_field_tag :"search[created_from]", @current_query[:created_from].to_s, { :size => 10, :readonly => "readonly"} %>
+   						<strong>to:</strong>
+              <%= text_field_tag :"search[created_to]", @current_query[:created_to].to_s, { :size => 10, :readonly => "readonly"} %>
+              <br/>
+						<strong>On the model:</strong>
+              <%= text_field_tag :"search[auditable_type]", @current_query[:action].to_s, { :size => 20, :autocomplete => "off"} %>
+						<strong>Action:</strong>
+  						<%= select_tag :"search[action_name]", options_for_select([["All actions", ""], ["Create", "create"], ["Update", "update"], ["Destroy", "destroy"]], :selected => @current_query[:action_name]) %>
+						<strong>Made by:</strong>
+              <%= text_field_tag :"search[made_by]", @current_query[:made_by].to_s, { :size => 20, :autocomplete => "off"} %>
+        <% end %>
+        <%= filter_form(admin_changes_path(:js)) %>
+      </div>
+<div style="clear: both"></div>
+<% unless @changes.empty? %>
+  <div class="list" id="changes_list">
+    <ul>
+      <%= render :partial => 'admin/changes/change', :collection => @changes %>
+    </ul>
+  </div>
+  <%= will_paginate @changes %>
+<% else %>
+  <p>
+  	<% if @current_query.blank? %>
+    	There are no Changes at the moment.
+  	<% else %>
+    	There are no Changes found matching your query.
+  	<% end %>
+  </p>
+<% end %>
+</div>
+
+<% javascript_tag do %>
+<%= date_picker(:control_id => 'search_created_from', :maxDate => '+0d') %>
+<%= date_picker(:control_id => 'search_created_to', :maxDate => '+1d') %>
+<% end %>

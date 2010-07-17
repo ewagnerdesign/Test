@@ -1,0 +1,67 @@
+<div class="block-container">
+<tr class="tr_next hidden">
+                                    <td colspan="10" class="td_trigger">
+                                        <table class="tbl_inner">
+                                            <tr>
+                                                <td class="td_left"><div></div></td>
+                                                <td class="td_mid">
+
+  
+  <%= link_to_close(admin_user_path(@user)) %>
+  <h2>User - <%= highlight_search_result(@user.full_name, @current_query) %></h2>
+  <dl><dt><%= (@user.active?)? "Active" : "Inactive" %></dd></dl>
+  <dl><dt>Title:</dt><dd><%= highlight_search_result(@user.title, @current_query) %></dd></dl>
+ <dl><dt>Email:</dt><dd><%= @user.email %></dd></dl>
+  <dl><dt>Address: </dt><dd><%= highlight_search_result(@user.address_1, @current_query) %><%= ", #{highlight_search_result(@user.address_2, @current_query)}" unless @user.address_2.blank? %></dd></dl>
+ <dl><dt> City: </dt><dd> <%= highlight_search_result(@user.city, @current_query) %></dd></dl>
+ <dl><dt>State: </dt><dd><%= highlight_search_result(@user.state_cd, @current_query) %></dd></dl>
+ <dl><dt>ZIP: </dt><dd> <%= highlight_search_result(@user.zip, @current_query) %></dd></dl>
+ <dl><dt>Phone: </dt><dd> <%= number_to_phone(@user.phone, :extension => @user.ext) %></dd></dl>
+ <dl><dt>Fax: </dt><dd> <%= @user.fax %></dd></dl>
+ <dl><dt>Website: </dt><dd> <%= @user.web_site %></dd></dl>
+  
+<dl><dt>Timezone: </dt><dd><%= @user.time_zone %></dd></dl>
+  
+  <%= render :partial => 'admin/users/nested' %>
+  </td>
+                                                <td class="td_right"><div></div></td>
+                                            </tr>
+                                            <tr class="foot">
+                                                <td class="td_left"><div></div></td>
+                                                <td class="td_mid"><div></div></td>
+                                                <td class="td_right"><div></div></td>
+                                            </tr>
+                                        </table>
+
+                                    </td>
+                                </tr>
+  
+</div>
+
+<tr class="tr_next hidden">
+                                    <td colspan="10" class="td_trigger">
+                                        <table class="tbl_inner">
+                                            <tr>
+                                                <td class="td_left"><div></div></td>
+                                                <td class="td_mid">
+                                                    <dl><dt>Title:</dt><dd>Dr.</dd></dl>
+                                                    <dl><dt>Email:</dt><dd>invest@somasdfezzz.com</dd></dl>
+                                                    <dl><dt>Adress:</dt><dd>Study first</dd></dl>
+                                                    <dl><dt>City:</dt><dd>Study first</dd></dl>
+                                                    <dl><dt>State:</dt><dd>Study first</dd></dl>
+                                                    <dl><dt>Zip:</dt><dd>263456</dd></dl>                                                    <dl><dt>Phone:</dt><dd>2-253-3545</dd></dl>
+                                                    <dl><dt>Fax:</dt><dd>12143536</dd></dl>
+                                                    <dl><dt>Website:</dt><dd><a href="#link">www.site.com</a></dd></dl>
+                                                                                                        
+                                                </td>
+                                                <td class="td_right"><div></div></td>
+                                            </tr>
+                                            <tr class="foot">
+                                                <td class="td_left"><div></div></td>
+                                                <td class="td_mid"><div></div></td>
+                                                <td class="td_right"><div></div></td>
+                                            </tr>
+                                        </table>
+
+                                    </td>
+                                </tr>

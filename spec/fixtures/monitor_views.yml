@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  study: 
+  form: 
+
+two:
+  name: MyString
+  study: 
+  form: 

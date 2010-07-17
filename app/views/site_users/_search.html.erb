@@ -1,0 +1,10 @@
+<div>
+  <% form_tag site_users_path, :method=>:get do %>
+    <%= label_tag :filter_study_id, "Study" %>
+    <%= collection_select 'filter', "study_id",
+                          @site.studies, :id, :name,
+                          {:include_blank=>"all", :selected=>@study.try(:id) },
+                          { :onchange=>"$(this).parent('form').submit()"}
+    %>
+  <% end %>
+</div>

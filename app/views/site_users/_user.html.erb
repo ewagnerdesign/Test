@@ -1,0 +1,25 @@
+<tr class="<%= cycle "even", 'odd' %> user_item">
+  <td><%= user.id %><%= hidden_field_tag "site_user_id", user.id %></td>
+  <td><%= user.first_name %></td>
+  <td><%= user.last_name %></td>
+  <td>
+    <%= link_to "edit" %> |
+    <% unless @study.nil? %>
+      <%= link_to 'remove from study',
+                  destroy_from_study_site_user_path(user, :study_id=>@study.id),
+                  :confirm=>"Are you delete this user from study?",
+                  :method => :delete
+      %> |
+    <% end %>
+    <%= link_to 'delete',
+            site_user_path(user.id),
+            :confirm=>(
+              user.site_users.first.study_site_users.size>1?
+                "Are you sure delete users from all studies?":
+                "Are you sure?"
+            ),
+            :method=>:delete
+        %>
+  </td>
+</tr>
+

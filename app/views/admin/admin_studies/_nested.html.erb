@@ -1,0 +1,30 @@
+<div class="tabs" id="<%= dom_id(@study, :show) %>">
+  <!-- tabs -->
+  <ul class="tabNavigation">
+    <li><a id="<%= dom_id(@study, :contacts)%>" href="#<%= dom_id(@study, :contacts_tab) %>">Contacts</a></li>
+    <li><a id="<%= dom_id(@study, :sites)%>" href="#<%= dom_id(@study, :sites_tab) %>">Sites</a></li>
+    <li><a id="<%= dom_id(@study, :visits)%>" href="#<%= dom_id(@study, :visits_tab) %>">Visits</a></li>
+    <li><a id="<%= dom_id(@study, :cumulative_crfs)%>" href="#<%= dom_id(@study, :cumulative_crfs_tab) %>">Cumulative CRFs</a></li>
+  </ul>
+  <!-- tab containers -->
+  <div id="<%= dom_id(@study, :contacts_tab) %>">
+    <div id="<%= dom_id(@study, :contacts_index)%>">
+      <%= lazy_ajax_loader(dom_id(@study, :contacts_tab), admin_study_contacts_path(:study_id => @study.id)) %>
+    </div>
+  </div>
+  <div id="<%= dom_id(@study, :sites_tab) %>">
+    <div id="<%= dom_id(@study, :sites_index)%>">
+      <%= lazy_ajax_loader(dom_id(@study, :sites_tab), admin_study_sites_path(:study_id => @study.id)) %>
+    </div>
+  </div>
+  <div id="<%= dom_id(@study, :visits_tab) %>">
+    <div id="<%= dom_id(@study, :visits_index)%>">
+      <%= lazy_ajax_loader(dom_id(@study, :visits_tab), admin_study_visits_path(:study_id => @study.id, :force_html => true)) %>
+    </div>
+  </div>
+  <div id="<%= dom_id(@study, :cumulative_crfs_tab) %>">
+    <div id="<%= dom_id(@study, :cumulative_crfs_index)%>">
+      <%= lazy_ajax_loader(dom_id(@study, :cumulative_crfs_tab), admin_study_crfs_path(:study_id => @study.id)) %>
+    </div>
+  </div>
+</div>

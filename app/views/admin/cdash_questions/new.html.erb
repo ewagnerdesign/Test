@@ -1,0 +1,12 @@
+<div class="block-container" style="border-color:LimeGreen;">
+  <div class="title">Add child for Parent - <%= @domain.name %>: Control Type Code: <%= @domain.code %> </div>
+  <%= link_to_close(new_admin_domain_cdash_question_path(@domain)) %>
+  <div id="<%= dom_id(@domain, :cdash_question) %>" class="input-form crud-form">
+    <% remote_form_for [:admin, @domain, @cdash_question], :url => admin_domain_cdash_questions_path(@domain)do |f| %>
+      <%= render :partial => "admin/cdash_questions/form", :locals => {:f => f} %>
+      <p>
+        <%= f.submit "Create" %> or <%= link_to_cancel "cancel", new_admin_domain_cdash_question_path(@domain) %>
+      </p>
+    <% end %>
+  </div>
+</div>

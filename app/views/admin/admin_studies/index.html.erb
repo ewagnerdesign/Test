@@ -1,0 +1,33 @@
+<div id="studies_index">
+<div class="title_tools">
+  <% content_for :search_params do %>
+    <input id="search" name="search" size="30" type="text" value="<%= @current_query %>" />
+  <% end %>
+  <%= filter_form(admin_studies_path(:js)) %>
+  <%= link_to_remote "Add study", 
+    { :url => new_admin_study_path, :method => :get, :condition => "close_previous_crud_form()" },
+    { :id => :add_study } %> |
+  <%= link_to_ni "Options" %>
+</div>
+<div style="clear: both"></div>
+<ul>
+  <div id="create_study"></div>
+  <div class="list" id="studies_list">
+    <% unless @entities.empty? %>
+      <%= render :partial => 'study', :collection => @entities  %>
+    <% end %>
+  </div>
+</ul>
+<%= will_paginate @entities, :param_name => dom_id_nested(:page) %>
+<div id="emptiness_messages">
+  <% if @entities.empty? %>
+    <p>
+    <% if @current_query.blank? %>
+       There are no Studies at the moment.
+    <% else %>
+       There are no Studies found matching <strong><%= @current_query %></strong>.
+     <% end %>
+    </p>
+  <% end %>
+</div>
+</div>

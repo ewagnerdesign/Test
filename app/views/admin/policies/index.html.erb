@@ -1,0 +1,68 @@
+<div id="<%= dom_id_nested(:index) %>" class="policies-form crud-form">
+  Set password and lockout policies for all users.
+
+  <% form_remote_tag :url => set_admin_policies_path(:format => :js), :html => { :method => :put } do -%>
+    <p>
+      <%= label_tag :password_expiration, "Password Expiration" %>
+      <%= select_tag :password_expiration,  options_for_select([
+          ["Never Expires", "0"],
+          ["1 Month", "30"],
+          ["2 Months", "60"]], Settings.password_expiration.to_s) %>
+    </p>
+
+    <p>
+      <%= label_tag :password_history, "Password History" %>
+      <%= select_tag :password_history,  options_for_select([
+          ["No Password History", "0"],
+          ["3 Previous Passwords", "3"],
+          ["5 Previous Passwords", "5"]], Settings.password_history.to_s) %>
+    </p>
+
+    <p>
+      <%= label_tag :minimum_password_length, "Minimum Password Length" %>
+      <%= select_tag :minimum_password_length,  options_for_select([
+          ["6 characters", "6"],
+          ["8 characters", "8"],
+          ["10 characters", "10"]], Settings.minimum_password_length.to_s) %>
+    </p>
+
+    <p>
+      <%= label_tag :password_complexity, "Password Complexity" %>
+      <%= select_tag :password_complexity,  options_for_select([
+          ["Mix of alpha and numeric", "0"],
+          ["Mix of alpha, numeric and symbols", "1"]], Settings.password_complexity.to_s) %>
+    </p>
+
+    <p>
+      <%= label_tag :maximum_invalid_login_attempts, "Maximum Invalid Login Attempts" %>
+      <%= select_tag :maximum_invalid_login_attempts,  options_for_select([
+          ["3", "3"],
+          ["5", "5"],
+          ["10", "10"],
+          ["No Limit", "0"]], Settings.maximum_invalid_login_attempts.to_s) %>
+    </p>
+
+    <p>
+      <%= label_tag :lockout_period, "Lockout Period" %>
+      <%= select_tag :lockout_period,  options_for_select([
+          ["15 minutes", "15"],
+          ["30 minutes", "30"],
+          ["60 minutes", "60"],
+          ["Forever", "0"]], Settings.lockout_period.to_s) %>
+    </p>
+
+    <p>
+      <%= label_tag :enable_password_reset, "Enable Password Reset for User" %>
+      <input name="enable_password_reset" type="hidden" value="false" />
+      <%= check_box_tag :enable_password_reset, true, Settings.enable_password_reset %>
+    </p>
+
+    <p>
+      <%= submit_tag "Save" %> <%= button_to_remote "Expire All Passwords", :url => expire_all_passwords_admin_policies_path(:format => :js) %>
+    </p>
+
+    <div class="notice" id="result"></div>
+
+<% end %>
+
+</div>

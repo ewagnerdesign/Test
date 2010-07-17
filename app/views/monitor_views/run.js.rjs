@@ -1,0 +1,4 @@
+page.call '$(".monitor_view_ecrf_row").remove'
+page.insert_html :after, :monitor_view_ecrf_table_headers, :partial => "monitor_view_ecrf", :collection => @ecrfs, :locals => { :monitor_view => @monitor_view }
+page[dom_id_nested(:emptiness_messages)].replace_html ""
+

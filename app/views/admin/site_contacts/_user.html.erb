@@ -1,0 +1,17 @@
+<li id="<%= dom_id(@site, dom_id(user)) %>"
+  <%= highlightable(dom_id(@site, dom_id(user, :tools)), true) %>
+  <%= clickable admin_site_contact_path(@site, user) %> >
+  <div class="tools" id="<%= dom_id(@site, dom_id(user, :tools)) %>" style="display:none;">
+    <%= link_to_remote 'Show', {:method => :get, :url => admin_site_contact_path(@site, user)}, {:onclick => "event.cancelBubble=true;"} %> |
+    <%= link_to_remote 'Edit',
+      {:method => :get, :url => edit_admin_site_contact_path(@site, user), :condition => "close_previous_crud_form()"},
+      {:onclick => "event.cancelBubble=true;" } %> |
+    <%= link_to_remote 'Remove from Site',
+       {:method=> :delete, :url => remove_admin_site_contact_path(@site, user)},
+       {:onclick => "event.cancelBubble=true;", :id => "#{dom_id(@site, dom_id(user,:remove))}"} %>
+  </div>
+  <div class="strip<%= "-create" if user.active %>"><strong>ID:</strong> <%= user.id %></div>
+  <div class="indent">
+    <%= highlight_search_result(user.full_name, @current_query) %>
+  </div>
+</li>

@@ -1,0 +1,4 @@
+<%= options_from_collection_for_select(
+  [StudyArm.new(:code => "Please Select", :id => 0)] + (study.try(:study_arms) || []), 
+  :id, :code, :selected => study.nil? ? 0 : study.default_study_arm.try(:id)
+) %>

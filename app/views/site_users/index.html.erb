@@ -1,0 +1,47 @@
+<% title "Users" %>
+
+<%= render 'search' %>
+
+<div class="data_area_content">
+
+  <div id="site_users_list" style="float:left">
+    <%= render 'users' %>
+    <%= link_to "Add contact" %>
+  </div>
+
+
+  <div id="site_user_roles_list">
+    <%= render :action=>'roles', :user=>@users.first %>
+  </div>
+
+
+  <script type="text/javascript">
+  <%# javascript_tag do %>
+   $(document).ready(function(){
+     $('#site_users_list').delegate('table tr.user_item', 'click', function(e){
+        e.preventDefault()
+         var studyId = $('#filter_study_id').val()
+         if(studyId==""){
+           alert('Please select study')
+           return;
+         }
+
+         $(this).parents('table').find('tr.active').removeClass('active')
+         $(this).addClass('active')
+
+         var user_id = $(this).find('input[type="hidden"]').val()
+         $('#site_user_roles_list').load(Routes.rolesSiteUserPath(user_id, {study_id: studyId}) )
+     })
+
+     $('#site_user_roles_list').delegate('input[type="checkbox"]', 'change', function(e){
+        e.preventDefault();
+         var studyId = $('#filter_study_id').val()
+         var enable = $(this).is(':checked');
+         var userId = $('#site_users_list .user_item.active input[type="hidden"]').val()
+         $.post(Routes.updateRolesSiteUserPath(userId), {study_id:studyId, enable:enable, role_id:$(this).val()})
+     })
+   })
+  <%# end %>
+  </script>
+
+</div>

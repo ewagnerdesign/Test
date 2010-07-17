@@ -1,0 +1,12 @@
+<div class="tabs" id="<%= dom_id(@site, :show) %>">
+  <!-- tabs -->
+  <ul class="tabNavigation">
+    <li><a id="<%= dom_id(@site, :contacts)%>" href="#<%= dom_id(@site, :contacts_tab)%>">Contacts</a></li>
+  </ul>
+  <!-- tab containers -->
+  <div id="<%= dom_id(@site, :contacts_tab) %>">
+    <div id="<%= dom_id(@site, :contacts_index)%>">
+      <%= lazy_ajax_loader(dom_id(@site, :contacts_tab), admin_site_contacts_path(:site_id => @site.id)) %>
+    </div>
+  </div>
+ </div>

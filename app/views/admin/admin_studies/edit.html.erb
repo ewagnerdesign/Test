@@ -1,0 +1,9 @@
+<div class="block-container" style="border-color:LimeGreen;">
+  <div class="title">Edit study - <%= @study.name %> </div>
+  <%= link_to_close(edit_admin_study_path(@site)) %>
+  <div id="<%= dom_id(@study) %>" class="input-form crud-form">
+  <% remote_form_for @study, :url => admin_study_path(@study) do |f| %>
+    <%= render :partial => "admin/admin_studies/form", :locals => {:f => f} %>
+  <% end %>
+  </div>
+</div>

@@ -1,0 +1,2 @@
+module Admin::StudyVisitsHelper
+end

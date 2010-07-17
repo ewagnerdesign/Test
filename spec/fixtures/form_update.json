@@ -1,0 +1,151 @@
+{
+   "controls":[
+      {
+         "group":{
+            "size":1,
+            "columns":[
+               [
+                  {
+                     "control":{
+                        "validators":[
+                           {
+                              "data":{
+                                 "maximum":"",
+                                 "enable":false,
+                                 "minimum":"12",
+                                 "message":"Must be ${is}, characters long!"
+                              },
+                              "type":"size"
+                           }
+                        ],
+                        "controlId":1,
+                        "type":"textarea",
+                        "options":{
+                           "required":"false",
+                           "label":"General in-column textarea",
+                           "rows":5,
+                           "cols":25,
+                           "description":"Please fill it out with your text"
+                        }
+                     }
+                  }
+               ]
+            ]
+         }
+      },
+      {
+         "group":{
+            "size":3,
+            "columns":[
+               [
+                  {
+                     "control":{
+                        "validators":[
+
+                        ],
+                        "controlId":2,
+                        "type":"radiobox",
+                        "options":{
+                           "required":"false",
+                           "label":"One of three",
+                           "selected":"",
+                           "description":"",
+                           "options":[
+                              "First Choice",
+                              "Second Choice",
+                              "Third Choice"
+                           ]
+                        }
+                     }
+                  }
+               ],
+               [
+                  {
+                     "control":{
+                        "validators":[
+                           {
+                              "data":{
+                                 "maximum":"",
+                                 "enable":false,
+                                 "minimum":"12",
+                                 "message":"Must be ${is}, characters long!"
+                              },
+                              "type":"size"
+                           }
+                        ],
+                        "type":"textarea",
+                        "controlId":0,
+                        "options":{
+                           "required":"false",
+                           "label":"New inform control instead deleted one",
+                           "rows":5,
+                           "cols":25,
+                           "description":"Note that new control has no ControlId or controlId == 0"
+                        }
+                     }
+                  }
+               ],
+               [
+
+               ]
+            ]
+         }
+      },
+      {
+         "control":{
+            "validators":[
+
+            ],
+            "controlId":4,
+            "type":"section",
+            "options":{
+               "required":"false",
+               "label":"This is section break",
+               "description":"It's non-value control, so it wont be present in form fields"
+            }
+         }
+      },
+      {
+         "control":{
+            "validators":[
+
+            ],
+            "controlId":6,
+            "type":"dropdown",
+            "options":{
+               "required":"false",
+               "label":"Dropdown without column",
+               "emptyElement":"false",
+               "selected":"",
+               "description":"",
+               "options":[
+                  "1",
+                  "2",
+                  "3"
+               ]
+            }
+         }
+      },
+      {
+         "group":{
+            "size":3,
+            "columns":[
+               [
+
+               ],
+               [
+
+               ],
+               [
+
+               ]
+            ]
+         }
+      }
+   ],
+   "form":{
+      "title":"RSpec Test Form after update",
+      "description":"Some nice form description",
+      "formId":8
+   }
+}

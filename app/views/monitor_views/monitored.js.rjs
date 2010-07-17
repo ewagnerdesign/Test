@@ -1,0 +1,1 @@
+  page[dom_id_n(:save_message, @monitor_view)].replace_html :file => "monitor_views/monitored.html.erb"

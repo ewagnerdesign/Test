@@ -1,0 +1,12 @@
+<tr class="<%= cycle("even", "odd") %>">
+  <td><%= site.name %></td>
+  <%
+    study_site = StudySite.study_id_eq(@study.id).site_id_eq(site.id).first
+    study_site_form_version = study_site.study_site_form_versions.descend_by_created_at.first
+  %>
+  <td>
+    <%= select_tag "form_versions[#{site.id}]",  options_for_select(
+      study_site.form_versions.form_id_eq(@form.id).map{|fv| [fv.name, fv.id]}, 1) %>
+  </td>
+  <td><%= study_site_form_version.created_at.to_s(:date_time24s) if study_site_form_version %></td>
+</tr>

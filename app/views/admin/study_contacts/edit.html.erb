@@ -1,0 +1,9 @@
+<div class="block-container" style="border-color:LimeGreen;">
+  <div class="title">Edit contact - <%= @user.full_name %> </div>
+  <%= link_to_close(edit_admin_study_contact_path(@study, @user)) %>
+  <div id="<%= dom_id(@user) %>" class="input-form crud-form">
+  <% remote_form_for [:admin, @study, @user], :url => admin_study_contact_path(@study, @user) do |f| %>
+    <%= render :partial => "admin/users/form", :locals => {:f => f} %>
+  <% end %>
+  </div>
+</div>

@@ -1,0 +1,7 @@
+if params[:cancel] == "true"
+  page[dom_id_nested(:item, @role)].replace :partial => "role"
+else
+  page[dom_id_nested(:item, @role)].replace_html :file => "admin/roles/edit.html.erb"
+  page << "$('##{dom_id_nested(:item, @role)}').get(0).onmouseover = null"
+  page << "$('##{dom_id_nested(:item, @role)}').get(0).onclick = null"
+end

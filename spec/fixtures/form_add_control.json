@@ -1,0 +1,17 @@
+{
+   "control":{
+      "type":"textarea",
+      "id": {
+        "internalId": 1,
+        "controlId": ""
+      },
+      "options":{
+         "label":"General in-column textarea",
+         "required":"false",
+         "description":"Please fill it out with your text",
+         "rows":5,
+         "cols":25
+      },
+      "validators":[]
+   }
+}

@@ -1,0 +1,3 @@
+#Render users list
+page[dom_id(@site, :users_index)].replace :file => "admin/users/index"
+

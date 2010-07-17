@@ -1,0 +1,31 @@
+<div class="block-container">
+  <%= link_to_close(admin_study_path(@study)) %>
+  <p>
+    <strong>Study: </strong> <%= highlight_search_result(@study.name, @current_query) %>
+  </p>
+  <p>
+    <strong>Protocol Number: </strong> <%= highlight_search_result(@study.protocol_number, @current_query) %>
+  </p>
+  <p>
+    <strong>Study Title: </strong> <%= highlight_search_result(@study.title, @current_query) %>
+  </p>
+  <p>
+    <strong>Drug Name: </strong> <%= highlight_search_result(@study.drug_name, @current_query) %>
+  </p>
+  <p>
+    <strong>Therapeutic Area: </strong> <%= highlight_search_result(@study.therapeutic_area.try(:name), @current_query) %>
+  </p>
+  <p>
+    <strong>FPFV: </strong> <%= @study.fpfv %>
+  </p>
+  <p>
+    <strong>LPLV: </strong> <%= @study.lplv %>
+  </p>
+  <p>
+    <strong>Expected DB Lock: </strong> <%= @study.expected_db_lock %>
+  </p>
+  <p>
+    <strong>Expected # of sites: </strong> <%= highlight_search_result(@study.expected_sites_number.to_s, @current_query) %>
+  </p>
+  <%= render :partial => 'admin/admin_studies/nested' %>
+</div>

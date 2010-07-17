@@ -1,0 +1,10 @@
+if @sdtm_answer.valid?
+  page.insert_html :top, dom_id_nested(:list, @sdtm_category), :partial => "sdtm_answer", :collection => [ @sdtm_answer ]
+  page[dom_id(@sdtm_answer)].effect("highlight", {}, 3500)
+  page[dom_id_nested(:create, @sdtm_category)].replace_html ""
+  page[dom_id_nested(:emptiness_messages, @sdtm_category)].replace_html ""
+  #TODO: Hide form
+else
+  page[dom_id_nested(:create, @sdtm_category)].replace_html :file => "admin/sdtm_answers/new.html.erb"
+  page[dom_id_nested(:create, @sdtm_category)].effect("shake", {:direction => 'up', :distance => '6'}, 100)
+end

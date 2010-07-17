@@ -1,0 +1,8 @@
+<% unless validator['data'].empty?  %>
+  $('#<%= control_id%>').validate().add({
+        format:{
+            options: <%= validator['data']['formatType'].to_json %>,
+            message: <%= validator['data']['message'].to_json %>
+        }
+  })
+<% end %>

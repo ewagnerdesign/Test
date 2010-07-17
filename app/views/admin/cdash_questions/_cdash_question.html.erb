@@ -1,0 +1,21 @@
+<li id="<%= dom_id(cdash_question) %>"
+  <%= highlightable(dom_id(cdash_question, :tools), true) %>
+  <%= clickable admin_domain_cdash_question_path(@domain, cdash_question) %>   >
+  <div class="strip">
+    <%= cdash_question.variable_name %>
+  </div>
+  <div class="tools" id="<%= dom_id(cdash_question, :tools) %>"<%= cdash_question.id %> style="display:none;">
+    <%= link_to_remote 'Show', {:method => :get, :url => admin_domain_cdash_question_path(@domain, cdash_question)}, {:onclick => "event.cancelBubble=true;"} %> |
+    <%= link_to_remote 'Edit',
+      {:method => :get, :url => edit_admin_domain_cdash_question_path(@domain, cdash_question), :condition => "close_previous_crud_form()"},
+      {:onclick => "event.cancelBubble=true;" } %> |
+    <%= link_to_remote_if cdash_question.removable?, 'Delete',
+      {:method=> :delete, :url => admin_domain_cdash_question_path(@domain, cdash_question),
+       :confirm => 'Are you sure you want to delete the "' + cdash_question.variable_name + '"?'},
+       {:onclick => "event.cancelBubble=true;"} %>
+  </div>
+  <div class="indent">
+    <%= highlight_search_result(cdash_question.data_collection_field, @current_query) %><br/>
+    <%= highlight_search_result(cdash_question.definition, @current_query) %>
+  </div>
+</li>

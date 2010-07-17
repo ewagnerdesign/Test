@@ -1,0 +1,28 @@
+<% if !@role.errors.empty? %>
+  <h2>The following problems prevent this role from being saved:</h2>
+  <ul>
+  <% @role.errors.each do |e| %>
+    <li>
+     <%= e.first.humanize + " " + e.second -%>
+    </li>
+  <% end %>
+  </ul>
+<% end %>
+
+ <p>
+  <%= f.label :name %><br />
+  <%= f.text_field :name %>
+</p>
+
+<p>
+  <%= f.label :description %><br />
+  <%= f.text_area :description, :cols => 100, :rows => 1 %>
+</p>
+
+<p>
+  Category<br />
+  <%= f.select :category, Role::CATEGORIES.collect{|c| [category_name(c), c]}, {}, {:onchange => remote_function(:method => :get, :with => "'search[category]=' + this.value", :url => admin_permissions_path())} %>
+</p>
+
+<%= render :partial => 'admin/permissions/index', :locals => { :selected_permissions => @role.permissions } %>
+

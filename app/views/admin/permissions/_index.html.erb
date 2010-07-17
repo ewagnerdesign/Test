@@ -1,0 +1,20 @@
+<div id="<%= dom_id_n(:index_permissions) %>">
+  <ul>
+    <div class="list" <% if @possible_permissions.empty? %>style="display:none;"<% end %>>
+    <table class="changes">
+      <tr id="role_permissions_table_headers">
+        <th style="width: 30px"></th>
+        <th>Permission:</th>
+      </tr>
+      <%= render :partial => 'admin/permissions/permission', :collection => @possible_permissions, :locals => { :selected_permissions => selected_permissions } %>
+    </table>
+    </div>
+  </ul>
+  <div id="<%= dom_id_nested(:emptiness_messages) %>">
+    <% if @possible_permissions.empty? %>
+      <p>
+         There are no permissions at the moment.
+      </p>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,40 @@
+<% # TODO: check other all "$.getJSON" places. May be they should be replaced by this helper %>
+
+<%= label_tag :study %>:
+<%= collection_select(:search, :study_id, Study.all, :id, :name, {:prompt => "All Studies", :selected => @current_query[:study_id]}, { :onchange =>
+                        "$.getJSON( Routes.%s({format: 'json'}), { 'search[study_id]': $('#search_study_id').val() },
+                           function(data) {
+                             var s = $('#%s');
+                             s.empty().append('<option selected=\"selected\" value=\"\">Select %s</option>');
+                             $.each(data, function(index, itemData) {
+                               var caption = itemData.%s
+                               var option = new Option(caption, itemData.id);
+                               option.innerText = caption;
+                               s.append(option);
+                             });
+                             $('#search_subject_id').empty().append('<option selected=\"selected\" value=\"\">Select Subject</option>');
+                             $('#search_visit_id').empty().append('<option selected=\"selected\" value=\"\">Select Visit</option>');
+                           });" % [ 'studyArmsPath', 'search_study_arm_id', 'Arm', 'code']
+              })  %>
+<%= label_tag :study_arm %>:
+<%= collection_select(:search, :study_arm_id, study ? study.study_arms : [], :id, :code, {:prompt => "Select Arm", :selected => @current_query[:study_arm_id]}, { :onchange =>
+                        "$.getJSON( Routes.%s({format: 'json'}), { 'search[study_id]': $('#search_study_id').val(), 'search[study_arm_id]': $('#search_study_arm_id').val() },
+                           function(data) {
+                             var s = $('#%s');
+                             s.empty().append('<option selected=\"selected\" value=\"\">Select %s</option>');
+                             $.each(data, function(index, itemData) {
+                               var caption = itemData.%s
+                               var option = new Option(caption, itemData.id);
+                               option.innerText = caption;
+                               s.append(option);
+                             });
+                           });" * 2 % [ 'subjectsPath', 'search_subject_id', 'Subject', 'number',
+                                        'visitsPath', 'search_visit_id', 'Visit', 'name']
+              })  %>
+<%= label_tag :site %>:
+<%= collection_select(:search, :site_id, Site.all, :id, :name, {:prompt => "Select Site", :selected => @current_query[:site_id]} )  %>
+<br/>
+<%= label_tag :subject %>:
+<%= collection_select(:search, :subject_id, study ? study.subjects : [], :id, :number, {:prompt => "Select Subject", :selected => @current_query[:subject_id]} )  %>
+<%= label_tag :visit %>:
+<%= collection_select(:search, :visit_id, study ? study.visits : [], :id, :name, {:prompt => "Select Visit", :selected => @current_query[:visit_id]} )  %>

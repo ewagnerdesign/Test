@@ -1,0 +1,24 @@
+<tr id="<%= dom_id_nested(:item, subject) %>" class="underlined_row">
+  <td><%= obj_monitored_status_icon(subject) %></td>
+  <td><%= obj_submit_status_icon(subject) %></td>
+  <td><%= obj_query_status_icon(subject) %></td>
+  <td><%= highlight_search_result(subject.number, @current_query[:query]) %></td>
+  <td><%= subject.dob %></td>
+  <td><%= subject.gender %></td>
+  <td><%= subject.study.try(:name) || "None" %></td>
+  <td><%= subject.site.try(:name) %></td>
+  <td><%= subject.study_arm.try(:code) || "None" %></td>
+  <td><%= link_to "Visits", visits_path(:"search[study_id]" => subject.study, :"search[subject_id]" => subject.id) %></td>
+  <td><%= link_to image_tag("icons/cum-crf-view.png", :alt => "View Cumulative CRF", :title => "View Cumulative CRF"), subject_cumcrfs_path(:subject_id => subject.id) %> | <%= image_tag("icons/cum-crf-new.png", :alt => "Add Cumulative CRF", :title => "Add Cumulative CRF", :onclick => "show_subject_cumcrfs(#{subject.id})")%></td>
+  <td>
+    <%= link_to_remote 'Show', {:method => :get, :url => subject_path(subject)}, {:onclick => "event.cancelBubble=true;"} %> |
+    <%= link_to_remote 'Edit',
+      {:method => :get, :url => edit_subject_path(subject), :condition => "close_previous_crud_form()"},
+      {:onclick => "event.cancelBubble=true;" } %> |
+    <%= link_to_remote_if subject.removable?, 'Delete',
+      {:method=> :delete, :url => subject_path(subject),
+       :confirm => "Are you sure you want to delete the subject '#{subject.number}'?"},
+       {:onclick => "event.cancelBubble=true;", :id => dom_id(subject, :delete)} %>
+  </td>
+</tr>
+

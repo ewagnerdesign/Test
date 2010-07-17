@@ -1,0 +1,5 @@
+page[dom_id(@query.form_field_value, :query_status_icon)].replace link_to(query_status_icon(@query), '#', {:onclick => "show_query_comments(#{@query.form_field_value.id})"})
+
+if @reload_queries
+  page.redirect_to :action => "index"
+end

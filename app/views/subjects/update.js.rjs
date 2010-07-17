@@ -1,0 +1,7 @@
+if @subject.valid?
+  page[dom_id_nested(:item, @subject)].replace :partial => "subject"
+  page[dom_id_nested(:item, @subject)].effect("highlight", {}, 3500)
+else
+  page[dom_id_nested(:item, @subject)].replace_html :file => "subjects/edit.html.erb"
+  page[dom_id_nested(:item, @subject)].effect("shake", {:direction => 'up', :distance => '6'}, 100)
+end

@@ -1,0 +1,12 @@
+<li id="<%= dom_id(change) %>"
+  <%= highlightable(dom_id(change, :tools), true) %>
+  <%= clickable admin_change_path(change) %>   >
+  <div class="tools" id="<%= dom_id(change, :tools) %>" style="display:none;">
+    <%= link_to_remote 'Show', {:method => :get, :url => admin_change_path(change)}, {:onclick => "event.cancelBubble=true;"} %>&nbsp;&nbsp;
+  </div>
+  <div class="strip-<%= change.action %>"><strong>ID:</strong> <%= change.id %><br/><span class="ch-action-<%= change.action %>"><%= change.action %></span></div>
+  <div class="indent">
+    <tt><%= change.created_at.to_s :date_time24 %><br/><%= change.auditable_type %>:<%= change.auditable_id %><br />
+  </tt>
+  </div>
+</li>

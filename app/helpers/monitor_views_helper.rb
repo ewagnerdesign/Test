@@ -1,0 +1,2 @@
+module MonitorViewsHelper
+end

@@ -1,0 +1,19 @@
+<tr id="<%= dom_id_nested(:item, visit) %>" class="<%= cycle("even", "odd") %>">
+  <td><%= obj_monitored_status_icon(visit) %></td>
+  <td><%= obj_submit_status_icon(visit) %></td>
+  <td><%= obj_query_status_icon(visit) %></td>
+  <td><%= visit.id %></td>
+  <td><%= visit.name %></td><td><%= visit.status %></td>
+  <% if visit.prev_visit %>
+    <td>Relative</td>
+    <td><%= visit.prev_visit.name %></td>
+    <td><%= visit.prev_visit_start_offset_day %>..<%= visit.prev_visit_end_offset_day %></td>
+  <% else %>
+    <td><%= visit.start_date %></td>
+    <td></td><td></td>
+  <% end %>
+  <td><%= Site.subjects_study_arm_visits_id_eq(visit.id).all(:group => :id).map(&:name).join(", ") %></td>
+  <td><%= link_to "CRFs", ecrfs_path(:"search[study_id]" => visit.study, :"search[visit_id]" => visit.id, :"search[subject_id]" => @current_query[:subject_id]) %></td>
+</tr>
+
+

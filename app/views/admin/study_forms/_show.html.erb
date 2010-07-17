@@ -1,0 +1,13 @@
+<div class="block-container">
+    <%= link_to_close(admin_study_form_path(@study, @form, :format => :js, :study_arm_visit_id => @study_arm_visit.id)) %>
+    <div class="title">Form</div>
+        <tt>
+          Name: <%= highlight_search_result(@form.name, @current_query) %><br/>
+          <%= @form.cumulative? ? "Cumulative" : "eCRF" %><br/>
+          Domain: <%= @form.domain.try(:name) %><br/>
+          Description: <%= highlight_search_result(@form.description, @current_query) %><br/>
+
+          Updated at: <%= h(@form.updated_at) %>
+        </tt>
+   <br/>
+</div>

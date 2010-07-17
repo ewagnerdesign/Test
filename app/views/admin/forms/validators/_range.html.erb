@@ -1,0 +1,8 @@
+<% unless validator['data']['minimum'].blank? && validator['data']['maximum'].blank? %>
+  $('#<%= control_id(control) %>').validate().add({
+        range: {
+          options: <%= [ validator['data']['minimum'], validator['data']['maximum'] ].to_json %>,
+          message: <%= validator['data']['message'].to_json %>
+        }
+    })
+<% end %>

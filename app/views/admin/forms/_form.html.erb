@@ -1,0 +1,34 @@
+<script type="text/javascript" charset="utf-8">
+  $.extend(true,$.sv.field.validatior, {conf: {renderError: false, renderSucess:false, api: true}});
+</script>
+<h1><%= @form_data["form"]["title"] %></h1>
+<small>
+    <%= @form_data["form"]["description"] %>
+</small>
+<br/>New Form
+<fieldset class="">
+   <% @form.tree.each do |control| %>
+        <%= render :partial =>(
+                        control.kind_of?(FormerGroup) ?
+                            "admin/forms/controls/groupf":
+                            "admin/forms/controls/base"
+                    ),
+                   :locals => {:control => control}
+        %>
+   <% end %>
+</fieldset>
+<%= render :partial=>"admin/forms/connections",
+           :locals => { :connections=> @form.connections }
+%>
+
+<% javascript_tag do %>
+    $(document).ready(function() {
+       <%= yield(:form_scripts).strip %>
+     })
+<% end unless yield(:form_scripts).nil? %>
+
+<% javascript_tag do %>
+    $(document).ready(function() {
+      $('.uniForm .fieldHint').tooltip({tip: '.tooltip', position:"bottom right", offset: [-16, 0]});
+    });
+<% end %>

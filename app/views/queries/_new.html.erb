@@ -1,0 +1,28 @@
+ <div class="title">Add new Query</div>
+
+<% if !@query.errors.empty? %>
+  <h2>The following problems prevent this Query from being saved:</h2>
+  <ul>
+  <% @query.errors.each do |e| %>
+    <li>
+     <%= e.first.humanize + " " + e.second -%>
+    </li>
+  <% end %>
+  </ul>
+<% end %>
+
+<% remote_form_for(@query) do |f| %>
+<%= f.hidden_field :form_field_value_id %>
+<%= hidden_field_tag :reload_queries, @reload_queries %>
+<p>
+  <%= f.label :comment %>
+  <%= f.text_area :comment, :rows => 2  %>
+</p>
+<p>
+    <%= submit_to_remote :submit, "Create", {:method => :post, :url => queries_path, :before => "close_query_popup()" } %>
+    <%= submit_tag "Cancel", :onclick => "close_query_popup(); return false;" %>
+</p>
+<% end %>
+
+</div>
+

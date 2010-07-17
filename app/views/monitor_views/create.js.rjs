@@ -1,0 +1,10 @@
+if @monitor_view.valid?
+  page.insert_html :after, dom_id_n(:create_monitor_view), :partial => "monitor_view", :collection => [ @monitor_view ]
+  page[dom_id(@monitor_view)].effect("highlight", {}, 3500)
+  page[dom_id_n(:create_monitor_view)].replace_html ""
+  page[dom_id_n(:emptiness_messages)].replace_html ""
+  #TODO: Hide form
+else
+  page[dom_id_n(:create_monitor_view)].replace_html :file => "monitor_views/new.html.erb"
+  page[dom_id_n(:create_monitor_view)].effect("shake", {:direction => 'up', :distance => '6'}, 100)
+end

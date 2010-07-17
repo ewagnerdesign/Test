@@ -1,0 +1,18 @@
+<li id="<%= dom_id(therapeutic_area) %>"
+  <%= highlightable(dom_id(therapeutic_area, :tools), true) %>
+  <%= clickable admin_therapeutic_area_path(therapeutic_area) %>   >
+  <div class="tools" id="<%= dom_id(therapeutic_area, :tools) %>"<%= therapeutic_area.id %> style="display:none;">
+    <%= link_to_remote 'Show', {:method => :get, :url => admin_therapeutic_area_path(therapeutic_area)}, {:onclick => "event.cancelBubble=true;"} %> |
+    <%= link_to_remote 'Edit',
+      {:method => :get, :url => edit_admin_therapeutic_area_path(therapeutic_area)},
+      {:onclick => "event.cancelBubble=true;" } %> |
+    <%= link_to_remote 'Delete',
+      {:method=> :delete, :url => admin_therapeutic_area_path(therapeutic_area),
+       :confirm => 'Are you sure you want to delete the therapeutic_area "' + therapeutic_area.name + '"?'},
+       {:onclick => "event.cancelBubble=true;"} %>
+  </div>
+  <div class="strip"><strong>ID:</strong> <%= therapeutic_area.id %></div>
+  <div class="indent">
+    <strong><%= therapeutic_area.name %></strong><br/>
+  </div>
+</li>

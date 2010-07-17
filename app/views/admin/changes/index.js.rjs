@@ -1,0 +1,2 @@
+#Render sites list
+page["changes_index"].replace_html :file => "admin/changes/index"

@@ -1,0 +1,5 @@
+$('#<%= control_id %>').validate().add({
+    required: {
+        message: <%= validator['data']['message'].to_json %>
+    }
+})

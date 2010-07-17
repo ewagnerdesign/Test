@@ -1,0 +1,36 @@
+<div id="<%= dom_id(@study, :contacts_index)%>">
+<div class="title_tools">
+  <% content_for :search_params do %>
+    <input id="search" name="search" size="30" type="text" value="<%= @current_query %>" />
+  <% end %>
+  <%= filter_form(admin_study_contacts_path(@study, :js), @study) %>
+  <%= link_to_remote "Add existing",
+  { :url => add_admin_study_contacts_path(@study), :method => :get },
+  {:id => "#{dom_id(@study, :add_contact)}"}
+  %> |
+  <%= link_to_remote "Create new", 
+  { :url => new_admin_study_contact_path(@study), :method => :get, :condition => "close_previous_crud_form()" },
+  {:id => "#{dom_id(@study, :new_contact)}"}
+  %> |
+  <%= link_to_ni "Options" %>
+</div>
+<div style="clear: both"></div>
+<div id="<%= dom_id(@study, :create_contact) %>"></div>
+<ul class="list" id="<%= dom_id(@study, :contacts_list) %>">
+      <% unless @entities.empty? %>
+        <%= render :partial => 'user', :collection => @entities  %>
+      <% end %>
+</ul>
+<%= will_paginate @entities, :param_name => dom_id_nested(:page, @study) %>
+<div id="<%= dom_id(@study, :contacts_emptiness_messages) %>">
+  <% if @entities.empty? %>
+    <p>
+    <% if @current_query.blank? %>
+       There are no Contacts at the moment.
+    <% else %>
+       There are no Contacts found matching <strong><%= @current_query %></strong>.
+     <% end %>
+    </p>
+  <% end %>
+</div>
+</div>
